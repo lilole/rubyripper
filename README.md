@@ -75,7 +75,7 @@ hear this.
 
 Dependencies:
 * cdparanoia
-* ruby 1.9
+* ruby 1.9 and higher
 
 Suggested:
 * ruby-gettext (for translations)
@@ -107,7 +107,7 @@ To uninstall: `make uninstall`
 To cleanup: `make clean`
 
 
-## MacOs support<a name="MacOS-support"></a>
+## MacOS support<a name="MacOS-support"></a>
 
 The CLI now works in MacOS. However, if your cdparanoia version
 doesn't support the -d switch (to set the device), only the default

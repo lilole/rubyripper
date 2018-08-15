@@ -29,11 +29,11 @@ msgstr "Программа копирования: cdparanoia %s\n"
 
 #: lib/rubyripper/system/dependency.rb:105
 msgid "You won't be able to use the gtk2 interface."
-msgstr ""
+msgstr "Вы не сможете использовать интерфейс gtk2"
 
 #: lib/rubyripper/system/dependency.rb:106
 msgid "You won't be able to use translations."
-msgstr ""
+msgstr "Вы не сможете использовать переводы"
 
 #: lib/rubyripper/system/dependency.rb:107
 #: lib/rubyripper/system/dependency.rb:109
