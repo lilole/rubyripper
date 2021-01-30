@@ -27,32 +27,29 @@ class GtkDisc
 
   attr_reader :display, :error, :selection, :disc
  
-  def initalize
+  def initialize(gui)
     @discInfoTable = nil
     @trackInfoTable = nil
     @display = nil
+    @ui = gui
   end
   
   def start
-    refresh(firsttime = true)   
+    @firsttime = true
+    refreshDisc   
   end
 
-  def refresh(firsttime=false)
-    @selection = []
-    @error = nil
-    @disc = Disc.new()
-    @disc.scan()
+  def refresh
+    @firsttime = false
+    refreshDisc   
+  end
 
-    if @disc.status == 'ok'
-      @md = @disc.metadata
-      buildDiscInfo unless @discInfoTable
-      buildTrackInfo()
-      buildLayout() unless @display
-      updateDisc(firsttime)
-      updateTracks()
-    else
-      @error = @disc.error
-    end
+  def refreshGui
+    buildDiscInfo unless @discInfoTable
+    buildTrackInfo()
+    buildLayout() unless @display
+    updateDisc(@firsttime)
+    updateTracks()
   end
   
   # store any updates the user has made and save the selected tracks
@@ -74,6 +71,21 @@ class GtkDisc
   end
   
   private
+
+  def refreshDisc
+    @selection = []
+    @error = nil
+    @disc = Disc.new()
+    Thread.new do
+      @disc.scan()
+      if @disc.status == 'ok'
+        @md = @disc.metadata
+      else
+        @error = @disc.error
+      end
+      @ui.update("scan_disc_finished")
+    end
+  end
   
   #create all necessary objects for displaying the discinfo
   def buildDiscInfo

@@ -24,7 +24,8 @@ class RipStatus
 
   attr_reader :textview, :display
 
-  def initialize
+  def initialize(gui)
+    @ui = gui
     createObjects()
     packObjects()
     reset() #reset to default text
@@ -44,9 +45,16 @@ class RipStatus
 
   # Show the new text in the status window
   def logChange(text)
-  # First parameter is the last character + 1 in the log
-    @textview.buffer.insert(@textview.buffer.end_iter, text)
-    @textview.scroll_to_iter(@textview.buffer.end_iter, 0, true, 1, 1)
+    start_iter, end_iter = @textview.buffer.bounds
+    @textview.buffer.insert(end_iter, text)
+    @ui.update("scroll_to_end")
+  end
+
+  def scrollToEnd
+    start_iter, end_iter = @textview.buffer.bounds
+    @mark = @textview.buffer.create_mark(nil, end_iter, true) unless @mark
+    @textview.buffer.move_mark(@mark, end_iter)
+    @textview.scroll_mark_onscreen(@mark)
   end
 
   def createObjects
