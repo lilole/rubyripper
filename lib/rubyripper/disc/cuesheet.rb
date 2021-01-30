@@ -71,6 +71,7 @@ private
     @cuesheet << "REM DATE #{@md.year}"
     @cuesheet << "REM DISCID #{@disc.freedbDiscid}"
     @cuesheet << "REM FREEDB_QUERY \"#{@disc.freedbString}\""
+    @cuesheet << "REM MUSICBRAINZ_DISCID #{@disc.musicbrainzDiscid}"
     @cuesheet << "REM COMMENT \"Rubyripper #{$rr_version}\""
     @cuesheet << "PERFORMER \"#{@md.artist}\""
     @cuesheet << "TITLE \"#{@md.album}\""
