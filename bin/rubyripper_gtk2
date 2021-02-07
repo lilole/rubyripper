@@ -35,9 +35,9 @@ end
 
 # Try to load the gtk2 files
 begin
-  require 'gtk2'
+  require 'gtk3'
 rescue LoadError
-  puts "The ruby-gtk2 library could not be found. Is it installed?"; exit()
+  puts "The ruby-gtk3 library could not be found. Is it installed?"; exit()
 end
 
 # The class defines the Rubyripper window.
@@ -102,10 +102,10 @@ attr_reader :instances
   
   # setup the central container
   def setupMainContainer
-    @mainHbox = Gtk::HBox.new(false,5)
+    @mainHbox = Gtk::Box.new(:horizontal,5)
     createButtonsLeftside()
     setButtonsLeftsideSignals()
-    @mainHbox.pack_start(@vbuttonbox1,false,false,0)
+    @mainHbox.pack_start(@vbuttonbox1,:expand => false,:fill => false,:padding => 10)
     @gtkWindow.add(@mainHbox)
   end
   
@@ -184,13 +184,13 @@ attr_reader :instances
   
   # The abort button transforms into exit when the rip is finished or aborted
   def updateAbortButtonToExit
-    @buttontext[4].set_text('_' + _("Exit"), true)
+    @buttontext[4].set_markup('_' + _("Exit"), {:use_underline => true})
     @buttonicons[4].stock = Gtk::Stock::QUIT
   end
   
   # The exit button transforms into abort when the rip is started
   def updateExitButtonToAbort
-    @buttontext[4].set_text('_' + _("Abort"), true)
+    @buttontext[4].set_markup('_' + _("Abort"), {:use_underline => true})
     @buttonicons[4].stock = Gtk::Stock::CANCEL
   end
   
@@ -200,7 +200,7 @@ attr_reader :instances
 
     @mainHbox.remove(@mainHbox.children[-1]) if @currentInstance
     @currentInstance = object.class.to_s # save the name of the class as a string
-    @mainHbox.add(object.display)
+    @mainHbox.pack_start(object.display, :expand => true, :fill => true)
     
     updateExitButtonToAbort if @currentInstance == "RipStatus"
     object.display.show_all()
@@ -208,12 +208,27 @@ attr_reader :instances
   
   # the leftside menu that is always visible
   def createButtonsLeftside
-    @vbuttonbox1 = Gtk::VButtonBox.new #child of @mainHbox
+    @vbuttonbox1 = Gtk::Box.new(:vertical, 5) #child of @mainHbox
+    vbuttonbox = Gtk::ButtonBox.new(:vertical)
+    vbuttonbox.layout_style=Gtk::ButtonBoxStyle::START
+    vbuttonbox.spacing = 5
     @buttons = [Gtk::Button.new, Gtk::Button.new, Gtk::Button.new, Gtk::Button.new, Gtk::Button.new]
     @buttons.each{|button| button.sensitive = false}
-    @buttontext = [Gtk::Label.new('_'+_('Preferences'),true), Gtk::Label.new('_'+_("Scan drive"), true), Gtk::Label.new('_'+_("Open tray"),true), Gtk::Label.new('_'+_("Rip cd now!"),true), Gtk::Label.new('_'+_("Exit"),true)]
-    @buttonicons = [Gtk::Image.new(Gtk::Stock::PREFERENCES, Gtk::IconSize::LARGE_TOOLBAR), Gtk::Image.new(Gtk::Stock::REFRESH, Gtk::IconSize::LARGE_TOOLBAR), Gtk::Image.new(Gtk::Stock::GOTO_BOTTOM, Gtk::IconSize::LARGE_TOOLBAR), Gtk::Image.new(Gtk::Stock::CDROM, Gtk::IconSize::LARGE_TOOLBAR), Gtk::Image.new(Gtk::Stock::QUIT, Gtk::IconSize::LARGE_TOOLBAR)]
-    @vboxes = [Gtk::VBox.new, Gtk::VBox.new, Gtk::VBox.new,  Gtk::VBox.new, Gtk::VBox.new]
+    @buttontext = [Gtk::Label.new('_'+_('Preferences'),{:use_underline => true}),
+                   Gtk::Label.new('_'+_("Scan drive"), {:use_underline => true}),
+                   Gtk::Label.new('_'+_("Open tray"),  {:use_underline => true}),
+                   Gtk::Label.new('_'+_("Rip cd now!"),{:use_underline => true}),
+                   Gtk::Label.new('_'+_("Exit"),       {:use_underline => true})]
+    @buttonicons = [Gtk::Image.new(:stock => Gtk::Stock::PREFERENCES, :size => Gtk::IconSize::LARGE_TOOLBAR),
+                    Gtk::Image.new(:stock => Gtk::Stock::REFRESH,     :size => Gtk::IconSize::LARGE_TOOLBAR),
+                    Gtk::Image.new(:stock => Gtk::Stock::GOTO_BOTTOM, :size => Gtk::IconSize::LARGE_TOOLBAR),
+                    Gtk::Image.new(:stock => Gtk::Stock::CDROM,       :size => Gtk::IconSize::LARGE_TOOLBAR),
+                    Gtk::Image.new(:stock => Gtk::Stock::QUIT,        :size => Gtk::IconSize::LARGE_TOOLBAR)]
+    @vboxes = [Gtk::Box.new(:vertical,5),
+               Gtk::Box.new(:vertical,5),
+               Gtk::Box.new(:vertical,5),
+               Gtk::Box.new(:vertical,5),
+               Gtk::Box.new(:vertical,5)]
 
     index = 0
     @vboxes.each do |vbox|
@@ -222,7 +237,9 @@ attr_reader :instances
       @buttons[index].add(@vboxes[index])
       index += 1
     end
-    @buttons.each{|button| @vbuttonbox1.pack_start(button,false,false)}
+    @buttons.each{|button| vbuttonbox.pack_start(button, :expand => false, :fill => false)}
+
+    @vbuttonbox1.pack_start(vbuttonbox, :expand => false, :fill => false, :padding => 10)
   end
 
   def setButtonsLeftsideSignals
@@ -256,7 +273,7 @@ attr_reader :instances
 
   def savePreferences
     if @currentInstance == 'GtkPreferences'
-      @buttontext[0].set_text('_'+_('Preferences'),true)
+      @buttontext[0].set_markup('_'+_('Preferences'), {:use_underline => true})
       @buttonicons[0].stock = Gtk::Stock::PREFERENCES
       @gtkPrefs.save
     end
@@ -290,7 +307,7 @@ attr_reader :instances
   def showDiscOrPreferences
     @buttons.each{|button| button.sensitive = false}
     if @currentInstance != 'GtkPreferences'
-      @buttontext[0].set_text('_'+_('Disc info'), true)
+      @buttontext[0].set_markup('_'+_('Disc info'), {:use_underline => true})
       @buttonicons[0].stock = Gtk::Stock::INFO
       startupPreferences()
       @buttons[0..2].each{|button| button.sensitive = true}
@@ -352,12 +369,12 @@ attr_reader :instances
   end
   
   def showClosedTray
-    @buttontext[2].set_text('_'+_("Close tray"), true)
+    @buttontext[2].set_markup('_'+_("Close tray"), {:use_underline => true})
     @buttonicons[2].stock = Gtk::Stock::GOTO_TOP
   end
   
   def showOpenTray
-    @buttontext[2].set_text('_'+_("Open tray"),true)
+    @buttontext[2].set_markup('_'+_("Open tray"), {:use_underline => true})
     @buttonicons[2].stock = Gtk::Stock::GOTO_BOTTOM
   end
   

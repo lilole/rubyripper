@@ -27,31 +27,31 @@ class MultipleFreedbHits
 
   def initialize(value, main_instance)
     @label1 = Gtk::Label.new(_("The freedb server reports multiple hits.\nWhich one would you prefer?"))
-    @image1 = Gtk::Image.new(Gtk::Stock::DIALOG_QUESTION, Gtk::IconSize::DIALOG)
-    @hbox1 = Gtk::HBox.new
+    @image1 = Gtk::Image.new(:stock => Gtk::Stock::DIALOG_QUESTION, :size => Gtk::IconSize::DIALOG)
+    @hbox1 = Gtk::Box.new
     [@image1, @label1].each{|object| @hbox1.pack_start(object)}
 
-    @combobox = Gtk::ComboBox.new(true) # text only
+    @combobox = Gtk::ComboBoxText.new(true) # text only
     value.each{|freedb_hit| @combobox.append_text(freedb_hit)}
-    @separator1 = Gtk::HSeparator.new
-    @hbox2 = Gtk::HBox.new
-    @hbox2.pack_start(@combobox, false,false,5)
+    @separator1 = Gtk::Separator.new(:horizontal)
+    @hbox2 = Gtk::Box.new(:horizontal)
+    @hbox2.pack_start(@combobox, :expand => false, :fill=> false, :padding => 5)
 
     @button1 = Gtk::Button.new
     @label2 = Gtk::Label.new(_("Ok"))
-    @image2 = Gtk::Image.new(Gtk::Stock::OK, Gtk::IconSize::LARGE_TOOLBAR)
-    @hbox3 = Gtk::HBox.new
-    [@image2, @label2].each{|object| @hbox3.pack_start(object,false,false,15)}
+    @image2 = Gtk::Image.new(:stock => Gtk::Stock::OK, :size => Gtk::IconSize::LARGE_TOOLBAR)
+    @hbox3 = Gtk::Box.new(:horizontal)
+    [@image2, @label2].each{|object| @hbox3.pack_start(object, :expand => false, :fill => false, :padding => 15)}
     @button1.add(@hbox3)
-    @hbox4 = Gtk::HBox.new
-    @hbox4.pack_start(@button1,true,false)
+    @hbox4 = Gtk::Box.new(:horizontal)
+    @hbox4.pack_start(@button1, :expand => true, :fill => false)
 
-    @vbox1 = Gtk::VBox.new
+    @vbox1 = Gtk::Box.new(:vertical)
     @vbox1.border_width = 10
-    [@hbox1, @hbox2, @separator1, @hbox4].each{|object| @vbox1.pack_start(object,false,false,10)}
+    [@hbox1, @hbox2, @separator1, @hbox4].each{|object| @vbox1.pack_start(object, :expand => false, :fill => false, :padding => 10)}
 
     @display = Gtk::Frame.new(_("Multiple hits found...")) # will contain the above
-    @display.set_shadow_type(Gtk::SHADOW_ETCHED_IN)
+    @display.set_shadow_type(Gtk::ShadowType::ETCHED_IN)
     @display.border_width = 5
     @display.add(@vbox1)
     @button1.signal_connect("released") do

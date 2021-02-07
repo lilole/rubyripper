@@ -28,35 +28,39 @@ class GtkDirExists
   def initialize(gui, rubyripper, dirname)
     @label = Gtk::Label.new(_("The directory %s already exists.\n\nWhat do you want rubyripper to do?") % [dirname])
     @label.wrap = true
-    @image = Gtk::Image.new(Gtk::Stock::DIALOG_QUESTION, Gtk::IconSize::DIALOG)
+    @image = Gtk::Image.new(:stock => Gtk::Stock::DIALOG_QUESTION, :size => Gtk::IconSize::DIALOG)
   
-    @infobox = Gtk::HBox.new
+    @infobox = Gtk::Box.new(:horizontal)
     @infobox.add(@image) ; @infobox.add(@label)
-    @separator = Gtk::HSeparator.new
+    @separator = Gtk::Separator.new(:horizontal)
 
     @buttons = [Gtk::Button.new, Gtk::Button.new, Gtk::Button.new]
-    @labels = [Gtk::Label.new(_("Cancel rip")), Gtk::Label.new(_("Delete existing\ndirectory")), Gtk::Label.new(_("Auto rename\ndirectory"))]
-    @images = [Gtk::Image.new(Gtk::Stock::CANCEL, Gtk::IconSize::LARGE_TOOLBAR), Gtk::Image.new(Gtk::Stock::CLEAR, Gtk::IconSize::LARGE_TOOLBAR), Gtk::Image.new(Gtk::Stock::OK, Gtk::IconSize::LARGE_TOOLBAR)]
-    @hboxes = [Gtk::HBox.new, Gtk::HBox.new, Gtk::HBox.new]
-    @buttonbox = Gtk::HBox.new
+    @labels = [Gtk::Label.new(_("Cancel rip")),
+               Gtk::Label.new(_("Delete existing\ndirectory")),
+               Gtk::Label.new(_("Auto rename\ndirectory"))]
+    @images = [Gtk::Image.new(:stock => Gtk::Stock::CANCEL, :size => Gtk::IconSize::LARGE_TOOLBAR),
+               Gtk::Image.new(:stock => Gtk::Stock::CLEAR, :size => Gtk::IconSize::LARGE_TOOLBAR),
+               Gtk::Image.new(:stock => Gtk::Stock::OK, :size => Gtk::IconSize::LARGE_TOOLBAR)]
+    @hboxes = [Gtk::Box.new(:horizontal), Gtk::Box.new(:horizontal), Gtk::Box.new(:horizontal)]
+    @buttonbox = Gtk::Box.new(:horizontal)
 
     3.times do |index|
-      @hboxes[index].pack_start(@images[index], false, false) #pack the image + label into a hbox
-      @hboxes[index].pack_start(@labels[index], false, false)
+      @hboxes[index].pack_start(@images[index], :expand => false, :fill => false) #pack the image + label into a hbox
+      @hboxes[index].pack_start(@labels[index], :expand => false, :fill => false)
       @buttons[index].add(@hboxes[index]) #put the hbox into the button
-      @buttonbox.pack_start(@buttons[index], false, false, 10) #put the buttons into a hbox
+      @buttonbox.pack_start(@buttons[index], :expand => false, :fill => false, :padding => 10) #put the buttons into a hbox
     end
 
     @buttons[0].signal_connect("released") {gui.showDisc()}
     @buttons[1].signal_connect("released") {rubyripper.overwriteDir() ; gui.continueRip() }
     @buttons[2].signal_connect("released") {rubyripper.postfixDir() ; gui.continueRip() }
 
-    @vbox = Gtk::VBox.new
+    @vbox = Gtk::Box.new(:vertical)
     @vbox.border_width = 10
-    [@infobox, @separator, @buttonbox].each{|object| @vbox.pack_start(object,false,false,10)}
+    [@infobox, @separator, @buttonbox].each{|object| @vbox.pack_start(object, :expand => false, :fill => false, :padding => 10)}
     
     @display = Gtk::Frame.new(_("Directory already exists...")) # will contain the above
-    @display.set_shadow_type(Gtk::SHADOW_ETCHED_IN)
+    @display.set_shadow_type(Gtk::ShadowType::ETCHED_IN)
     @display.border_width = 5
     @display.add(@vbox)
   end

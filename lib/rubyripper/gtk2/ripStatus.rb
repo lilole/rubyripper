@@ -60,10 +60,10 @@ class RipStatus
   def createObjects
     @textview = Gtk::TextView.new
     @textview.editable = false
-    @textview.wrap_mode = Gtk::TextTag::WRAP_WORD
+    @textview.wrap_mode = Gtk::WrapMode::WORD
     
     @scrolledWindow = Gtk::ScrolledWindow.new
-    @scrolledWindow.set_policy(Gtk::POLICY_NEVER,Gtk::POLICY_AUTOMATIC)
+    @scrolledWindow.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC)
     @scrolledWindow.border_width = 7
     @scrolledWindow.add(@textview)
 
@@ -71,24 +71,27 @@ class RipStatus
     @ripBar = Gtk::ProgressBar.new
     @encBar.pulse_step = 0.01
     @ripBar.pulse_step = 0.01
+    @encBar.show_text = true
+    @ripBar.show_text = true
 
-    @hbox1 = Gtk::HBox.new(true,5)
-    @vbox1 = Gtk::VBox.new(false,5)
+    @hbox1 = Gtk::Box.new(:horizontal)
+    @hbox1.homogeneous = true
+    @vbox1 = Gtk::Box.new(:vertical)
     @vbox1.border_width = 5
 
     @label1 = Gtk::Label.new
     @label1.set_markup(_("<b>Ripping status</b>"))
     @display = Gtk::Frame.new
-    @display.set_shadow_type(Gtk::SHADOW_ETCHED_IN)
+    @display.set_shadow_type(Gtk::ShadowType::ETCHED_IN)
     @display.label_widget = @label1
     @display.border_width = 5
   end
 
   def packObjects
-    @hbox1.pack_start(@ripBar)
-    @hbox1.pack_start(@encBar)
-    @vbox1.pack_start(@scrolledWindow)
-    @vbox1.pack_start(@hbox1,false,false)
+    @hbox1.pack_start(@ripBar, :expand => true, :fill => true, :padding => 5)
+    @hbox1.pack_start(@encBar, :expand => true, :fill => true, :padding => 5)
+    @vbox1.pack_start(@scrolledWindow, :expand => true, :fill => true)
+    @vbox1.pack_start(@hbox1, :expand => false, :fill => false)
     @display.add(@vbox1)
   end
 
