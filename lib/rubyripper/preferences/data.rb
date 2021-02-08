@@ -215,8 +215,5 @@ module Preferences
 
     # TEST DATA
     attr_accessor :testdisc
-
-    # Workaround for crashes when scroling log window
-    attr_accessor :disableRipLogAutoScrolling
   end
 end

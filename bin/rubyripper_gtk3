@@ -25,7 +25,7 @@ begin
   require 'rubyripper/errors'
   require 'rubyripper/preferences/main'
   require 'rubyripper/system/dependency'
-  require 'rubyripper/gtk2/shortMessage'
+  require 'rubyripper/gtk3/shortMessage'
   require 'thread'
 rescue LoadError
   puts 'The rubyripper lib files can\'t be found!'
@@ -33,7 +33,7 @@ rescue LoadError
   exit()
 end
 
-# Try to load the gtk2 files
+# Try to load the gtk3 files
 begin
   require 'gtk3'
 rescue LoadError
@@ -42,7 +42,7 @@ end
 
 # The class defines the Rubyripper window.
 # It has a variable frame in it, that can be
-# replaced with other Gtk2 classes.
+# replaced with other Gtk3 classes.
 
 class GraphicalUserInterface
 attr_reader :instances
@@ -120,7 +120,7 @@ attr_reader :instances
     if @gtkDisc
       @gtkDisc.refresh
     else
-      require 'rubyripper/gtk2/gtkDisc'
+      require 'rubyripper/gtk3/gtkDisc'
       @gtkDisc = GtkDisc.new(self)
       @gtkDisc.start()
     end
@@ -156,9 +156,9 @@ attr_reader :instances
       elsif entry.modus == "log_change"
         @ripStatus.logChange(entry.value)
       elsif entry.modus == "scroll_to_end"
-        @ripStatus.scrollToEnd unless @prefs.disableRipLogAutoScrolling
+        @ripStatus.scrollToEnd
       elsif entry.modus == "dir_exists"
-        require 'rubyripper/gtk2/gtkDirExists'
+        require 'rubyripper/gtk3/gtkDirExists'
         @dirExists = GtkDirExists.new(self, @rubyripper, entry.value)
         changeDisplay(@dirExists)
       elsif entry.modus == "finished"
@@ -288,7 +288,7 @@ attr_reader :instances
   # make sure the gtk preferences is loaded
   def startupPreferences
     if not @gtkPrefs
-      require 'rubyripper/gtk2/gtkPreferences'
+      require 'rubyripper/gtk3/gtkPreferences'
       @gtkPrefs = GtkPreferences.new()
       @gtkPrefs.start()
     end
@@ -410,7 +410,7 @@ attr_reader :instances
   end
   
   def updateInterfaceAndStartRip
-    require 'rubyripper/gtk2/ripStatus'
+    require 'rubyripper/gtk3/ripStatus'
     @buttons[0..3].each{|button| button.sensitive = false}
     @ripStatus = RipStatus.new(self)
     changeDisplay(@ripStatus)
@@ -432,7 +432,7 @@ attr_reader :instances
   
   def showSummary(succes)
     @buttons[0..3].each{|button| button.sensitive = true}
-    require 'rubyripper/gtk2/gtkSummary'
+    require 'rubyripper/gtk3/gtkSummary'
     @gtkSummary = GtkSummary.new(@rubyripper.fileScheme, @rubyripper.summary, succes)
     changeDisplay(@gtkSummary)
     showClosedTray if @prefs.eject == true
