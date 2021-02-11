@@ -102,7 +102,7 @@ private
   def setConsequence
     @consequence = {
     'cdparanoia' => _("Rubyripper can't be used without cdparanoia!"),
-      'ruby-gtk2' => _("You won't be able to use the gtk2 interface."),
+      'ruby-gtk3' => _("You won't be able to use the gtk3 interface."),
       'ruby-gettext' => _("You won't be able to use translations."),
       'discid' => _("You won't have accurate freedb string \
 calculation unless %s is installed.") % ['Cd-discid'],
@@ -138,7 +138,7 @@ calculation unless %s is installed.") % ['Discid'],
   # check if all the optional dependencies are there
   def checkOptionalDeps()
     @optionalDeps = Array.new
-    @optionalDeps << ['ruby-gtk2', isGtk2Found()]
+    @optionalDeps << ['ruby-gtk3', isGtk3Found()]
     @optionalDeps << ['ruby-gettext', isGettextFound()]
     @optionalDeps << ['discid', installed?('discid')]
     @optionalDeps << ['cd-discid', installed?('cd-discid')]
@@ -162,10 +162,10 @@ calculation unless %s is installed.") % ['Discid'],
     @optionalDeps << ['diskutil', installed?('diskutil')]
   end
 
-  # check for ruby-gtk2
-  def isGtk2Found
+  # check for ruby-gtk3
+  def isGtk3Found
     begin
-      require 'gtk2'
+      require 'gtk3'
       return true
     rescue LoadError
       return false

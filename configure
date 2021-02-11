@@ -46,7 +46,7 @@ else
   $INSTALL = 'install -D'
 end
 
-$GTK2 = false
+$GTK3 = false
 $CLI = false
 $LANG = []
 $LANG_SUPPORT = ["nl", "de", "fr", "hu", "ru", "es", "se", "bg", "it", "da"]
@@ -76,7 +76,7 @@ if ARGV.include?('--help') || ARGV.include?('-h') || ARGV.length == 0
   puts ""
   puts "--prefix=<destination_dir>  (default: #{$PREFIX})"
   puts ""
-  puts "--enable-gtk2  (install the gtk2 frontend)"
+  puts "--enable-gtk3  (install the gtk3 frontend)"
   puts "--enable-cli  (install the cli frontend)"
   puts "--enable-lang-all  (install all locale files)"
   puts "--enable-lang=<xx>  (install specific locale file, separate with a comma)"
@@ -99,7 +99,10 @@ def update_po
       task.domain = 'rubyripper'
       task.files = Dir.glob("lib/**/*.rb") + Dir.glob("bin/*")
       task.package_name = 'Rubyripper'
-      task.package_version = '#{$rr_version}'
+      task.package_version = "#{$rr_version}"
+      task.xgettext_options = ["--copyright-holder", "BleskoDev",
+                               "--copyright-year", "2021",
+                               "--msgid-bugs-address", "bleskodev@ennumia.eu"]
     end
     updatePoAndMoTask.invoke
   end
@@ -111,7 +114,7 @@ def update_mo
       task.domain = 'rubyripper'
       task.files = Dir.glob("lib/**/*.rb") + Dir.glob("bin/*")
       task.package_name = 'Rubyripper'
-      task.package_version = '#{$rr_version}'
+      task.package_version = "#{$rr_version}"
       task.enable_po = false
     end
     updateMoTask.invoke
@@ -126,8 +129,8 @@ end
 ARGV.each do |argument|
   if argument[0,9] == "--prefix="
     $PREFIX = argument[9..-1]
-  elsif argument == '--enable-gtk2'
-    $GTK2 = true
+  elsif argument == '--enable-gtk3'
+    $GTK3 = true
   elsif argument == '--enable-cli'
     $CLI = true
   elsif argument == '--enable-lang-all'
@@ -141,7 +144,7 @@ ARGV.each do |argument|
   end
 end
 
-unless ($GTK2 || $CLI)
+unless ($GTK3 || $CLI)
   puts "You have to choose at least one frontend you want to install!"
   puts ""
   exit()
@@ -167,8 +170,8 @@ Dir.glob("#{$RUBYDIR[1..-1]}/**/*.rb").each do |file|
   makefile.puts "\t#{$INSTALL} -m 644 #{file} $(prefix)$(DESTDIR)#{$PREFIX}/#{file}"
 end
 
-if $GTK2
-  makefile.puts "\t#{$INSTALL} -m 755 bin/rubyripper_gtk2 $(prefix)$(DESTDIR)$(BINDIR)/rrip_gui"
+if $GTK3
+  makefile.puts "\t#{$INSTALL} -m 755 bin/rubyripper_gtk3 $(prefix)$(DESTDIR)$(BINDIR)/rrip_gui"
   makefile.puts "\t#{$INSTALL} -m 644 #{$ICONDIR[1..-1]}/rubyripper.png $(prefix)$(DESTDIR)$(ICONDIR)/rubyripper.png"
   makefile.puts "\t#{$INSTALL} -m 644 #{$DESKTOP[1..-1]}/rubyripper.desktop $(prefix)$(DESTDIR)$(DESKTOP)/rubyripper.desktop"
 end
@@ -185,7 +188,7 @@ makefile.puts ""
 makefile.puts "uninstall:"
 makefile.puts "\trm -rf $(prefix)$(DESTDIR)$(RUBYDIR)"
 
-if $GTK2
+if $GTK3
   makefile.puts "\trm -f $(prefix)$(DESTDIR)$(BINDIR)/rrip_gui"
   makefile.puts "\trm -f $(prefix)$(DESTDIR)$(ICONDIR)/rubyripper.png"
   makefile.puts "\trm -f $(prefix)$(DESTDIR)$(DESKTOP)/rubyripper.desktop"
@@ -221,7 +224,7 @@ puts "* Desktop file: #{$PREFIX}#{$DESKTOP}"
 puts "* Library files: #{$PREFIX}#{$RUBYDIR}"
 puts ""
 
-if $GTK2 == true; puts "Gtk2 frontend will be installed" end
+if $GTK3 == true; puts "Gtk3 frontend will be installed" end
 if $CLI == true; puts "Cli frontend will be installed" end
 unless $LANG.empty?; puts "Languages to be installed: #{$LANG.join(', ')}" end
 
