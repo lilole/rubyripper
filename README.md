@@ -24,11 +24,11 @@ I have time and energy.
 
 Rubyripper aims to deliver high quality rips from audio cd's to your computer
 drive. It tries to do so by ripping the same track with cdparanoia multiple
-times and then comparing the results. It currently has a gtk2 and a command-
+times and then comparing the results. It currently has a gtk3 and a command-
 line interface.
 
 Some of it's main features:
-* graphical (gtk2) and command line interface
+* graphical (gtk3) and command line interface
 * a [secure rip method](#Secure-rip-method)
 * editable freedb and musicbrainz tag fetching
 * flac, vorbis, mp3, wav support
@@ -79,7 +79,7 @@ Dependencies:
 
 Suggested:
 * ruby-gettext (for translations)
-* ruby-gtk2 (for gtk2 gui)
+* ruby-gtk3 (for gtk3 gui)
 * cd-discid or discid (for proper freedb support)
 * eject or diskutil for MacOS (for eject support)
 * flac, oggenc, lame, neroAacEnc, wavpack (if the codec is wanted)
@@ -90,14 +90,14 @@ Suggested:
 
 Run from directory:
 <pre>
-./bin/rubyripper_gtk2 or 
+./bin/rubyripper_gtk3 or 
 ./bin/rubyripper_cli
 </pre>
 
 To install:
 <pre>
-./configure --enable-lang-all --enable-gtk2 --enable-cli --prefix=/usr or
-./configure --enable-lang=de,hu --enable-gtk2 --enable-cli --prefix=/usr
+./configure --enable-lang-all --enable-gtk3 --enable-cli --prefix=/usr or
+./configure --enable-lang=de,hu --enable-gtk3 --enable-cli --prefix=/usr
 make install
 </pre>
 
