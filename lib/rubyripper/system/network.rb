@@ -43,7 +43,12 @@ class Network
   # fire up a CGI command to the server
   def get(query)
     puts "DEBUG: CGI query: #{@url.scheme + '://' +  @url.host + query}" if @prefs.debug
-    @connection.request(configureGetRequest(query)).body
+    begin
+      @connection.request(configureGetRequest(query)).body
+    rescue Exception => e
+      puts "DEBUG: CGI query failed! #{e.message}" if @prefs.debug
+      return ""
+    end
   end
   
   # encode for a specific protocol in order to escape certain characters
