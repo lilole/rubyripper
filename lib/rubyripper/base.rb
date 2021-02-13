@@ -23,7 +23,7 @@ $rr_url = 'https://github.com/bleskodev/rubyripper'
 Thread.abort_on_exception = true
 
 # Make sure the locale files work before installing
-ENV['GETTEXT_PATH'] = File.expand_path('../../../data/locale',__FILE__)
+ENV['GETTEXT_PATH'] = File.expand_path('../../../locale',__FILE__) unless ENV['GETTEXT_PATH']
 
 major_version = RUBY_VERSION.delete('.')[0..1].to_i
 if major_version < 19
