@@ -75,6 +75,8 @@ attr_reader :metadata
   
   # join with the main thread again
   def finishExtendedTocScan(log)
+    # in case extended toc scan hasn't been started yet...
+    startExtendedTocScan() if @cdrdao == nil
     @cdrdao.joinWithMainThread(log)
   end
   

@@ -136,6 +136,7 @@ class GtkPreferences
     @namingImageEntry.text = @prefs.namingImage
     @verbose.active = @prefs.verbose
     @debug.active = @prefs.debug
+    @disableRipLogAutoScrolling.active = @prefs.disableRipLogAutoScrolling
     @editorEntry.text = @prefs.editor
     @filemanagerEntry.text = @prefs.filemanager
   end
@@ -203,6 +204,7 @@ class GtkPreferences
     @prefs.namingImage = @namingImageEntry.text
     @prefs.verbose = @verbose.active?
     @prefs.debug = @debug.active?
+    @prefs.disableRipLogAutoScrolling = @disableRipLogAutoScrolling.active?
     @prefs.editor = @editorEntry.text
     @prefs.filemanager = @filemanagerEntry.text
     @prefs.save() #also update the config file
@@ -449,7 +451,7 @@ It is recommended to enable this option.")
     createSingle()
     createCue()
     @createCue.signal_connect("clicked"){createCue()}
-    @createCue.signal_connect("clicked"){`killall cdrdao 2>1` if !@createCue.active?}
+    @createCue.signal_connect("clicked"){`killall cdrdao 2>&1` if !@createCue.active?}
     @image.signal_connect("clicked"){createSingle()}
   end
 
@@ -747,12 +749,14 @@ It is recommended to enable this option.")
 #Small table for debugging
 #Verbose mode	| debug mode
   def buildFrameDebugOptions # Debug options frame
-    @table120 = newTable(rows=1, columns=2)
+    @table120 = newTable(rows=1, columns=3)
 #creating objects and packing them
     @verbose = Gtk::CheckButton.new(_('Verbose mode'))
     @debug = Gtk::CheckButton.new(_('Debug mode'))
+    @disableRipLogAutoScrolling = Gtk::CheckButton.new(_('Disable Rip Log Auto Scrolling'))
     @table120.attach(@verbose, 0,1,0,1,Gtk::FILL|Gtk::EXPAND, Gtk::SHRINK)
     @table120.attach(@debug, 1,2,0,1,Gtk::FILL|Gtk::EXPAND, Gtk::SHRINK)
+    @table120.attach(@disableRipLogAutoScrolling, 2,3,0,1,Gtk::FILL|Gtk::EXPAND, Gtk::SHRINK)
     @frame120 = newFrame(_('Debug options'), child=@table120)
   end
 

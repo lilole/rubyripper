@@ -50,12 +50,15 @@ attr_reader :instances
   include GetText
   GetText.bindtextdomain("rubyripper")
 
+  QueueEntry = Struct.new(:modus, :value)
+
   def initialize(prefs=nil, short=nil, deps=nil)
     @prefs = prefs ? prefs : Preferences::Main.instance
     @shortMessage = short ? short : ShortMessage.new()
     @deps = deps ? deps : Dependency.instance
     @currentInstance = nil
     @gtkDisc = nil
+    @updateQueue = Queue.new()
   end
   
   def start
@@ -71,34 +74,10 @@ attr_reader :instances
   def showDisc ; scanDiscResults(); end
   def continueRip ; updateInterfaceAndStartRip ; end
   
-  # send updates to the interface, 1 at a time
+  # send updates to the interface
   def update(modus, value=false)
-    @updateQueue ||= SizedQueue.new(1)
-    @updateQueue << Thread.new do
-      if modus == "error"
-        @shortMessage.showMessage(value)
-        changeDisplay(@shortMessage)
-        sleep(5)
-        changeDisplay(@gtkDisc)
-        @buttons.each{|button| button.sensitive = true}
-      elsif modus == "ripping_progress"
-        @ripStatus.updateProgress('ripping', value)
-      elsif modus == "encoding_progress"
-        @ripStatus.updateProgress('encoding', value)
-      elsif modus == "log_change"
-        @ripStatus.logChange(value)
-      elsif modus == "dir_exists"
-        require 'rubyripper/gtk2/gtkDirExists'
-        @dirExists = GtkDirExists.new(self, @rubyripper, value)
-        changeDisplay(@dirExists)
-      elsif modus == "finished"
-        showSummary(value)
-      else
-        puts _("Ehh.. There shouldn't be anything else. WTF?")
-        puts _("Secret modus = %s") % [modus]
-      end
-    end
-    @updateQueue.pop()
+    @updateQueue << QueueEntry.new(modus, value)
+    GLib::Idle.add { processUpdateQueue() }
   end
   
   private
@@ -135,18 +114,15 @@ attr_reader :instances
     @shortMessage.welcome()
     changeDisplay(@shortMessage)
   end
-   
+
   def scanDisc
-    Thread.new do
-      @buttons.each{|button| button.sensitive = false}
-      if @gtkDisc ; @gtkDisc.refresh
-      else
-        require 'rubyripper/gtk2/gtkDisc'
-        @gtkDisc = GtkDisc.new()
-        @gtkDisc.start()
-      end
-    
-      scanDiscResults()
+    @buttons.each{|button| button.sensitive = false}
+    if @gtkDisc
+      @gtkDisc.refresh
+    else
+      require 'rubyripper/gtk2/gtkDisc'
+      @gtkDisc = GtkDisc.new(self)
+      @gtkDisc.start()
     end
   end
   
@@ -154,6 +130,7 @@ attr_reader :instances
   # TODO freedb multiple choice
   def scanDiscResults   
     if @gtkDisc.error.nil?
+      @gtkDisc.refreshGui()
       showOpenTray if @buttontext[2].text != _("Open tray")
       @buttons.each{|button| button.sensitive = true}
       changeDisplay(@gtkDisc)
@@ -161,6 +138,47 @@ attr_reader :instances
       @shortMessage.showError(@gtkDisc.error)
       @buttons[0..2].each{|button| button.sensitive = true} ; @buttons[4].sensitive = true
       changeDisplay(@shortMessage)
+    end
+  end
+
+  def processUpdateQueue()
+    if not @updateQueue.empty?
+      entry = @updateQueue.pop()
+      if entry.modus == "error"
+        displayErrorMessage(entry.value)
+      elsif entry.modus == "error_msg_end"
+        changeDisplay(@gtkDisc)
+        @buttons.each{|button| button.sensitive = true}
+      elsif entry.modus == "ripping_progress"
+        @ripStatus.updateProgress('ripping', entry.value)
+      elsif entry.modus == "encoding_progress"
+        @ripStatus.updateProgress('encoding', entry.value)
+      elsif entry.modus == "log_change"
+        @ripStatus.logChange(entry.value)
+      elsif entry.modus == "scroll_to_end"
+        @ripStatus.scrollToEnd unless @prefs.disableRipLogAutoScrolling
+      elsif entry.modus == "dir_exists"
+        require 'rubyripper/gtk2/gtkDirExists'
+        @dirExists = GtkDirExists.new(self, @rubyripper, entry.value)
+        changeDisplay(@dirExists)
+      elsif entry.modus == "finished"
+        showSummary(entry.value)
+      elsif entry.modus == "scan_disc_finished"
+        scanDiscResults();
+      else
+        puts _("Ehh.. There shouldn't be anything else. WTF?")
+        puts _("Secret modus = %s") % [entry.modus]
+      end
+    end
+    return false
+  end
+
+  def displayErrorMessage(message)
+    @shortMessage.showMessage(message)
+    changeDisplay(@shortMessage)
+    Thread.new do
+      sleep(5)
+      update("error_msg_end")
     end
   end
   
@@ -271,20 +289,18 @@ attr_reader :instances
   # The button should change to the opposite value
   def showDiscOrPreferences
     @buttons.each{|button| button.sensitive = false}
-    Thread.new do
-      if @currentInstance != 'GtkPreferences'
-        @buttontext[0].set_text('_'+_('Disc info'), true)
-        @buttonicons[0].stock = Gtk::Stock::INFO
-        startupPreferences()
-        @buttons[0..2].each{|button| button.sensitive = true}
-        @buttons[3].sensitive = true if @gtkDisc && @gtkDisc.error.nil?
-        @buttons[4].sensitive = true
-      elsif @gtkDisc && @gtkDisc.error.nil?
-        changeDisplay(@gtkDisc)
-        @buttons.each{|button| button.sensitive = true}
-      else
-        refreshDisc()
-      end
+    if @currentInstance != 'GtkPreferences'
+      @buttontext[0].set_text('_'+_('Disc info'), true)
+      @buttonicons[0].stock = Gtk::Stock::INFO
+      startupPreferences()
+      @buttons[0..2].each{|button| button.sensitive = true}
+      @buttons[3].sensitive = true if @gtkDisc && @gtkDisc.error.nil?
+      @buttons[4].sensitive = true
+    elsif @gtkDisc && @gtkDisc.error.nil?
+      changeDisplay(@gtkDisc)
+      @buttons.each{|button| button.sensitive = true}
+    else
+      refreshDisc()
     end
   end
 
@@ -318,14 +334,12 @@ attr_reader :instances
   # TODO cancelTocScan()
   def handleTray
     @buttons.each{|button| button.sensitive = false}
-    Thread.new do
-      if @buttontext[2].text == _("Open tray")
-        openDrive()
-        askForDisc()
-      else
-        closeDrive()
-        scanDisc()
-      end
+    if @buttontext[2].text == _("Open tray")
+      openDrive()
+      askForDisc()
+    else
+      closeDrive()
+      scanDisc()
     end
   end
   
@@ -380,10 +394,11 @@ attr_reader :instances
   
   def updateInterfaceAndStartRip
     require 'rubyripper/gtk2/ripStatus'
+    @buttons[0..3].each{|button| button.sensitive = false}
+    @ripStatus = RipStatus.new(self)
+    changeDisplay(@ripStatus)
+
     @rubyripperThread = Thread.new do
-      @buttons[0..3].each{|button| button.sensitive = false}
-      @ripStatus = RipStatus.new()
-      changeDisplay(@ripStatus)
       @rubyripper.startRip
     end
   end

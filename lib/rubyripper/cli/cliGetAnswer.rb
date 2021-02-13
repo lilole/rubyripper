@@ -52,7 +52,7 @@ class CliGetBool < CliGetAnswer
     input = super
 
     if !@valid.key?(input)
-      @out.print_("Please answer %s or %s. Try again.\n") % [_('yes'), _('no')]
+      @out.print _("Please answer %s or %s. Try again.\n") % [_('yes'), _('no')]
       get(question, default)
     else
       return @valid[input]
@@ -76,7 +76,7 @@ class CliGetInt < CliGetAnswer
     elsif input.to_i > 0 || input == "0"
       return input.to_i
     else
-      @out.print_("Please enter an integer value. Try again.\n")
+      @out.print _("Please enter an integer value. Try again.\n")
       get(question, default)
     end
   end

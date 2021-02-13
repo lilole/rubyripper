@@ -47,7 +47,7 @@ private
 
   def showVersion
     @logString << _("Rubyripper version %s") % [$rr_version]
-    @logString << _("\nWebsite:") + " http://code.google.com/p/rubyripper\n\n"
+    @logString << _("\nWebsite:") + " https://github.com/bleskodev/rubyripper\n\n"
   end
 
   def showBasicRipInfo
