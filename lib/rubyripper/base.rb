@@ -16,7 +16,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 # The current version of Rubyripper
-$rr_version = '0.7.0rc2'
+$rr_version = '0.7.0'
 $rr_url = 'https://github.com/bleskodev/rubyripper'
 
 # Crash on errors, because bugs are otherwise hard to find
