@@ -431,7 +431,10 @@ attr_reader :instances
   end
   
   def showSummary(succes)
-    @buttons[0..3].each{|button| button.sensitive = true}
+    @buttons[0].sensitive = true
+    @buttons[1].sensitive = true unless @prefs.eject == true 
+    @buttons[2].sensitive = true
+    @buttons[3].sensitive = true unless @prefs.eject == true
     require 'rubyripper/gtk3/gtkSummary'
     @gtkSummary = GtkSummary.new(@rubyripper.fileScheme, @rubyripper.summary, succes)
     changeDisplay(@gtkSummary)
