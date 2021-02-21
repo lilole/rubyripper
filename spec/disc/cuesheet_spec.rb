@@ -19,11 +19,12 @@ require 'rubyripper/disc/cuesheet'
 
 class DiscStub
   attr_accessor :startSectors
-  attr_reader :metadata, :freedbDiscid, :freedbString, :audiotracks
+  attr_reader :metadata, :freedbDiscid, :freedbString, :musicbrainzDiscid, :audiotracks
   
   def initialize
     @freedbDiscid = 'AAAA1234'
     @freedbString = 'This is a freedb string'
+    @musicbrainzDiscid = "SEPOa6RCm56Luhh2o_2KFO0Mq4A-"
     @metadata = MetadataStub.new()
     @audiotracks = 3
     @startSectors = {1=>0, 2=>225, 3=>450}
@@ -67,9 +68,14 @@ describe Cuesheet do
 
   it "should show all relevant disc data at the top" do
     cue.test_printDiscData()
-    expect(cue.cuesheet).to eq(['REM GENRE rock', 'REM DATE 1983', 'REM DISCID AAAA1234',
-                            'REM FREEDB_QUERY "This is a freedb string"', 'REM COMMENT "Rubyripper test"',
-                            'PERFORMER "Iron Maiden"', 'TITLE "Number of the Beast"'])
+    expect(cue.cuesheet).to eq(['REM GENRE rock',
+                                'REM DATE 1983',
+                                'REM DISCID AAAA1234',
+                                'REM FREEDB_QUERY "This is a freedb string"',
+                                'REM MUSICBRAINZ_DISCID SEPOa6RCm56Luhh2o_2KFO0Mq4A-',
+                                'REM COMMENT "Rubyripper test"',
+                                'PERFORMER "Iron Maiden"',
+                                'TITLE "Number of the Beast"'])
   end
   
   context "When printing the track info for image rips" do
