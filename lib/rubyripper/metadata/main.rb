@@ -34,7 +34,7 @@ module Metadata
       setProvidersPriority()
       @providers.each do |provider|
         startup(provider)
-        break if provider == 'none' || @provider.status == 'ok'
+        break if provider == 'none' || @provider.status == 'ok' || @provider.status == 'multipleRecords'
       end
       
       return @provider

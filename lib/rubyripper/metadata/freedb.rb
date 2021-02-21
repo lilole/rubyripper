@@ -50,6 +50,19 @@ class Freedb
     end
   end
 
+  # get metadata choices when status is multipleRecords
+  def getChoices()
+    unless @status == 'multipleRecords'
+      return nil
+    end
+    return @getFreedb.choices
+  end
+
+  def choose(value)
+    @getFreedb.choose(value)
+    handleRemote()
+  end
+
   # helper function for the freedbrecordparser class
   def undoVarArtist ; @parser.undoVarArtist ; end
   def redoVarArtist ; @parser.redoVarArtist ; end
@@ -57,7 +70,7 @@ class Freedb
   # convert metadata content to freedb record and save it localy
   def save()
     freedbRecord = @generator.generate(@disc, @parser.revision + 1)
-    @save.save(freedbRecord, @md.genre,@disc.freedbDiscid, force=true)
+    @save.save(freedbRecord, @md.genre, @disc.freedbDiscid, force=true)
   end
 
   private

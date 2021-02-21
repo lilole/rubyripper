@@ -78,12 +78,14 @@ class GtkDisc
     @disc = Disc.new()
     Thread.new do
       @disc.scan()
+      uiUpdateMsg = 'scan_disc_finished'
       if @disc.status == 'ok'
         @md = @disc.metadata
+        uiUpdateMsg = 'scan_disc_metadata_mutiple_records' if @md.status == 'multipleRecords'
       else
         @error = @disc.error
       end
-      @ui.update("scan_disc_finished")
+      @ui.update(uiUpdateMsg)
     end
   end
   

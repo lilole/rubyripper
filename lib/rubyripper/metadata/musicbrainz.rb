@@ -44,14 +44,32 @@ attr_reader :status
     if @getMusicBrainz.status == 'ok'
       @parser.parse(@getMusicBrainz.musicbrainzRelease, @disc.musicbrainzDiscid, @disc.freedbDiscid)
       @status = @parser.status
-    elsif @getMusicBrainz.status == 'multipleReleases'
+    elsif @getMusicBrainz.status == 'multipleRecords'
       #multiple records
       # This will require showing USEFUL info (more info than a
       # multiple-record freedb result) to disambiguate (status,
       # packaging, country, barcode, date...)
-      @status = 'multipleReleases'
+      @status = 'multipleRecords'
     else  # status == 'noMatches'
       @status = 'noMatches'
+    end
+  end
+
+  # get metadata choices when status is multipleRecords
+  def getChoices()
+    unless @status == 'multipleRecords'
+      return nil
+    end
+    return @getMusicBrainz.choices
+  end
+
+  def choose(value)
+    @getMusicBrainz.choose(value)
+    if @getMusicBrainz.status == 'ok'
+      @parser.parse(@getMusicBrainz.musicbrainzRelease, @disc.musicbrainzDiscid, @disc.freedbDiscid)
+      @status = @parser.status
+    else
+      puts "ERROR: MusicBrainz status after choose: #{@getMusicBrainz.status}" 
     end
   end
 

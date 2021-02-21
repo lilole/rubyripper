@@ -53,7 +53,7 @@ class ScanDiscCdparanoia
     else
       waitForDisc()
       if @error.nil? && @perm.problemsSCSI?(@query)
-	updateStatus(@perm.error)
+        updateStatus(@perm.error)
       elsif @error.nil?
         @status = 'ok'
       end

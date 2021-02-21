@@ -25,23 +25,24 @@ class MultipleFreedbHits
 
   attr_reader :display
 
-  def initialize(value, main_instance)
+  def initialize(metadata, main_instance)
     @label1 = Gtk::Label.new(_("The gnudb server reports multiple hits.\nWhich one would you prefer?"))
     @image1 = Gtk::Image.new(:stock => Gtk::Stock::DIALOG_QUESTION, :size => Gtk::IconSize::DIALOG)
-    @hbox1 = Gtk::Box.new
+    @hbox1 = Gtk::Box.new(:horizontal)
     [@image1, @label1].each{|object| @hbox1.pack_start(object)}
 
-    @combobox = Gtk::ComboBoxText.new(true) # text only
-    value.each{|freedb_hit| @combobox.append_text(freedb_hit)}
+    @combobox = Gtk::ComboBoxText.new()
+    metadata.getChoices().each{|freedb_hit| @combobox.append_text(freedb_hit)}
+    @combobox.active = 0
     @separator1 = Gtk::Separator.new(:horizontal)
     @hbox2 = Gtk::Box.new(:horizontal)
-    @hbox2.pack_start(@combobox, :expand => false, :fill=> false, :padding => 5)
+    @hbox2.pack_start(@combobox, :expand => true, :fill=> true, :padding => 5)
 
     @button1 = Gtk::Button.new
     @label2 = Gtk::Label.new(_("Ok"))
     @image2 = Gtk::Image.new(:stock => Gtk::Stock::OK, :size => Gtk::IconSize::LARGE_TOOLBAR)
     @hbox3 = Gtk::Box.new(:horizontal)
-    [@image2, @label2].each{|object| @hbox3.pack_start(object, :expand => false, :fill => false, :padding => 15)}
+    [@image2, @label2].each{|object| @hbox3.pack_start(object, :expand => false, :fill => false, :padding => 10)}
     @button1.add(@hbox3)
     @hbox4 = Gtk::Box.new(:horizontal)
     @hbox4.pack_start(@button1, :expand => true, :fill => false)
@@ -55,10 +56,8 @@ class MultipleFreedbHits
     @display.border_width = 5
     @display.add(@vbox1)
     @button1.signal_connect("released") do
-      Thread.new do
-        main_instance.change_display(main_instance.instances['GtkMetadata'])
-        main_instance.handleFreedb(@combobox.active)
-      end
+      metadata.choose(@combobox.active)
+      main_instance.update('scan_disc_finished')
     end
   end
 end

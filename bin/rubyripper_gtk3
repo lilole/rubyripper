@@ -25,7 +25,7 @@ begin
   require 'rubyripper/errors'
   require 'rubyripper/preferences/main'
   require 'rubyripper/system/dependency'
-  require 'rubyripper/gtk3/shortMessage'
+  require 'rubyripper/gtk3/gtkShortMessage'
   require 'thread'
 rescue LoadError
   puts 'The rubyripper lib files can\'t be found!'
@@ -127,7 +127,6 @@ attr_reader :instances
   end
   
   # TODO cancel tocscan
-  # TODO freedb multiple choice
   def scanDiscResults   
     if @gtkDisc.error.nil?
       @gtkDisc.refreshGui()
@@ -138,6 +137,22 @@ attr_reader :instances
       @shortMessage.showError(@gtkDisc.error)
       @buttons[0..2].each{|button| button.sensitive = true} ; @buttons[4].sensitive = true
       changeDisplay(@shortMessage)
+    end
+  end
+
+  def showMultipleRecordsSelection()
+    metaDataType = @gtkDisc.disc.metadata.class.to_s
+    if metaDataType == 'MusicBrainz'
+      require 'rubyripper/gtk3/gtkMultipleMusicBrainzHits'
+      @multipleMusicBrainzHits = MultipleMusicBrainzHits.new(@gtkDisc.disc.metadata, self)
+      changeDisplay(@multipleMusicBrainzHits)
+    elsif metaDataType == 'Freedb'
+      require 'rubyripper/gtk3/gtkMultipleFreedbHits'
+      @multipleFreedbHits = MultipleFreedbHits.new(@gtkDisc.disc.metadata, self)
+      changeDisplay(@multipleFreedbHits)
+    else
+      puts "ERROR: Unknown metadata type, check code!"
+      update('scan_disc_finished')
     end
   end
 
@@ -164,7 +179,9 @@ attr_reader :instances
       elsif entry.modus == "finished"
         showSummary(entry.value)
       elsif entry.modus == "scan_disc_finished"
-        scanDiscResults();
+        scanDiscResults()
+      elsif entry.modus == "scan_disc_metadata_mutiple_records"
+        showMultipleRecordsSelection()
       else
         puts _("Ehh.. There shouldn't be anything else. WTF?")
         puts _("Secret modus = %s") % [entry.modus]
@@ -321,35 +338,7 @@ attr_reader :instances
       refreshDisc()
     end
   end
-
-  #Fetch the cddb info if user wants to
-  def handleFreedb(choice = false)
-    if choice == false
-      @settings['cd'].md.freedb(@settings, @settings['first_hit'])
-    elsif choice == -1
-      @settings['cd'].md.freedbChoice(0)
-    else
-      @settings['cd'].md.freedbChoice(choice)
-    end
-
-    status = @settings['cd'].md.status
-
-    if status == true #success
-      @gtkDisc.updateMetadata()
-      if @currentInstance != 'GtkDisc'
-        changeDisplay(@gtkDisc)
-      end
-    elsif status[0] == "choices"
-      @instances['MultipleFreedbHits'] = MultipleFreedbHits.new(status[1], self)
-      changeDisplay(@instances['MultipleFreedbHits'])
-    elsif status[0] == "networkDown" || status[0] == "noMatches" || status[0] == "unknownReturnCode" || status[0] == "NoAudioDisc"
-      update("error", status[1])
-    else
-      puts "Unknown error with Metadata class."
-    end
-  end
   
-  # TODO cancelTocScan()
   def handleTray
     @buttons.each{|button| button.sensitive = false}
     if @buttontext[2].text == _("Open tray")
@@ -412,7 +401,7 @@ attr_reader :instances
   end
   
   def updateInterfaceAndStartRip
-    require 'rubyripper/gtk3/ripStatus'
+    require 'rubyripper/gtk3/gtkRipStatus'
     @buttons[0..3].each{|button| button.sensitive = false}
     @ripStatus = RipStatus.new(self)
     changeDisplay(@ripStatus)
