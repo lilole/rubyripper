@@ -297,6 +297,7 @@ attr_reader :instances
   end
   
   def refreshDisc
+    cancelTocScan()
     @shortMessage.refreshDisc()
     changeDisplay(@shortMessage)
     scanDisc()
@@ -352,6 +353,7 @@ attr_reader :instances
   def handleTray
     @buttons.each{|button| button.sensitive = false}
     if @buttontext[2].text == _("Open tray")
+      cancelTocScan()
       openDrive()
       askForDisc()
     else
