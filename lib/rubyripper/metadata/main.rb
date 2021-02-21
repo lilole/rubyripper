@@ -45,14 +45,14 @@ module Metadata
     def setProvidersPriority
       @providers = [@prefs.metadataProvider]
       @providers << 'musicbrainz' if @prefs.metadataProvider != 'musicbrainz'
-      @providers << 'freedb' if @prefs.metadataProvider != 'freedb'
+      @providers << 'gnudb' if @prefs.metadataProvider != 'gnudb'
       @providers << 'none' if @prefs.metadataProvider != 'none'
     end
     
     def startup(provider)
       case provider
         when 'musicbrainz' then musicbrainz()
-        when 'freedb' then freedb()
+        when 'gnudb' then freedb()
         when 'none' then none()
       end
     end

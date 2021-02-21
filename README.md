@@ -30,7 +30,7 @@ line interface.
 Some of it's main features:
 * graphical (gtk3) and command line interface
 * a [secure rip method](#Secure-rip-method)
-* editable freedb and musicbrainz tag fetching
+* editable gnudb and musicbrainz tag fetching
 * flac, vorbis, mp3, wav support
 * any other codec by passing the command
 * multiple codec encoding in one run
@@ -80,7 +80,7 @@ Dependencies:
 Suggested:
 * ruby-gettext (for translations)
 * ruby-gtk3 (for gtk3 gui)
-* cd-discid or discid (for proper freedb support)
+* cd-discid or discid (for proper gnudb support)
 * eject or diskutil for MacOS (for eject support)
 * flac, oggenc, lame, neroAacEnc, wavpack (if the codec is wanted)
 * wavgain, vorbisgain, mp3gain, aacgain (for replaygain support)
@@ -112,7 +112,7 @@ To cleanup: `make clean`
 The CLI now works in MacOS. However, if your cdparanoia version
 doesn't support the -d switch (to set the device), only the default
 drive can be used. Rubyripper doesn't do this for you, so if you got
-weird results with freedb fetching, use your other cdrom drive.
+weird results with gnudb fetching, use your other cdrom drive.
 
 A cdparanoia port for MacOS that supports the -d switch [can be found here](http://sourceforge.net/project/showfiles.php?group_id=158413)
 

@@ -151,6 +151,7 @@ class GtkPreferences
   def loadMetadataProvider
     case @prefs.metadataProvider
       when 'freedb' then 0
+      when 'gnudb' then 0
       when 'musicbrainz' then 1
       when 'none' then 2
     end
@@ -217,7 +218,7 @@ class GtkPreferences
   
   def saveMetadataProvider
     case @metadataChoice.active
-      when 0 then 'freedb'
+      when 0 then 'gnudb'
       when 1 then 'musicbrainz'
       when 2 then 'none'
     end
@@ -581,7 +582,7 @@ It is recommended to enable this option.")
     @table90 = newTable(rows=1, columns=2)
     @metadataLabel = Gtk::Label.new(_("Primary metadata provider:"))
     @metadataChoice = Gtk::ComboBoxText.new()
-    @metadataChoice.append_text(_("Freedb"))
+    @metadataChoice.append_text(_("Gnudb"))
     @metadataChoice.append_text(_("Musicbrainz"))
     @metadataChoice.append_text(_("Don't use a metadata provider"))
     @table90.attach(@metadataLabel,0,1,0,1,Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK,0,0)
@@ -592,8 +593,8 @@ It is recommended to enable this option.")
   def buildFrameFreedbOptions
     @table91 = newTable(rows=4, columns=2)
 #creating objects
-    @firstHit= Gtk::CheckButton.new(_("Always use first freedb hit"))
-    @freedb_server_label= Gtk::Label.new(_("Freedb server:")) ; @freedb_server_label.set_alignment(0.0, 0.5)
+    @firstHit= Gtk::CheckButton.new(_("Always use first gnudb hit"))
+    @freedb_server_label= Gtk::Label.new(_("Gnudb server:")) ; @freedb_server_label.set_alignment(0.0, 0.5)
     @freedb_username_label= Gtk::Label.new(_("Username:")) ; @freedb_username_label.set_alignment(0.0, 0.5)
     @freedb_hostname_label= Gtk::Label.new(_("Hostname:")) ; @freedb_hostname_label.set_alignment(0.0, 0.5)
     @freedbServerEntry = Gtk::Entry.new
@@ -610,7 +611,7 @@ It is recommended to enable this option.")
                     Gtk::AttachOptions::SHRINK, 0, 0) #2nd column, 4th row
     @table91.attach(@freedbHostnameEntry, 1, 2, 3, 4, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND,
                     Gtk::AttachOptions::SHRINK, 0, 0) #2nd column, 5th row
-    @frame91 = newFrame(_('Freedb options'), child=@table91)
+    @frame91 = newFrame(_('Gnudb options'), child=@table91)
 #pack frame
   end
   

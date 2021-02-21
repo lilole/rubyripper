@@ -1,3 +1,6 @@
+---------0.8.0 RELEASE------
+* redirected freedb code to gnudb (following the closure of the freedb service)
+* updated GUI to GTK3
 ---------0.7.0 RELEASE------
 * updated ruby requirement to 1.9
 * massive refactoring and cleanups

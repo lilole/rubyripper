@@ -83,9 +83,9 @@ module Preferences
     end
 
     def setFreedbDefaults
-      @data.metadataProvider = 'freedb'
+      @data.metadataProvider = 'gnudb'
       @data.firstHit = true
-      @data.site = 'http://freedb.freedb.org/~cddb/cddb.cgi'
+      @data.site = 'http://gnudb.gnudb.org/~cddb/cddb.cgi'
       @data.username = 'anonymous'
       @data.hostname = 'my_secret.com'
     end

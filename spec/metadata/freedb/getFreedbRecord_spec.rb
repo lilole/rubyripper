@@ -23,9 +23,9 @@ describe GetFreedbRecord do
   # helper function to return the query message in the stub
   def setQueryReply(query=nil)
     allow(prefs).to receive(:debug).and_return false
-    allow(prefs).to receive(:site).and_return 'http://freedb.freedb.org/~cddb/cddb.cgi'
+    allow(prefs).to receive(:site).and_return 'http://gnudb.gnudb.org/~cddb/cddb.cgi'
     query ||= '200 blues 7F087C0A Some random artist / Some random album'
-    expect(network).to receive(:startCgiConnection).once.with('http://freedb.freedb.org/~cddb/cddb.cgi')
+    expect(network).to receive(:startCgiConnection).once.with('http://gnudb.gnudb.org/~cddb/cddb.cgi')
     expect(network).to receive(:encode).at_least(:once).with(anything()) {|a| CGI.escape(a)}
     expect(network).to receive(:get).with(@query_disc).and_return query
   end
@@ -45,7 +45,7 @@ Joe+fakestation+rubyripper+test&proto=6"
     @query_disc = "/~cddb/cddb.cgi?cmd=cddb+query+7F087C0A+10+150+13359+\
 36689+53647+68322+81247+87332+106882+122368+124230+2174&hello=Joe+\
 fakestation+rubyripper+test&proto=6"
-    @file = 'A fake freedb record file'
+    @file = 'A fake gnudb record file'
   end
 
   let(:prefs) {double('Preferences').as_null_object}
@@ -62,7 +62,7 @@ fakestation+rubyripper+test&proto=6"
     end
   end
 
-  context "After firing a query for a disc to the freedb server" do
+  context "After firing a query for a disc to the gnudb server" do
 
     before(:each) do
       expect(prefs).to receive(:hostname).at_least(:once).and_return 'fakestation'

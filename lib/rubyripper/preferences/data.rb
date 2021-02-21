@@ -155,19 +155,19 @@ module Preferences
     attr_accessor :gain
 
     # METADATA PREFERENCES
-    # Choose metadata provider 'none' || 'freedb' || 'musicbrainz' 
+    # Choose metadata provider 'none' || 'gnudb' || 'musicbrainz' 
     attr_accessor :metadataProvider
 
-    # Always use first hit from freedb
+    # Always use first hit from gnudb
     attr_accessor :firstHit
 
-    # Freedb server used
+    # Gnudb server used
     attr_accessor :site
 
-    # Freedb username for authentication
+    # Gnudb username for authentication
     attr_accessor :username
 
-    # Freedb hostname for authentication
+    # Gnudb hostname for authentication
     attr_accessor :hostname
 
     # MUSICBRAINZ PREFERENCES

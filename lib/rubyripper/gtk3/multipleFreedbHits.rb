@@ -26,7 +26,7 @@ class MultipleFreedbHits
   attr_reader :display
 
   def initialize(value, main_instance)
-    @label1 = Gtk::Label.new(_("The freedb server reports multiple hits.\nWhich one would you prefer?"))
+    @label1 = Gtk::Label.new(_("The gnudb server reports multiple hits.\nWhich one would you prefer?"))
     @image1 = Gtk::Image.new(:stock => Gtk::Stock::DIALOG_QUESTION, :size => Gtk::IconSize::DIALOG)
     @hbox1 = Gtk::Box.new
     [@image1, @label1].each{|object| @hbox1.pack_start(object)}

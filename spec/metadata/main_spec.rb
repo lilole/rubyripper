@@ -34,8 +34,8 @@ describe Metadata::Main do
       expect(main.get).to eq(musicbrainz)
     end
   
-    it "should use Freedb if that is the preference" do
-      allow(prefs).to receive(:metadataProvider).and_return("freedb")
+    it "should use Gnudb if that is the preference" do
+      allow(prefs).to receive(:metadataProvider).and_return("gnudb")
       expect(freedb).to receive(:get)
       expect(freedb).to receive(:status).and_return 'ok'
       expect(main.get).to eq(freedb)
@@ -51,7 +51,7 @@ describe Metadata::Main do
         allow(prefs).to receive(:metadataProvider).and_return("musicbrainz")
       end
       
-      it "should first fall back to Freedb if Musicbrainz fails" do
+      it "should first fall back to Gnudb if Musicbrainz fails" do
         expect(musicbrainz).to receive(:get)
         expect(musicbrainz).to receive(:status).and_return 'mayday'
         expect(freedb).to receive(:get)
@@ -59,7 +59,7 @@ describe Metadata::Main do
         expect(main.get).to eq(freedb)
       end
       
-      it "should fall back to none if Freedb fails as well" do
+      it "should fall back to none if Gnudb fails as well" do
         expect(musicbrainz).to receive(:get)
         expect(musicbrainz).to receive(:status).and_return 'mayday'
         expect(freedb).to receive(:get)
@@ -68,12 +68,12 @@ describe Metadata::Main do
       end
     end
     
-    context "Given the preference is set to freedb" do
+    context "Given the preference is set to gnudb" do
       before(:each) do
-        allow(prefs).to receive(:metadataProvider).and_return("freedb")
+        allow(prefs).to receive(:metadataProvider).and_return("gnudb")
       end
       
-      it "should first fall back to Musicbrainz if Freedb fails" do
+      it "should first fall back to Musicbrainz if Gnudb fails" do
         expect(freedb).to receive(:get)
         expect(freedb).to receive(:status).and_return 'mayday'
         expect(musicbrainz).to receive(:get)

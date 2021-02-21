@@ -30,7 +30,7 @@ describe Freedb do
   let(:getFreedb) {double('GetFreedbRecord').as_null_object}
 
   context "When save is requested" do
-    it "should generate freedb record and save it" do
+    it "should generate gnudb record and save it" do
       freedbRecord = 'fake record'
       category = 'Jazz'
       discid = 'a56b3400'
