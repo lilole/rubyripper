@@ -150,6 +150,7 @@ unless ($GTK3 || $CLI)
   exit()
 end
 
+update_mo()
 check_deps()
 
 puts "Creating the Makefile..."
@@ -162,10 +163,7 @@ makefile.puts "ICONDIR=#{$PREFIX}#{$ICONDIR}"
 makefile.puts "DESKTOP=#{$PREFIX}#{$DESKTOP}"
 makefile.puts "RUBYDIR=#{$PREFIX}#{$RUBYDIR}"
 makefile.puts ""
-makefile.puts "all:"
-makefile.puts "\truby configure --update-mo #update the locale files"
-makefile.puts ""
-makefile.puts "install: all"
+makefile.puts "install:"
 Dir.glob("#{$RUBYDIR[1..-1]}/**/*.rb").each do |file|
   makefile.puts "\t#{$INSTALL} -m 644 #{file} $(prefix)$(DESTDIR)#{$PREFIX}/#{file}"
 end
