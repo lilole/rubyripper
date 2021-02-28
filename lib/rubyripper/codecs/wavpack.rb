@@ -28,6 +28,7 @@ module Codecs
         :discNumber => "-w DISCNUMBER=",
         :encoder => "-w ENCODER=",
         :discId => "-w DISCID=",
+        :musicBrainzDiscId => "-w MUSICBRAINZ_DISCID=",
         :trackname => "-w TITLE=",
         :tracknumber => "-w TRACKNUMBER=",
         :tracktotal => "-w TRACKTOTAL=",

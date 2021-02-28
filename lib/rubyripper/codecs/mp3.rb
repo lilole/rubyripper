@@ -29,7 +29,8 @@ module Codecs
         :albumArtist => "--tv TPE2=",
         :discNumber => "--tv TPOS=",
         :encoder => "--tv TENC=",
-        :discId => "--tc DISCID=",
+        :discId => "--tv \"TXXX=DISCID=",
+        :musicBrainzDiscId => "--tv \"TXXX=MusicBrainz Disc Id=",
         :trackname => "--tt",
         :tracknumberTotal => "--tn"
       }

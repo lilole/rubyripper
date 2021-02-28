@@ -28,6 +28,7 @@ module Codecs
         :discNumber => "-meta:disc=",
         :encoder => "-meta-user:ENCODER=",
         :discId => "-meta-user:DISCID=",
+        :musicBrainzDiscId => "-meta-user:MUSICBRAINZ_DISCID=",
         :trackname => "-meta:title=",
         :tracknumber => "-meta:track=",
         :tracktotal => "-meta:totaltracks="

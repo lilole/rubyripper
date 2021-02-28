@@ -121,7 +121,8 @@ module Codecs
           when :genre then add(value, @tags.genre)
           when :year then add(value, @tags.year)
           when :albumArtist then add(value, @tags.artist) if @md.various?
-          when :discId then add(value, "\"#{@disc.freedbDiscid}\"") if @disc.freedbDiscid
+          when :discId then add(value, "#{@disc.freedbDiscid}\"") if @disc.freedbDiscid
+          when :musicBrainzDiscId then add(value, "#{@disc.musicbrainzDiscid}\"") if @disc.musicbrainzDiscid
           when :discNumber then add(value, "#{@md.discNumber}") if @md.discNumber
           when :encoder then add(value, "\"Rubyripper #{$rr_version}\"")
           when :cuesheet then addCuesheet(value) if @prefs.image

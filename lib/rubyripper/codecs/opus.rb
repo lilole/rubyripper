@@ -28,6 +28,7 @@ module Codecs
         :discNumber => "--comment DISCNUMBER=",
         :encoder => "--comment ENCODER=",
         :discId => "--comment DISCID=",
+        :musicBrainzDiscId => "--comment MUSICBRAINZ_DISCID=",
         :trackname => "--title",
         :tracknumber => "--comment TRACKNUMBER=",
         :tracktotal => "--comment TRACKTOTAL="
