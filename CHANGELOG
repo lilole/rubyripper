@@ -1,4 +1,6 @@
 ---------0.8.0 RELEASE------
+* Musicbrainz disc id is now written into tags
+* handle multiple releases/db hits in GTK frontend
 * redirected freedb code to gnudb (following the closure of the freedb service)
 * updated GUI to GTK3
 ---------0.7.0 RELEASE------
