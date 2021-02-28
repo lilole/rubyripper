@@ -121,8 +121,8 @@ module Codecs
           when :genre then add(value, @tags.genre)
           when :year then add(value, @tags.year)
           when :albumArtist then add(value, @tags.artist) if @md.various?
-          when :discId then add(value, "#{@disc.freedbDiscid}\"") if @disc.freedbDiscid
-          when :musicBrainzDiscId then add(value, "#{@disc.musicbrainzDiscid}\"") if @disc.musicbrainzDiscid
+          when :discId then add(value, wrapDiscIdValueForTags(@disc.freedbDiscid)) if @disc.freedbDiscid
+          when :musicBrainzDiscId then add(value, wrapDiscIdValueForTags(@disc.musicbrainzDiscid)) if @disc.musicbrainzDiscid
           when :discNumber then add(value, "#{@md.discNumber}") if @md.discNumber
           when :encoder then add(value, "\"Rubyripper #{$rr_version}\"")
           when :cuesheet then addCuesheet(value) if @prefs.image
@@ -134,6 +134,14 @@ module Codecs
         result << tag unless tag.nil? || tag.strip().empty?
       end
       result.join(" ")
+    end
+
+    def wrapDiscIdValueForTags(discId)
+      if @codec.class.to_s == "Codecs::Mp3"
+        return "#{discId}\""
+      else
+        return "\"#{discId}\""
+      end
     end
     
     def addCuesheet(value)

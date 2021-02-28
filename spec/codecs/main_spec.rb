@@ -63,6 +63,7 @@ describe Codecs::Main do
         expect(md).to receive(:various?).and_return nil
         expect(md).to receive(:discNumber).and_return nil
         expect(disc).to receive(:freedbDiscid).and_return nil
+        expect(disc).to receive(:musicbrainzDiscid).and_return nil
 
         expect(@codec.command(1)).to eq('lame -V 2 --ta "trackArtist 1" --tl "album" '\
             '--tv TCON="genre" --ty "year" --tv TENC="Rubyripper test" --tt "trackname 1" '\
@@ -74,6 +75,7 @@ describe Codecs::Main do
         expect(md).to receive(:various?).and_return true
         expect(md).to receive(:discNumber).and_return nil
         expect(disc).to receive(:freedbDiscid).and_return nil
+        expect(disc).to receive(:musicbrainzDiscid).and_return nil
         
         expect(@codec.command(1)).to eq('lame -V 2 --ta "trackArtist 1" --tl "album" '\
             '--tv TCON="genre" --ty "year" --tv TPE2="artist" --tv TENC="Rubyripper test" '\
@@ -84,9 +86,11 @@ describe Codecs::Main do
         expect(md).to receive(:various?).and_return nil
         expect(md).to receive(:discNumber).and_return nil
         expect(disc).to receive(:freedbDiscid).twice.and_return 'ABCDEFGH'
+        expect(disc).to receive(:musicbrainzDiscid).twice.and_return 'yQnNM8eSkwrJ.9m9cLM07cRxmwg-'
         
         expect(@codec.command(1)).to eq('lame -V 2 --ta "trackArtist 1" --tl "album" '\
-            '--tv TCON="genre" --ty "year" --tv TENC="Rubyripper test" --tc DISCID="ABCDEFGH" '\
+            '--tv TCON="genre" --ty "year" --tv TENC="Rubyripper test" --tv "TXXX=DISCID=ABCDEFGH" '\
+            '--tv "TXXX=MusicBrainz Disc Id=yQnNM8eSkwrJ.9m9cLM07cRxmwg-" '\
             '--tt "trackname 1" --tn 1/99 "input_1.wav" "/home/mp3/1-test.mp3"')
       end
       
@@ -94,6 +98,7 @@ describe Codecs::Main do
         expect(md).to receive(:various?).and_return nil
         expect(md).to receive(:discNumber).twice.and_return 1
         expect(disc).to receive(:freedbDiscid).and_return nil
+        expect(disc).to receive(:musicbrainzDiscid).and_return nil
         
         expect(@codec.command(1)).to eq('lame -V 2 --ta "trackArtist 1" --tl "album" '\
             '--tv TCON="genre" --ty "year" --tv TPOS=1 --tv TENC="Rubyripper test" --tt '\
@@ -126,11 +131,13 @@ describe Codecs::Main do
       expect(md).to receive(:various?).and_return true
       expect(md).to receive(:discNumber).twice.and_return 1
       expect(disc).to receive(:freedbDiscid).twice.and_return 'ABCDEFGH'
+      expect(disc).to receive(:musicbrainzDiscid).twice.and_return 'yQnNM8eSkwrJ.9m9cLM07cRxmwg-'
       
       expect(@codec.command(1)).to eq('oggenc -o "/home/vorbis/1-test.ogg" -q 6 -c '\
           'ARTIST="trackArtist 1" -c ALBUM="album" -c GENRE="genre" -c DATE="year" -c '\
           '"ALBUM ARTIST"="artist" -c DISCNUMBER=1 -c ENCODER="Rubyripper test" -c '\
-          'DISCID="ABCDEFGH" -c TITLE="trackname 1" -c TRACKNUMBER=1 -c TRACKTOTAL=99 "input_1.wav"')
+          'DISCID="ABCDEFGH" -c MUSICBRAINZ_DISCID="yQnNM8eSkwrJ.9m9cLM07cRxmwg-" '\
+          '-c TITLE="trackname 1" -c TRACKNUMBER=1 -c TRACKTOTAL=99 "input_1.wav"')
       expect(@codec.setTagsAfterEncoding(1)).to eq('')
     end
   end
@@ -159,12 +166,13 @@ describe Codecs::Main do
       expect(md).to receive(:various?).and_return true
       expect(md).to receive(:discNumber).twice.and_return 1
       expect(disc).to receive(:freedbDiscid).twice.and_return 'ABCDEFGH'
+      expect(disc).to receive(:musicbrainzDiscid).twice.and_return 'yQnNM8eSkwrJ.9m9cLM07cRxmwg-'
       
       expect(@codec.command(1)).to eq('flac -o "/home/flac/1-test.flac" -q 6 --tag '\
           'ARTIST="trackArtist 1" --tag ALBUM="album" --tag GENRE="genre" --tag DATE="year" '\
           '--tag "ALBUM ARTIST"="artist" --tag DISCNUMBER=1 --tag ENCODER="Rubyripper test" '\
-          '--tag DISCID="ABCDEFGH" --tag TITLE="trackname 1" --tag TRACKNUMBER=1 --tag '\
-          'TRACKTOTAL=99 "input_1.wav"')
+          '--tag DISCID="ABCDEFGH" --tag MUSICBRAINZ_DISCID="yQnNM8eSkwrJ.9m9cLM07cRxmwg-" '\
+          '--tag TITLE="trackname 1" --tag TRACKNUMBER=1 --tag TRACKTOTAL=99 "input_1.wav"')
       expect(@codec.setTagsAfterEncoding(1)).to eq('')
     end
     
@@ -180,12 +188,13 @@ describe Codecs::Main do
       expect(md).to receive(:various?).and_return true
       expect(md).to receive(:discNumber).twice.and_return 1
       expect(disc).to receive(:freedbDiscid).twice.and_return 'ABCDEFGH'
+      expect(disc).to receive(:musicbrainzDiscid).twice.and_return 'yQnNM8eSkwrJ.9m9cLM07cRxmwg-'
       
       expect(@codec.command(1)).to eq('flac -o "/home/flac/1-test.flac" -q 6 --tag '\
           'ARTIST="trackArtist 1" --tag ALBUM="album" --tag GENRE="genre" --tag DATE="year" '\
           '--tag "ALBUM ARTIST"="artist" --tag DISCNUMBER=1 --tag ENCODER="Rubyripper test" '\
-          '--tag DISCID="ABCDEFGH" --tag '\
-          'TRACKTOTAL=99 --cuesheet="/home/flac/test.cue" "input_1.wav"')
+          '--tag DISCID="ABCDEFGH" --tag MUSICBRAINZ_DISCID="yQnNM8eSkwrJ.9m9cLM07cRxmwg-" '\
+          '--tag TRACKTOTAL=99 --cuesheet="/home/flac/test.cue" "input_1.wav"')
     end
   end
   
@@ -236,12 +245,14 @@ describe Codecs::Main do
       expect(md).to receive(:various?).and_return true
       expect(md).to receive(:discNumber).twice.and_return 1
       expect(disc).to receive(:freedbDiscid).twice.and_return 'ABCDEFGH'
+      expect(disc).to receive(:musicbrainzDiscid).twice.and_return 'yQnNM8eSkwrJ.9m9cLM07cRxmwg-'
       
       expect(@codec.command(1)).to eq('neroAacEnc -q 1 -if "input_1.wav" -of "/home/nero/1-test.m4a"')
       expect(@codec.setTagsAfterEncoding(1)).to eq('neroAacTag "/home/nero/1-test.m4a" '\
           '-meta:artist="trackArtist 1" -meta:album="album" -meta:genre="genre" -meta:year="year" '\
           '-meta-user:"ALBUM ARTIST"="artist" -meta:disc=1 -meta-user:ENCODER="Rubyripper test" '\
-          '-meta-user:DISCID="ABCDEFGH" -meta:title="trackname 1" -meta:track=1 -meta:totaltracks=99')
+          '-meta-user:DISCID="ABCDEFGH" -meta-user:MUSICBRAINZ_DISCID="yQnNM8eSkwrJ.9m9cLM07cRxmwg-" '\
+          '-meta:title="trackname 1" -meta:track=1 -meta:totaltracks=99')
     end
   end
   
@@ -269,10 +280,11 @@ describe Codecs::Main do
       expect(md).to receive(:various?).and_return true
       expect(md).to receive(:discNumber).twice.and_return 1
       expect(disc).to receive(:freedbDiscid).twice.and_return 'ABCDEFGH'
+      expect(disc).to receive(:musicbrainzDiscid).twice.and_return 'yQnNM8eSkwrJ.9m9cLM07cRxmwg-'
       
       expect(@codec.command(1)).to eq('wavpack -w ARTIST="trackArtist 1" -w ALBUM="album" '\
           '-w GENRE="genre" -w DATE="year" -w "ALBUM ARTIST"="artist" -w DISCNUMBER=1 -w '\
-          'ENCODER="Rubyripper test" -w DISCID="ABCDEFGH" -w '\
+          'ENCODER="Rubyripper test" -w DISCID="ABCDEFGH" -w MUSICBRAINZ_DISCID="yQnNM8eSkwrJ.9m9cLM07cRxmwg-" -w '\
           'TRACKTOTAL=99 -w CUESHEET="/home/wavpack/test.cue" "input_1.wav" -o "/home/wavpack/1-test.wv"')
       expect(@codec.setTagsAfterEncoding(1)).to eq('')
     end
@@ -292,10 +304,12 @@ describe Codecs::Main do
       expect(md).to receive(:various?).and_return true
       expect(md).to receive(:discNumber).twice.and_return 1
       expect(disc).to receive(:freedbDiscid).twice.and_return 'ABCDEFGH'
+      expect(disc).to receive(:musicbrainzDiscid).twice.and_return 'yQnNM8eSkwrJ.9m9cLM07cRxmwg-'
       
       expect(@codec.command(1)).to eq('opusenc --bitrate 160 --artist "trackArtist 1" --comment ALBUM="album" '\
           '--comment GENRE="genre" --comment DATE="year" --comment "ALBUM ARTIST"="artist" '\
-          '--comment DISCNUMBER=1 --comment ENCODER="Rubyripper test" --comment DISCID="ABCDEFGH" --title "trackname 1" '\
+          '--comment DISCNUMBER=1 --comment ENCODER="Rubyripper test" --comment DISCID="ABCDEFGH" '\
+          '--comment MUSICBRAINZ_DISCID="yQnNM8eSkwrJ.9m9cLM07cRxmwg-" --title "trackname 1" ' \
           '--comment TRACKNUMBER=1 --comment TRACKTOTAL=99 "input_1.wav" "/home/opus/1-test.opus"')
       expect(@codec.setTagsAfterEncoding(1)).to eq('')
     end
