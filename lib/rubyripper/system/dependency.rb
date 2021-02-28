@@ -104,9 +104,9 @@ private
     'cdparanoia' => _("Rubyripper can't be used without cdparanoia!"),
       'ruby-gtk3' => _("You won't be able to use the gtk3 interface."),
       'ruby-gettext' => _("You won't be able to use translations."),
-      'discid' => _("You won't have accurate freedb string \
+      'discid' => _("You won't have accurate Gnudb string \
 calculation unless %s is installed.") % ['Cd-discid'],
-      'cd-discid' => _("You won't have accurate freedb string \
+      'cd-discid' => _("You won't have accurate Gnnudb string \
 calculation unless %s is installed.") % ['Discid'],
       'eject' => _("Your disc tray can not be opened after ripping"),
       'flac' => _("You won't be able to encode in FLAC."),

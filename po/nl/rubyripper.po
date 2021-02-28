@@ -2,18 +2,21 @@
 # Copyright (C) 2012 Bouke Woudstra
 # This file is distributed under the same license as the Rubyripper package.
 # Bouke Woudstra boukewoudstra@gmail.com, 2012.
+# BleskoDev <bleskodev@ennumia.eu>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Rubyripper 0.7.0a1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2012-12-27 22:06+0100\n"
-"Last-Translator: Bouke Woudstra <rubyripperdev@gmail.com>\n"
-"Language-Team: Dutch\n"
+"PO-Revision-Date: 2021-02-28 19:13+0100\n"
+"Last-Translator: BleskoDev <bleskodev@ennumia.eu>\n"
+"Language-Team: French <bleskodev@ennumia.eu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Language: fr\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 msgid "y"
 msgstr "j"
@@ -458,17 +461,17 @@ msgstr "VOORKEUREN METADATA"
 msgid "Metadata provider"
 msgstr "Metadata provider"
 
-msgid "Freedb use first hit %s"
-msgstr "Gebruik altijd de eerste freedb mogelijkheid %s"
+msgid "Gnudb use first hit %s"
+msgstr "Gebruik altijd de eerste Gnudb mogelijkheid %s"
 
-msgid "Freedb server"
-msgstr "Freedb server"
+msgid "Gnudb server"
+msgstr "Gnudb server"
 
-msgid "Freedb username"
-msgstr "Freedb gebruikersnaam"
+msgid "Gnudb username"
+msgstr "Gnudb gebruikersnaam"
 
-msgid "Freedb hostname"
-msgstr "Freedb hostnaam"
+msgid "Gnudb hostname"
+msgstr "Gnudb hostnaam"
 
 msgid "Musicbrainz preferred countries (1st, 2nd,...)"
 msgstr "Musicbrainz voorkeur voor landen"
@@ -485,8 +488,8 @@ msgstr "Prefereer releases uit landen (beter, slecht, ...)"
 msgid "Don't fetch metadata from the internet"
 msgstr "Haal geen metadata van het internet"
 
-msgid "Use the freedb protocol as primary resource"
-msgstr "Gebruik het freedb protocol als primaire bron"
+msgid "Use the gnudb protocol as primary resource"
+msgstr "Gebruik het Gnudb protocol als primaire bron"
 
 msgid "Use the musicbrainz protocol as primary resource"
 msgstr "Gebruik het musicbrainz protocol als primaire bron"
@@ -734,6 +737,82 @@ msgstr "<b>Disk info</b>"
 msgid "<b>Track selection</b>"
 msgstr "<b>Track selectie</b>"
 
+msgid ""
+"The gnudb server reports multiple hits.\n"
+"Which one would you prefer?"
+msgstr ""
+"De Gnudb server geeft meerdere mogelijkheden aan.\n"
+"Welke mogelijkheid heeft uw voorkeur?"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Multiple hits found..."
+msgstr "Meerdere mogelijkheden..."
+
+msgid ""
+"The musicbrainz server reports multiple releases.\n"
+"Which one would you prefer?"
+msgstr ""
+"De Musicbrainz server geeft meerdere mogelijkheden aan.\n"
+"Welke mogelijkheid heeft uw voorkeur?"
+
+#, fuzzy
+msgid "Multiple releases found..."
+msgstr "Meerdere mogelijkheden..."
+
+msgid "Title:"
+msgstr ""
+
+msgid "Date:"
+msgstr ""
+
+#, fuzzy
+msgid "Description:"
+msgstr "n"
+
+#, fuzzy
+msgid "Country:"
+msgstr "j"
+
+#, fuzzy
+msgid "Packaging:"
+msgstr "n"
+
+msgid "Status:"
+msgstr ""
+
+msgid "Barcode:"
+msgstr ""
+
+#, fuzzy
+msgid "Unknown title"
+msgstr "Onbekend"
+
+#, fuzzy
+msgid "Unknown date"
+msgstr "Onbekend"
+
+#, fuzzy
+msgid "Unknown description"
+msgstr "Onbekend"
+
+#, fuzzy
+msgid "Unknown country code"
+msgstr "Onbekend"
+
+#, fuzzy
+msgid "Unknown packaging type"
+msgstr "Onbekend"
+
+#, fuzzy
+msgid "Unknown status"
+msgstr "Onbekend"
+
+#, fuzzy
+msgid "Unknown barcode"
+msgstr "Onbekend"
+
 msgid "Cdrom device:"
 msgstr "Cdrom apparaat:"
 
@@ -904,8 +983,9 @@ msgstr "Normaliseer naar standaard volume"
 msgid "Primary metadata provider:"
 msgstr "Primaire metadata provider:"
 
-msgid "Freedb"
-msgstr "Freedb"
+#, fuzzy
+msgid "Gnudb"
+msgstr "n"
 
 msgid "Musicbrainz"
 msgstr "Musicbrainz"
@@ -916,11 +996,11 @@ msgstr "Gebruik geen enkele metadata provider"
 msgid "Choose your metadata provider"
 msgstr "Kies uw metadata provider"
 
-msgid "Always use first freedb hit"
-msgstr "Gebruik altijd de eerste mogelijkheid van freedb"
+msgid "Always use first gnudb hit"
+msgstr "Gebruik altijd de eerste mogelijkheid van Gnudb"
 
-msgid "Freedb server:"
-msgstr "Freedb server:"
+msgid "Gnudb server:"
+msgstr "Gnudb server:"
 
 msgid "Username:"
 msgstr "Gebruikersnaam:"
@@ -928,8 +1008,8 @@ msgstr "Gebruikersnaam:"
 msgid "Hostname:"
 msgstr "Hostnaam:"
 
-msgid "Freedb options"
-msgstr "Freedb opties"
+msgid "Gnudb options"
+msgstr "Gnudb opties"
 
 msgid "Preferred countries:"
 msgstr "Voorkeur voor landen:"
@@ -994,42 +1074,6 @@ msgstr "Debug modus"
 msgid "Debug options"
 msgstr "Debug opties"
 
-msgid ""
-"The rip has succesfully finished.\n"
-"A short summary is shown below."
-msgstr ""
-"De rip is succesvol voltooid.\n"
-"Een korte samenvatting is hieronder zichtbaar."
-
-msgid ""
-"The rip had some problems.\n"
-"A short summary is shown below."
-msgstr ""
-"De rip heeft enige problemen gehad.\n"
-"Een korte samenvatting is hieronder zichtbaar."
-
-msgid "Open log file"
-msgstr "Open logbestand"
-
-msgid "Open directory"
-msgstr "Open directory"
-
-msgid "Ripping and encoding is finished"
-msgstr "Het rippen en encoderen is voltooid"
-
-msgid ""
-"The freedb server reports multiple hits.\n"
-"Which one would you prefer?"
-msgstr ""
-"De freedb server geeft meerdere mogelijkheden aan.\n"
-"Welke mogelijkheid heeft uw voorkeur?"
-
-msgid "Ok"
-msgstr "Ok"
-
-msgid "Multiple hits found..."
-msgstr "Meerdere mogelijkheden..."
-
 #, fuzzy
 msgid "Encoding progress %s %%"
 msgstr "Voortgang encoderen %s %"
@@ -1082,6 +1126,29 @@ msgstr ""
 
 msgid "The eject utility is not found on your system!"
 msgstr "Het eject programma is niet gevonden op uw systeem!"
+
+msgid ""
+"The rip has succesfully finished.\n"
+"A short summary is shown below."
+msgstr ""
+"De rip is succesvol voltooid.\n"
+"Een korte samenvatting is hieronder zichtbaar."
+
+msgid ""
+"The rip had some problems.\n"
+"A short summary is shown below."
+msgstr ""
+"De rip heeft enige problemen gehad.\n"
+"Een korte samenvatting is hieronder zichtbaar."
+
+msgid "Open log file"
+msgstr "Open logbestand"
+
+msgid "Open directory"
+msgstr "Open directory"
+
+msgid "Ripping and encoding is finished"
+msgstr "Het rippen en encoderen is voltooid"
 
 msgid ""
 "Artist : %s\n"
@@ -1361,11 +1428,19 @@ msgstr "U kunt geen gebruik maken van andere talen."
 
 #, fuzzy
 msgid ""
-"You won't have accurate freedb string \\\n"
+"You won't have accurate Gnudb string \\\n"
 "calculation unless %s is installed."
 msgstr ""
-"U heeft geen accurate freedb sleutel calculatie beschikbaar tenzij %s is geïns"
-"talleerd."
+"U heeft geen accurate Gnudb sleutel calculatie beschikbaar tenzij %s is geïnst"
+"alleerd."
+
+#, fuzzy
+msgid ""
+"You won't have accurate Gnnudb string \\\n"
+"calculation unless %s is installed."
+msgstr ""
+"U heeft geen accurate Gnudb sleutel calculatie beschikbaar tenzij %s is geïnst"
+"alleerd."
 
 msgid "Your disc tray can not be opened after ripping"
 msgstr "Uw cdrom lade kan niet worden geopend na het rippen"

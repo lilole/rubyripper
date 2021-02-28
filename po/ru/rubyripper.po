@@ -522,19 +522,19 @@ msgid "Metadata provider"
 msgstr ""
 
 #, fuzzy
-msgid "Freedb use first hit %s"
+msgid "Gnudb use first hit %s"
 msgstr "18) использовать первое совпадение [%s]"
 
 #, fuzzy
-msgid "Freedb server"
+msgid "Gnudb server"
 msgstr "Сервер freedb: "
 
 #, fuzzy
-msgid "Freedb username"
+msgid "Gnudb username"
 msgstr "Сервер freedb: "
 
 #, fuzzy
-msgid "Freedb hostname"
+msgid "Gnudb hostname"
 msgstr "Параметры freedb:"
 
 msgid "Musicbrainz preferred countries (1st, 2nd,...)"
@@ -552,8 +552,9 @@ msgstr ""
 msgid "Don't fetch metadata from the internet"
 msgstr ""
 
-msgid "Use the freedb protocol as primary resource"
-msgstr ""
+#, fuzzy
+msgid "Use the gnudb protocol as primary resource"
+msgstr "д"
 
 msgid "Use the musicbrainz protocol as primary resource"
 msgstr ""
@@ -828,6 +829,84 @@ msgstr "<b>Информация о диске</b>"
 msgid "<b>Track selection</b>"
 msgstr "<b>Выбор дорожек</b>"
 
+#, fuzzy
+msgid ""
+"The gnudb server reports multiple hits.\n"
+"Which one would you prefer?"
+msgstr ""
+"Сервер freedb сообщил о нескольких совпадениях.\n"
+"Какое из них выбрать?"
+
+msgid "Ok"
+msgstr "ОК"
+
+msgid "Multiple hits found..."
+msgstr "Найдено несколько совпадений..."
+
+#, fuzzy
+msgid ""
+"The musicbrainz server reports multiple releases.\n"
+"Which one would you prefer?"
+msgstr ""
+"Сервер freedb сообщил о нескольких совпадениях.\n"
+"Какое из них выбрать?"
+
+#, fuzzy
+msgid "Multiple releases found..."
+msgstr "Найдено несколько совпадений..."
+
+msgid "Title:"
+msgstr ""
+
+msgid "Date:"
+msgstr ""
+
+#, fuzzy
+msgid "Description:"
+msgstr "н"
+
+#, fuzzy
+msgid "Country:"
+msgstr "д"
+
+#, fuzzy
+msgid "Packaging:"
+msgstr "н"
+
+msgid "Status:"
+msgstr ""
+
+msgid "Barcode:"
+msgstr ""
+
+#, fuzzy
+msgid "Unknown title"
+msgstr "Неизвестный"
+
+#, fuzzy
+msgid "Unknown date"
+msgstr "Неизвестный"
+
+#, fuzzy
+msgid "Unknown description"
+msgstr "Неизвестный"
+
+#, fuzzy
+msgid "Unknown country code"
+msgstr "Неизвестный"
+
+#, fuzzy
+msgid "Unknown packaging type"
+msgstr "Неизвестный"
+
+#, fuzzy
+msgid "Unknown status"
+msgstr "Неизвестный"
+
+#, fuzzy
+msgid "Unknown barcode"
+msgstr "Неизвестный"
+
 msgid "Cdrom device:"
 msgstr "CD-привод:"
 
@@ -1007,8 +1086,9 @@ msgstr "Приводить к стандартной громкости"
 msgid "Primary metadata provider:"
 msgstr "Поставщик первичных метаданных:"
 
-msgid "Freedb"
-msgstr "Freedb"
+#, fuzzy
+msgid "Gnudb"
+msgstr "н"
 
 msgid "Musicbrainz"
 msgstr ""
@@ -1019,10 +1099,12 @@ msgstr "Не использовать поставщика метаданных"
 msgid "Choose your metadata provider"
 msgstr "Выберите поставщика метаданных"
 
-msgid "Always use first freedb hit"
+#, fuzzy
+msgid "Always use first gnudb hit"
 msgstr "Всегда выбирать первое совпадение"
 
-msgid "Freedb server:"
+#, fuzzy
+msgid "Gnudb server:"
 msgstr "Сервер freedb: "
 
 msgid "Username:"
@@ -1031,7 +1113,8 @@ msgstr "Имя пользователя:"
 msgid "Hostname:"
 msgstr "Имя узла:"
 
-msgid "Freedb options"
+#, fuzzy
+msgid "Gnudb options"
 msgstr "Параметры freedb:"
 
 #, fuzzy
@@ -1103,43 +1186,6 @@ msgstr "Режим отладки"
 msgid "Debug options"
 msgstr "Параметры отладки"
 
-msgid ""
-"The rip has succesfully finished.\n"
-"A short summary is shown below."
-msgstr ""
-"Копирование успешно завершено.\n"
-"Краткое описании показано ниже"
-
-msgid ""
-"The rip had some problems.\n"
-"A short summary is shown below."
-msgstr ""
-"При копирование были проблемы.\n"
-"Краткое описании показано ниже"
-
-msgid "Open log file"
-msgstr "Открыть журнал"
-
-msgid "Open directory"
-msgstr "Открыть директорию"
-
-msgid "Ripping and encoding is finished"
-msgstr "Копирование и сжатие завершено"
-
-#, fuzzy
-msgid ""
-"The freedb server reports multiple hits.\n"
-"Which one would you prefer?"
-msgstr ""
-"Сервер freedb сообщил о нескольких совпадениях.\n"
-"Какое из них выбрать?"
-
-msgid "Ok"
-msgstr "ОК"
-
-msgid "Multiple hits found..."
-msgstr "Найдено несколько совпадений..."
-
 #, fuzzy
 msgid "Encoding progress %s %%"
 msgstr "Сжатие %s %"
@@ -1195,6 +1241,29 @@ msgstr ""
 
 msgid "The eject utility is not found on your system!"
 msgstr "Утилита eject не найдена в вашей системе!"
+
+msgid ""
+"The rip has succesfully finished.\n"
+"A short summary is shown below."
+msgstr ""
+"Копирование успешно завершено.\n"
+"Краткое описании показано ниже"
+
+msgid ""
+"The rip had some problems.\n"
+"A short summary is shown below."
+msgstr ""
+"При копирование были проблемы.\n"
+"Краткое описании показано ниже"
+
+msgid "Open log file"
+msgstr "Открыть журнал"
+
+msgid "Open directory"
+msgstr "Открыть директорию"
+
+msgid "Ripping and encoding is finished"
+msgstr "Копирование и сжатие завершено"
 
 #, fuzzy
 msgid ""
@@ -1485,7 +1554,13 @@ msgstr "Вы не сможете использовать переводы"
 
 #, fuzzy
 msgid ""
-"You won't have accurate freedb string \\\n"
+"You won't have accurate Gnudb string \\\n"
+"calculation unless %s is installed."
+msgstr "н"
+
+#, fuzzy
+msgid ""
+"You won't have accurate Gnnudb string \\\n"
 "calculation unless %s is installed."
 msgstr "н"
 

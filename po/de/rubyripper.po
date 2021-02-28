@@ -2,18 +2,21 @@
 # Copyright (C) 2007 Bouke Woudstra
 # This file is distributed under the same license as the Rubyripper package.
 # <h-m.w@gmx.de>, 2007.
+# BleskoDev <bleskodev@ennumia.eu>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Rubyripper 0.7.0a1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2009-11-28 01:18+0100\n"
-"Last-Translator: Johannes Dewender <github@JonnyJD.net>\n"
-"Language-Team: German <h-m.w@gmx.de>\n"
-"Language: de\n"
+"PO-Revision-Date: 2021-02-28 19:19+0100\n"
+"Last-Translator: BleskoDev <bleskodev@ennumia.eu>\n"
+"Language-Team: French <bleskodev@ennumia.eu>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 msgid "y"
 msgstr "j"
@@ -23,8 +26,7 @@ msgstr "Einstellungen ändern? (j/n) : "
 
 #, fuzzy
 msgid "Rubyripper version %s"
-msgstr ""
-"Das Protokoll wurde erstellt von Rubyripper, Version %s\n"
+msgstr "Das Protokoll wurde erstellt von Rubyripper, Version %s\n"
 
 #, fuzzy
 msgid "* RUBYRIPPER MAIN MENU *"
@@ -253,13 +255,11 @@ msgid "n"
 msgstr "n"
 
 #, fuzzy
-msgid ""
-"Please answer %s or %s. Try again.\n"
+msgid "Please answer %s or %s. Try again.\n"
 msgstr "j"
 
 #, fuzzy
-msgid ""
-"Please enter an integer value. Try again.\n"
+msgid "Please enter an integer value. Try again.\n"
 msgstr "j"
 
 msgid ""
@@ -539,20 +539,17 @@ msgid "Metadata provider"
 msgstr ""
 
 #, fuzzy
-msgid "Freedb use first hit %s"
+msgid "Gnudb use first hit %s"
 msgstr "18) Immer ersten Treffer benutzen [%s]"
 
-#, fuzzy
-msgid "Freedb server"
-msgstr "Freedb Server:"
+msgid "Gnudb server"
+msgstr "Gnudb Server:"
 
-#, fuzzy
-msgid "Freedb username"
-msgstr "Freedb Server:"
+msgid "Gnudb username"
+msgstr "Gnudb Benutzername:"
 
-#, fuzzy
-msgid "Freedb hostname"
-msgstr "Freedb Optionen"
+msgid "Gnudb hostname"
+msgstr "Gnudb Optionen"
 
 msgid "Musicbrainz preferred countries (1st, 2nd,...)"
 msgstr ""
@@ -569,8 +566,9 @@ msgstr ""
 msgid "Don't fetch metadata from the internet"
 msgstr ""
 
-msgid "Use the freedb protocol as primary resource"
-msgstr ""
+#, fuzzy
+msgid "Use the gnudb protocol as primary resource"
+msgstr "j"
 
 msgid "Use the musicbrainz protocol as primary resource"
 msgstr ""
@@ -682,26 +680,19 @@ msgstr ""
 msgid ""
 "No pregap, silence, pre-emphasis or data track detected\n"
 "\n"
-msgstr ""
-"Keine Pregaps, Stille oder Pre-Emphasis entdeckt\n"
+msgstr "Keine Pregaps, Stille oder Pre-Emphasis entdeckt\n"
 
 #, fuzzy
-msgid ""
-"Silence detected for disc : %s sectors\n"
-msgstr ""
-"Stille in Track %s gefunden : %s Sektoren\n"
+msgid "Silence detected for disc : %s sectors\n"
+msgstr "Stille in Track %s gefunden : %s Sektoren\n"
 
 #, fuzzy
-msgid ""
-"Pregap detected for track %s : %s sectors\n"
-msgstr ""
-"Pregap entdeckt für Track %s : %s Sektoren\n"
+msgid "Pregap detected for track %s : %s sectors\n"
+msgstr "Pregap entdeckt für Track %s : %s Sektoren\n"
 
 #, fuzzy
-msgid ""
-"Track %s is marked as a DATA track\n"
-msgstr ""
-"Track %s ist als DATA Track markiert\n"
+msgid "Track %s is marked as a DATA track\n"
+msgstr "Track %s ist als DATA Track markiert\n"
 
 #, fuzzy
 msgid "No disc found after %s trial(s)!"
@@ -841,6 +832,82 @@ msgstr "<b>CD Info</b>"
 
 msgid "<b>Track selection</b>"
 msgstr "<b>Titelauswahl</b>"
+
+msgid ""
+"The gnudb server reports multiple hits.\n"
+"Which one would you prefer?"
+msgstr ""
+"Der Gnudb Server hat mehrere Treffer gefunden.\n"
+"Welcher soll verwendet werden?"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Multiple hits found..."
+msgstr "Mehrere Treffer gefunden..."
+
+msgid ""
+"The musicbrainz server reports multiple releases.\n"
+"Which one would you prefer?"
+msgstr ""
+"Der Musicbrainz Server hat mehrere Treffer gefunden.\n"
+"Welcher soll verwendet werden?"
+
+#, fuzzy
+msgid "Multiple releases found..."
+msgstr "Mehrere Treffer gefunden..."
+
+msgid "Title:"
+msgstr ""
+
+msgid "Date:"
+msgstr ""
+
+#, fuzzy
+msgid "Description:"
+msgstr "n"
+
+#, fuzzy
+msgid "Country:"
+msgstr "j"
+
+#, fuzzy
+msgid "Packaging:"
+msgstr "n"
+
+msgid "Status:"
+msgstr ""
+
+msgid "Barcode:"
+msgstr ""
+
+#, fuzzy
+msgid "Unknown title"
+msgstr "Unbekannt"
+
+#, fuzzy
+msgid "Unknown date"
+msgstr "Unbekannt"
+
+#, fuzzy
+msgid "Unknown description"
+msgstr "Unbekannt"
+
+#, fuzzy
+msgid "Unknown country code"
+msgstr "Unbekannt"
+
+#, fuzzy
+msgid "Unknown packaging type"
+msgstr "Unbekannt"
+
+#, fuzzy
+msgid "Unknown status"
+msgstr "Unbekannt"
+
+#, fuzzy
+msgid "Unknown barcode"
+msgstr "Unbekannt"
 
 msgid "Cdrom device:"
 msgstr "CD-Laufwerk:"
@@ -1014,8 +1081,8 @@ msgstr "Standardlautstärkeabgleich"
 msgid "Primary metadata provider:"
 msgstr ""
 
-msgid "Freedb"
-msgstr "Freedb"
+msgid "Gnudb"
+msgstr "Gnudb"
 
 msgid "Musicbrainz"
 msgstr ""
@@ -1026,11 +1093,11 @@ msgstr ""
 msgid "Choose your metadata provider"
 msgstr ""
 
-msgid "Always use first freedb hit"
-msgstr "Immer ersten Freedb Treffer verwenden"
+msgid "Always use first gnudb hit"
+msgstr "Immer ersten Gnudb Treffer verwenden"
 
-msgid "Freedb server:"
-msgstr "Freedb Server:"
+msgid "Gnudb server:"
+msgstr "Gnudb Server:"
 
 msgid "Username:"
 msgstr "Benutzername:"
@@ -1038,8 +1105,8 @@ msgstr "Benutzername:"
 msgid "Hostname:"
 msgstr "Hostname:"
 
-msgid "Freedb options"
-msgstr "Freedb Optionen"
+msgid "Gnudb options"
+msgstr "Gnudb Optionen"
 
 #, fuzzy
 msgid "Preferred countries:"
@@ -1110,39 +1177,6 @@ msgstr "Debug Modus"
 msgid "Debug options"
 msgstr "Debug Optionen"
 
-msgid ""
-"The rip has succesfully finished.\n"
-"A short summary is shown below."
-msgstr ""
-
-msgid ""
-"The rip had some problems.\n"
-"A short summary is shown below."
-msgstr ""
-
-msgid "Open log file"
-msgstr "Protokolldatei öffnen"
-
-msgid "Open directory"
-msgstr "Verzeichnis öffnen"
-
-msgid "Ripping and encoding is finished"
-msgstr "Auslesen und Kodieren abgeschlossen"
-
-#, fuzzy
-msgid ""
-"The freedb server reports multiple hits.\n"
-"Which one would you prefer?"
-msgstr ""
-"Der Freedb Server hat mehrere Treffer gefunden.\n"
-"Welcher soll verwendet werden?"
-
-msgid "Ok"
-msgstr "Ok"
-
-msgid "Multiple hits found..."
-msgstr "Mehrere Treffer gefunden..."
-
 #, fuzzy
 msgid "Encoding progress %s %%"
 msgstr "Kodierfortschritt %s %"
@@ -1201,6 +1235,25 @@ msgstr ""
 msgid "The eject utility is not found on your system!"
 msgstr "Das Auswerf-Hilfsprogramm eject wurde nicht gefunden!"
 
+msgid ""
+"The rip has succesfully finished.\n"
+"A short summary is shown below."
+msgstr ""
+
+msgid ""
+"The rip had some problems.\n"
+"A short summary is shown below."
+msgstr ""
+
+msgid "Open log file"
+msgstr "Protokolldatei öffnen"
+
+msgid "Open directory"
+msgstr "Verzeichnis öffnen"
+
+msgid "Ripping and encoding is finished"
+msgstr "Auslesen und Kodieren abgeschlossen"
+
 #, fuzzy
 msgid ""
 "Artist : %s\n"
@@ -1229,12 +1282,10 @@ msgid ""
 msgstr "Track %s"
 
 #, fuzzy
-msgid ""
-"File name %s\n"
+msgid "File name %s\n"
 msgstr "Dateinamen-Schema"
 
-msgid ""
-"Trial %s: %s seconds (%sx)\n"
+msgid "Trial %s: %s seconds (%sx)\n"
 msgstr ""
 
 msgid "Peak level %.1f %%"
@@ -1277,10 +1328,8 @@ msgstr ""
 "\n"
 
 #, fuzzy
-msgid ""
-"All chunks were tried to match at least %s times.\n"
-msgstr ""
-"Es wurde versucht alle Teilstücke mindestens %s mal abzugleichen.\n"
+msgid "All chunks were tried to match at least %s times.\n"
+msgstr "Es wurde versucht alle Teilstücke mindestens %s mal abzugleichen.\n"
 
 #, fuzzy
 msgid "Chunks that differed after %s trials,"
@@ -1293,17 +1342,14 @@ msgstr ""
 msgid ""
 "\n"
 "were tried to match %s times.\n"
-msgstr ""
-"Es wurde versucht alle Teilstücke mindestens %s mal abzugleichen.\n"
+msgstr "Es wurde versucht alle Teilstücke mindestens %s mal abzugleichen.\n"
 
 msgid "No errors occurred"
 msgstr ""
 
 #, fuzzy
-msgid ""
-"None of the tracks gave any problems\n"
-msgstr ""
-"Bei keinem Track kamen Probleme auf\n"
+msgid "None of the tracks gave any problems\n"
+msgstr "Bei keinem Track kamen Probleme auf\n"
 
 msgid "There were errors which could not be corrected"
 msgstr ""
@@ -1316,10 +1362,8 @@ msgstr ""
 "von Versuchen korrigiert werden\n"
 
 #, fuzzy
-msgid ""
-"Track %s could NOT be corrected completely\n"
-msgstr ""
-"Track %s konnte NICHT vollständig korrigiert werden\n"
+msgid "Track %s could NOT be corrected completely\n"
+msgstr "Track %s konnte NICHT vollständig korrigiert werden\n"
 
 msgid "There were errors which required correction"
 msgstr ""
@@ -1332,8 +1376,7 @@ msgstr ""
 "Einige Tracks bedurften einer Korrektur, aber konnten erfolgreich\n"
 "innerhalb der maximalen Anzahl von Versuchen korrigiert werden\n"
 
-msgid ""
-"There were errors during encoding\n"
+msgid "There were errors during encoding\n"
 msgstr ""
 
 #, fuzzy
@@ -1377,13 +1420,11 @@ msgstr "n"
 
 #, fuzzy
 msgid "Matches required for all chunks"
-msgstr ""
-"Benötigte Übereinstimmungen für alle Teilstücke: %s\n"
+msgstr "Benötigte Übereinstimmungen für alle Teilstücke: %s\n"
 
 #, fuzzy
 msgid "Matches required for erroneous chunks"
-msgstr ""
-"Benötigte Übereinstimmungen für fehlerhafte Teilstücke: %s\n"
+msgstr "Benötigte Übereinstimmungen für fehlerhafte Teilstücke: %s\n"
 
 msgid "Read offset correction"
 msgstr ""
@@ -1394,8 +1435,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-msgid ""
-"Fill up missing offset samples with silence : %s\n"
+msgid "Fill up missing offset samples with silence : %s\n"
 msgstr ""
 
 #, fuzzy
@@ -1405,8 +1445,7 @@ msgstr "ja"
 msgid "Null samples used in CRC calculations"
 msgstr ""
 
-msgid ""
-"Used output encoder : %s\n"
+msgid "Used output encoder : %s\n"
 msgstr ""
 
 msgid "Internal WAVE routines"
@@ -1461,8 +1500,7 @@ msgstr ""
 
 #, fuzzy
 msgid "File size is not correct! Trying another time"
-msgstr ""
-"Dateigröße ist nicht korrekt! Neuer Versuch\n"
+msgstr "Dateigröße ist nicht korrekt! Neuer Versuch\n"
 
 msgid "Sector mismatches at the following times, requiring extra trials:"
 msgstr ""
@@ -1479,8 +1517,7 @@ msgstr "Kein Auswurf-Werkzeug (eject) gefunden!"
 
 #, fuzzy
 msgid "Rubyripper can't be used without cdparanoia!"
-msgstr ""
-"Benutzter Ripper: cdparanoia %s\n"
+msgstr "Benutzter Ripper: cdparanoia %s\n"
 
 #, fuzzy
 msgid "You won't be able to use the gtk3 interface."
@@ -1491,7 +1528,13 @@ msgstr ""
 
 #, fuzzy
 msgid ""
-"You won't have accurate freedb string \\\n"
+"You won't have accurate Gnudb string \\\n"
+"calculation unless %s is installed."
+msgstr "n"
+
+#, fuzzy
+msgid ""
+"You won't have accurate Gnnudb string \\\n"
 "calculation unless %s is installed."
 msgstr "n"
 

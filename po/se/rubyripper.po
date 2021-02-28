@@ -1,16 +1,21 @@
+#
+# BleskoDev <bleskodev@ennumia.eu>, 2021.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Rubyripper 0.7.0a1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2010-08-25 14:28+0100\n"
-"Last-Translator: Joachim Nyqvist <Joachim@JNyqvist.se>\n"
-"Language-Team: sv <Joachim@JNyqvist.se>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-02-28 19:14+0100\n"
+"Last-Translator: BleskoDev <bleskodev@ennumia.eu>\n"
+"Language-Team: French <bleskodev@ennumia.eu>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Swedish\n"
 "X-Poedit-Country: SWEDEN\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 msgid "y"
 msgstr "j"
@@ -508,20 +513,17 @@ msgid "Metadata provider"
 msgstr ""
 
 #, fuzzy
-msgid "Freedb use first hit %s"
+msgid "Gnudb use first hit %s"
 msgstr "18) använd alltid första träffen [%s]"
 
-#, fuzzy
-msgid "Freedb server"
-msgstr "Freedb server:"
+msgid "Gnudb server"
+msgstr "Gnudb server:"
 
-#, fuzzy
-msgid "Freedb username"
-msgstr "Freedb server:"
+msgid "Gnudb username"
+msgstr "Gnudb server:"
 
-#, fuzzy
-msgid "Freedb hostname"
-msgstr "Freedb inställningar"
+msgid "Gnudb hostname"
+msgstr "Gnudb inställningar"
 
 msgid "Musicbrainz preferred countries (1st, 2nd,...)"
 msgstr ""
@@ -538,8 +540,9 @@ msgstr ""
 msgid "Don't fetch metadata from the internet"
 msgstr ""
 
-msgid "Use the freedb protocol as primary resource"
-msgstr ""
+#, fuzzy
+msgid "Use the gnudb protocol as primary resource"
+msgstr "j"
 
 msgid "Use the musicbrainz protocol as primary resource"
 msgstr ""
@@ -810,6 +813,82 @@ msgstr "<b>Skivinformation</b>"
 msgid "<b>Track selection</b>"
 msgstr "<b>Låtval</b>"
 
+msgid ""
+"The gnudb server reports multiple hits.\n"
+"Which one would you prefer?"
+msgstr ""
+"Gnudb servern får flera träffar.\n"
+"Vilken föredrar du?"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Multiple hits found..."
+msgstr "Flera träffar hittade..."
+
+msgid ""
+"The musicbrainz server reports multiple releases.\n"
+"Which one would you prefer?"
+msgstr ""
+"Musicbrainz servern får flera träffar.\n"
+"Vilken föredrar du?"
+
+#, fuzzy
+msgid "Multiple releases found..."
+msgstr "Flera träffar hittade..."
+
+msgid "Title:"
+msgstr ""
+
+msgid "Date:"
+msgstr ""
+
+#, fuzzy
+msgid "Description:"
+msgstr "n"
+
+#, fuzzy
+msgid "Country:"
+msgstr "j"
+
+#, fuzzy
+msgid "Packaging:"
+msgstr "n"
+
+msgid "Status:"
+msgstr ""
+
+msgid "Barcode:"
+msgstr ""
+
+#, fuzzy
+msgid "Unknown title"
+msgstr "Okänd"
+
+#, fuzzy
+msgid "Unknown date"
+msgstr "Okänd"
+
+#, fuzzy
+msgid "Unknown description"
+msgstr "Okänd"
+
+#, fuzzy
+msgid "Unknown country code"
+msgstr "Okänd"
+
+#, fuzzy
+msgid "Unknown packaging type"
+msgstr "Okänd"
+
+#, fuzzy
+msgid "Unknown status"
+msgstr "Okänd"
+
+#, fuzzy
+msgid "Unknown barcode"
+msgstr "Okänd"
+
 msgid "Cdrom device:"
 msgstr "Cdrom-enhet:"
 
@@ -983,8 +1062,9 @@ msgstr "Normalisera till standard volym"
 msgid "Primary metadata provider:"
 msgstr ""
 
-msgid "Freedb"
-msgstr "Freedb"
+#, fuzzy
+msgid "Gnudb"
+msgstr "n"
 
 msgid "Musicbrainz"
 msgstr ""
@@ -995,11 +1075,11 @@ msgstr ""
 msgid "Choose your metadata provider"
 msgstr ""
 
-msgid "Always use first freedb hit"
-msgstr "Använd alltid första träffen från freedb"
+msgid "Always use first gnudb hit"
+msgstr "Använd alltid första träffen från Gnudb"
 
-msgid "Freedb server:"
-msgstr "Freedb server:"
+msgid "Gnudb server:"
+msgstr "Gnudb server:"
 
 msgid "Username:"
 msgstr "Användarnamn:"
@@ -1007,8 +1087,8 @@ msgstr "Användarnamn:"
 msgid "Hostname:"
 msgstr "Värdnamn:"
 
-msgid "Freedb options"
-msgstr "Freedb inställningar"
+msgid "Gnudb options"
+msgstr "Gnudb inställningar"
 
 #, fuzzy
 msgid "Preferred countries:"
@@ -1080,45 +1160,6 @@ msgid "Debug options"
 msgstr "Avsöknings inställningar"
 
 #, fuzzy
-msgid ""
-"The rip has succesfully finished.\n"
-"A short summary is shown below."
-msgstr ""
-"Extraheringen har framgångsrikt slutförts.\n"
-"En kort sammanfattning visas nedan."
-
-#, fuzzy
-msgid ""
-"The rip had some problems.\n"
-"A short summary is shown below."
-msgstr ""
-"Extraheringen stötte på problem.\n"
-"En kort sammanfattning visas nedan."
-
-msgid "Open log file"
-msgstr "Öppna loggfilen"
-
-msgid "Open directory"
-msgstr "Öppna katalog"
-
-msgid "Ripping and encoding is finished"
-msgstr "Extrahering och omkodning är klar"
-
-#, fuzzy
-msgid ""
-"The freedb server reports multiple hits.\n"
-"Which one would you prefer?"
-msgstr ""
-"Freedb servern får flera träffar.\n"
-"Vilken föredrar du?"
-
-msgid "Ok"
-msgstr "Ok"
-
-msgid "Multiple hits found..."
-msgstr "Flera träffar hittade..."
-
-#, fuzzy
 msgid "Encoding progress %s %%"
 msgstr "Omkodning färdigt %s %"
 
@@ -1175,6 +1216,31 @@ msgstr ""
 
 msgid "The eject utility is not found on your system!"
 msgstr "Utmatningsverktyg ej hittat på ditt system!"
+
+#, fuzzy
+msgid ""
+"The rip has succesfully finished.\n"
+"A short summary is shown below."
+msgstr ""
+"Extraheringen har framgångsrikt slutförts.\n"
+"En kort sammanfattning visas nedan."
+
+#, fuzzy
+msgid ""
+"The rip had some problems.\n"
+"A short summary is shown below."
+msgstr ""
+"Extraheringen stötte på problem.\n"
+"En kort sammanfattning visas nedan."
+
+msgid "Open log file"
+msgstr "Öppna loggfilen"
+
+msgid "Open directory"
+msgstr "Öppna katalog"
+
+msgid "Ripping and encoding is finished"
+msgstr "Extrahering och omkodning är klar"
 
 #, fuzzy
 msgid ""
@@ -1469,7 +1535,13 @@ msgstr ""
 
 #, fuzzy
 msgid ""
-"You won't have accurate freedb string \\\n"
+"You won't have accurate Gnudb string \\\n"
+"calculation unless %s is installed."
+msgstr "n"
+
+#, fuzzy
+msgid ""
+"You won't have accurate Gnnudb string \\\n"
 "calculation unless %s is installed."
 msgstr "n"
 
