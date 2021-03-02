@@ -36,8 +36,9 @@ end
 # Try to load the gtk3 files
 begin
   require 'gtk3'
-rescue LoadError
-  puts "The ruby-gtk3 library could not be found. Is it installed?"; exit()
+rescue LoadError => e
+  puts e.message
+  puts "The ruby-gtk3 library (or one of its dependencies) could not be found. Is it correctly installed?"; exit()
 end
 
 # The class defines the Rubyripper window.
