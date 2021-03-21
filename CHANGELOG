@@ -1,4 +1,6 @@
 ---------0.8.0 RELEASE------
+* implemented replaygain for wavpack codec
+* fixed replaygain in 'album' mode
 * Musicbrainz disc id is now written into tags
 * handle multiple releases/db hits in GTK frontend
 * redirected freedb code to gnudb (following the closure of the freedb service)

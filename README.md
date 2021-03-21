@@ -83,7 +83,7 @@ Suggested:
 * cd-discid or discid (for proper gnudb support)
 * eject or diskutil for MacOS (for eject support)
 * flac, oggenc, lame, neroAacEnc, wavpack (if the codec is wanted)
-* wavgain, vorbisgain, mp3gain, aacgain, wvgain (for replaygain support)
+* wavegain, vorbisgain, mp3gain, aacgain, wvgain (for replaygain support)
 * normalize (for normalize support)
 * sox (for de-emphasize audio tracks)
 * cdrdao (for advanced toc analysis)
