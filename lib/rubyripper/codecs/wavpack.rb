@@ -47,12 +47,12 @@ module Codecs
   
     # replaygain is not supported for wavpack
     def replaygain(track)
-      ""
+      "wvgain %s"
     end
   
     # replaygain is not supported for wavpack
     def replaygainAlbum
-      ""
+      "wvgain -a %s"
     end
   end
 end

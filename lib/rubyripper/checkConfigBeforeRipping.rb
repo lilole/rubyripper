@@ -95,6 +95,7 @@ private
       isFound?('mp3gain') if @prefs.mp3
       isFound?('wavegain') if @prefs.wav
       isFound?('aacgain') if @prefs.nero || @prefs.fraunhofer
+      isFound?('wvgain') if @prefs.wavpack
     end
   end
 

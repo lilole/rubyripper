@@ -261,11 +261,14 @@ describe Codecs::Main do
       @codec = Codecs::Main.new('wavpack', disc, scheme, tags, prefs, md, file)
     end
     
-    it "should return an empty string for the replaygain commands (not available)" do
+    it "should return the command  the replaygain a track" do
       expect(scheme).to receive(:getFile).with('wavpack', 1).and_return 'output.wv'
-      expect(@codec.replaygain(1)).to eq('')
+      expect(@codec.replaygain(1)).to eq('wvgain "output.wv"')
+    end
+
+    it "should return the command to replaygain an album" do
       expect(scheme).to receive(:getDir).with('wavpack').and_return '/home/wavpack'
-      expect(@codec.replaygainAlbum).to eq('')
+      expect(@codec.replaygainAlbum).to eq('wvgain -a "/home/wavpack"/*.wv')
     end
     
     it "should calculate the command for encoding an image rip" do
