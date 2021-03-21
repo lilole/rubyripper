@@ -136,12 +136,8 @@ class Encode
   def encodeTrack(codec, track=nil)
     @log.encodingErrors = true if @exec.launch(codec.command(track)).empty?
   
-    if @prefs.normalizer == "replaygain"
-      if @prefs.gain == "track"
-        @exec.launch(codec.replaygain(track))
-      elsif not @tasks.values.flatten.include?(codec.name)
-        @exec.launch(codec.replaygainAlbum())
-      end
+    if @prefs.normalizer == "replaygain" and @prefs.gain == "track"
+      @exec.launch(codec.replaygain(track))
     end
     
     @exec.launch(codec.setTagsAfterEncoding(track))
@@ -151,6 +147,10 @@ class Encode
       @tasks[key].delete(codec.name)
       @file.delete(@scheme.getTempFile(track)) if @tasks[key].empty?
       @log.updateEncodingProgress(track, @codecs.size)
+    end
+
+    if @prefs.normalizer == "replaygain" and @prefs.gain == "album" 
+      @exec.launch(codec.replaygainAlbum()) unless @tasks.values.flatten.include?(codec.name)
     end
   end
 end
