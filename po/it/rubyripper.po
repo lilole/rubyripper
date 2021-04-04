@@ -440,14 +440,6 @@ msgstr "6)  supporto alla playlist [%s]"
 msgid "Maximum extra encoding threads"
 msgstr "Numero di thread"
 
-#, fuzzy
-msgid "Replace spaces with underscores %s"
-msgstr "Sostituisci gli spazi con il trattino basso _ "
-
-#, fuzzy
-msgid "Downsize all capital letters in file names %s"
-msgstr "Converti tutte le lettere maiuscole in minuscole"
-
 msgid "Normalize program"
 msgstr ""
 
@@ -576,6 +568,14 @@ msgstr "16) schema per artisti vari: %s"
 #, fuzzy
 msgid "Single file rip file scheme"
 msgstr "File immagine:"
+
+#, fuzzy
+msgid "Replace spaces with underscores %s"
+msgstr "Sostituisci gli spazi con il trattino basso _ "
+
+#, fuzzy
+msgid "Downsize all capital letters in file names %s"
+msgstr "Converti tutte le lettere maiuscole in minuscole"
 
 #, fuzzy
 msgid "Log file viewer"
@@ -1021,14 +1021,6 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr "Crea m3u playlist"
 
-#, fuzzy
-msgid "Replace spaces with underscores in file names"
-msgstr "Sostituisci gli spazi con il trattino basso _ "
-
-#, fuzzy
-msgid "Downsize all capital letters in file names"
-msgstr "Converti tutte le lettere maiuscole in minuscole"
-
 msgid "Number of extra encoding threads"
 msgstr "Numero di thread"
 
@@ -1132,6 +1124,14 @@ msgstr "Traccia %s"
 #, fuzzy
 msgid "Various artist"
 msgstr "Artisti vari:"
+
+#, fuzzy
+msgid "Replace spaces with underscores in file names"
+msgstr "Sostituisci gli spazi con il trattino basso _ "
+
+#, fuzzy
+msgid "Downsize all capital letters in file names"
+msgstr "Converti tutte le lettere maiuscole in minuscole"
 
 #, fuzzy
 msgid "File naming scheme"

@@ -448,14 +448,6 @@ msgstr ""
 "Количество потоков сжатия (выберите равным\n"
 "количеству ядер процессора)"
 
-#, fuzzy
-msgid "Replace spaces with underscores %s"
-msgstr "Заменять в названиях пробелы на нижние подчёркивания"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names %s"
-msgstr "Заменить в названиях заглавные буквы на строчные"
-
 msgid "Normalize program"
 msgstr ""
 
@@ -587,6 +579,14 @@ msgstr "16) схема для сборников (с разными исполн
 #, fuzzy
 msgid "Single file rip file scheme"
 msgstr "Одним файлом:"
+
+#, fuzzy
+msgid "Replace spaces with underscores %s"
+msgstr "Заменять в названиях пробелы на нижние подчёркивания"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names %s"
+msgstr "Заменить в названиях заглавные буквы на строчные"
 
 #, fuzzy
 msgid "Log file viewer"
@@ -1047,14 +1047,6 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr "Создать плейлист m3u"
 
-#, fuzzy
-msgid "Replace spaces with underscores in file names"
-msgstr "Заменять в названиях пробелы на нижние подчёркивания"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names"
-msgstr "Заменить в названиях заглавные буквы на строчные"
-
 msgid "Number of extra encoding threads"
 msgstr ""
 "Количество потоков сжатия (выберите равным\n"
@@ -1163,6 +1155,14 @@ msgstr "Дорожка %s"
 #, fuzzy
 msgid "Various artist"
 msgstr "Схема для сборников:"
+
+#, fuzzy
+msgid "Replace spaces with underscores in file names"
+msgstr "Заменять в названиях пробелы на нижние подчёркивания"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names"
+msgstr "Заменить в названиях заглавные буквы на строчные"
 
 #, fuzzy
 msgid "File naming scheme"

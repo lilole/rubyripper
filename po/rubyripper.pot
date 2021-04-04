@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Rubyripper 0.8.0rc1\n"
+"Project-Id-Version: Rubyripper 0.8.0rc2\n"
 "Report-Msgid-Bugs-To: bleskodev@ennumia.eu\n"
-"POT-Creation-Date: 2021-02-28 19:17+0100\n"
-"PO-Revision-Date: 2021-02-28 19:17+0100\n"
+"POT-Creation-Date: 2021-04-04 19:21+0200\n"
+"PO-Revision-Date: 2021-04-04 19:21+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Number %s is not a valid choice, try again"
 msgstr ""
 
-#: ../bin/rubyripper_cli:139 ../bin/rubyripper_gtk3:417
+#: ../bin/rubyripper_cli:139 ../bin/rubyripper_gtk3:418
 msgid "Please solve the following configuration errors first:"
 msgstr ""
 
@@ -99,45 +99,45 @@ msgstr ""
 msgid "Please enter the number of your choice: "
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:133 ../bin/rubyripper_gtk3:236
-#: ../bin/rubyripper_gtk3:344 ../bin/rubyripper_gtk3:368
+#: ../bin/rubyripper_gtk3:134 ../bin/rubyripper_gtk3:237
+#: ../bin/rubyripper_gtk3:345 ../bin/rubyripper_gtk3:369
 msgid "Open tray"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:186
+#: ../bin/rubyripper_gtk3:187
 msgid "Ehh.. There shouldn't be anything else. WTF?"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:187
+#: ../bin/rubyripper_gtk3:188
 msgid "Secret modus = %s"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:204 ../bin/rubyripper_gtk3:238
-#: ../bin/rubyripper_gtk3:274
+#: ../bin/rubyripper_gtk3:205 ../bin/rubyripper_gtk3:239
+#: ../bin/rubyripper_gtk3:275
 msgid "Exit"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:210
+#: ../bin/rubyripper_gtk3:211
 msgid "Abort"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:234 ../bin/rubyripper_gtk3:293
+#: ../bin/rubyripper_gtk3:235 ../bin/rubyripper_gtk3:294
 msgid "Preferences"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:235
+#: ../bin/rubyripper_gtk3:236
 msgid "Scan drive"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:237
+#: ../bin/rubyripper_gtk3:238
 msgid "Rip cd now!"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:328
+#: ../bin/rubyripper_gtk3:329
 msgid "Disc info"
 msgstr ""
 
-#: ../bin/rubyripper_gtk3:363
+#: ../bin/rubyripper_gtk3:364
 msgid "Close tray"
 msgstr ""
 
@@ -316,18 +316,18 @@ msgid "Toc analysis"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:106
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:577
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:573
 msgid "Codecs"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:107
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:653
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:649
 msgid "Metadata"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:108
 #: ../lib/rubyripper/gtk3/gtkPreferences.rb:35
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:762
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:799
 msgid "Other"
 msgstr ""
 
@@ -390,9 +390,9 @@ msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:150
 #: ../lib/rubyripper/cli/cliPreferences.rb:186
-#: ../lib/rubyripper/cli/cliPreferences.rb:247
-#: ../lib/rubyripper/cli/cliPreferences.rb:325
-#: ../lib/rubyripper/cli/cliPreferences.rb:378
+#: ../lib/rubyripper/cli/cliPreferences.rb:245
+#: ../lib/rubyripper/cli/cliPreferences.rb:321
+#: ../lib/rubyripper/cli/cliPreferences.rb:376
 msgid "Back to settings main menu"
 msgstr ""
 
@@ -459,7 +459,7 @@ msgid "FLAC %s"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:225
-#: ../lib/rubyripper/cli/cliPreferences.rb:258
+#: ../lib/rubyripper/cli/cliPreferences.rb:256
 msgid "FLAC options passed"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgid "Vorbis %s"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:227
-#: ../lib/rubyripper/cli/cliPreferences.rb:261
+#: ../lib/rubyripper/cli/cliPreferences.rb:259
 msgid "Oggenc options passed"
 msgstr ""
 
@@ -485,7 +485,7 @@ msgid "Nero AAC %s"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:231
-#: ../lib/rubyripper/cli/cliPreferences.rb:267
+#: ../lib/rubyripper/cli/cliPreferences.rb:265
 msgid "Nero options passed"
 msgstr ""
 
@@ -494,7 +494,7 @@ msgid "Fraunhofer AAC %s"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:233
-#: ../lib/rubyripper/cli/cliPreferences.rb:270
+#: ../lib/rubyripper/cli/cliPreferences.rb:268
 msgid "Fraunhofer options passed"
 msgstr ""
 
@@ -503,7 +503,7 @@ msgid "WavPack %s"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:235
-#: ../lib/rubyripper/cli/cliPreferences.rb:273
+#: ../lib/rubyripper/cli/cliPreferences.rb:271
 msgid "WavPack options passed"
 msgstr ""
 
@@ -512,7 +512,7 @@ msgid "Opus %s"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:237
-#: ../lib/rubyripper/cli/cliPreferences.rb:276
+#: ../lib/rubyripper/cli/cliPreferences.rb:274
 msgid "Opus options passed"
 msgstr ""
 
@@ -525,7 +525,7 @@ msgid "Other codec %s"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:240
-#: ../lib/rubyripper/cli/cliPreferences.rb:296
+#: ../lib/rubyripper/cli/cliPreferences.rb:292
 msgid "Commandline passed"
 msgstr ""
 
@@ -534,201 +534,201 @@ msgid "Playlist support %s"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:242
-#: ../lib/rubyripper/cli/cliPreferences.rb:282
+#: ../lib/rubyripper/cli/cliPreferences.rb:280
 msgid "Maximum extra encoding threads"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:243
-msgid "Replace spaces with underscores %s"
-msgstr ""
-
-#: ../lib/rubyripper/cli/cliPreferences.rb:244
-msgid "Downsize all capital letters in file names %s"
-msgstr ""
-
-#: ../lib/rubyripper/cli/cliPreferences.rb:245
 msgid "Normalize program"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:246
+#: ../lib/rubyripper/cli/cliPreferences.rb:244
 msgid "Normalize modus"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:264
+#: ../lib/rubyripper/cli/cliPreferences.rb:262
 msgid "Lame options passed"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:293
+#: ../lib/rubyripper/cli/cliPreferences.rb:289
 #: ../lib/rubyripper/cli/cliPreferences.rb:408
 #: ../lib/rubyripper/gtk3/gtkDisc.rb:194
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:668
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:665
 msgid "Artist"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:293
+#: ../lib/rubyripper/cli/cliPreferences.rb:289
 #: ../lib/rubyripper/cli/cliPreferences.rb:409
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:668
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:665
 msgid "Genre"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:293
+#: ../lib/rubyripper/cli/cliPreferences.rb:289
 #: ../lib/rubyripper/cli/cliPreferences.rb:408
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:669
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:666
 msgid "Album"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:293
+#: ../lib/rubyripper/cli/cliPreferences.rb:289
 #: ../lib/rubyripper/cli/cliPreferences.rb:409
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:669
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:666
 msgid "Year"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:294
+#: ../lib/rubyripper/cli/cliPreferences.rb:290
 #: ../lib/rubyripper/cli/cliPreferences.rb:411
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:668
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:665
 msgid "Track name"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:294
+#: ../lib/rubyripper/cli/cliPreferences.rb:290
 #: ../lib/rubyripper/cli/cliPreferences.rb:410
 msgid "Tracknumber"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:294
+#: ../lib/rubyripper/cli/cliPreferences.rb:290
 msgid "Input file"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:295
+#: ../lib/rubyripper/cli/cliPreferences.rb:291
 msgid "Output file"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:295
+#: ../lib/rubyripper/cli/cliPreferences.rb:291
 msgid " (don't forget the extension)"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:300
+#: ../lib/rubyripper/cli/cliPreferences.rb:296
 msgid "Don't normalize the audio"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:301
+#: ../lib/rubyripper/cli/cliPreferences.rb:297
 msgid "Use replaygain"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:302
+#: ../lib/rubyripper/cli/cliPreferences.rb:298
 msgid "Use normalize"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:307
+#: ../lib/rubyripper/cli/cliPreferences.rb:303
 msgid "Use album based gain"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:308
+#: ../lib/rubyripper/cli/cliPreferences.rb:304
 msgid "Use track based gain"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:315
+#: ../lib/rubyripper/cli/cliPreferences.rb:311
 msgid "METADATA PREFERENCES"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:317
+#: ../lib/rubyripper/cli/cliPreferences.rb:313
 msgid "Metadata provider"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:318
+#: ../lib/rubyripper/cli/cliPreferences.rb:314
 msgid "Gnudb use first hit %s"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:319
-#: ../lib/rubyripper/cli/cliPreferences.rb:336
+#: ../lib/rubyripper/cli/cliPreferences.rb:315
+#: ../lib/rubyripper/cli/cliPreferences.rb:332
 msgid "Gnudb server"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:320
-#: ../lib/rubyripper/cli/cliPreferences.rb:338
+#: ../lib/rubyripper/cli/cliPreferences.rb:316
+#: ../lib/rubyripper/cli/cliPreferences.rb:334
 msgid "Gnudb username"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:321
-#: ../lib/rubyripper/cli/cliPreferences.rb:340
+#: ../lib/rubyripper/cli/cliPreferences.rb:317
+#: ../lib/rubyripper/cli/cliPreferences.rb:336
 msgid "Gnudb hostname"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:322
+#: ../lib/rubyripper/cli/cliPreferences.rb:318
 msgid "Musicbrainz preferred countries (1st, 2nd,...)"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:323
+#: ../lib/rubyripper/cli/cliPreferences.rb:319
 msgid "Musicbrainz preferred date"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:324
+#: ../lib/rubyripper/cli/cliPreferences.rb:320
 msgid "Musicbrainz use first known year (including LPs) %s"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:342
+#: ../lib/rubyripper/cli/cliPreferences.rb:338
 msgid "Prefer releases from countries (better, worse, ...)"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:352
+#: ../lib/rubyripper/cli/cliPreferences.rb:348
 msgid "Don't fetch metadata from the internet"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:353
+#: ../lib/rubyripper/cli/cliPreferences.rb:349
 msgid "Use the gnudb protocol as primary resource"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:354
+#: ../lib/rubyripper/cli/cliPreferences.rb:350
 msgid "Use the musicbrainz protocol as primary resource"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:359
+#: ../lib/rubyripper/cli/cliPreferences.rb:355
 msgid "Prefer releases with earlier dates"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:360
+#: ../lib/rubyripper/cli/cliPreferences.rb:356
 msgid "Prefer releases with later dates"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:361
+#: ../lib/rubyripper/cli/cliPreferences.rb:357
 msgid "Ignore dates when selecting releases"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:368
+#: ../lib/rubyripper/cli/cliPreferences.rb:364
 msgid "OTHER PREFERENCES"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:370
-#: ../lib/rubyripper/cli/cliPreferences.rb:387
+#: ../lib/rubyripper/cli/cliPreferences.rb:366
+#: ../lib/rubyripper/cli/cliPreferences.rb:385
 msgid "Base directory"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:371
+#: ../lib/rubyripper/cli/cliPreferences.rb:367
 msgid "Standard file scheme"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:372
+#: ../lib/rubyripper/cli/cliPreferences.rb:368
 msgid "Various artist file scheme"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:373
+#: ../lib/rubyripper/cli/cliPreferences.rb:369
 msgid "Single file rip file scheme"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:374
+#: ../lib/rubyripper/cli/cliPreferences.rb:370
+msgid "Replace spaces with underscores %s"
+msgstr ""
+
+#: ../lib/rubyripper/cli/cliPreferences.rb:371
+msgid "Downsize all capital letters in file names %s"
+msgstr ""
+
+#: ../lib/rubyripper/cli/cliPreferences.rb:372
 #: ../lib/rubyripper/cli/cliPreferences.rb:392
 msgid "Log file viewer"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:375
+#: ../lib/rubyripper/cli/cliPreferences.rb:373
 #: ../lib/rubyripper/cli/cliPreferences.rb:394
 msgid "File manager"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:376
+#: ../lib/rubyripper/cli/cliPreferences.rb:374
 msgid "Verbose mode %s"
 msgstr ""
 
-#: ../lib/rubyripper/cli/cliPreferences.rb:377
+#: ../lib/rubyripper/cli/cliPreferences.rb:375
 msgid "Debug mode %s"
 msgstr ""
 
@@ -740,7 +740,7 @@ msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:410
 #: ../lib/rubyripper/gtk3/gtkPreferences.rb:516
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:669
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:666
 msgid "Codec"
 msgstr ""
 
@@ -753,9 +753,9 @@ msgid "New naming scheme (q to quit)"
 msgstr ""
 
 #: ../lib/rubyripper/cli/cliPreferences.rb:419
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:709
 #: ../lib/rubyripper/gtk3/gtkPreferences.rb:713
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:718
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:721
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:729
 msgid "Example file name: "
 msgstr ""
 
@@ -1208,169 +1208,169 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:543
-msgid "Replace spaces with underscores in file names"
-msgstr ""
-
 #: ../lib/rubyripper/gtk3/gtkPreferences.rb:544
-msgid "Downsize all capital letters in file names"
-msgstr ""
-
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:546
 msgid "Number of extra encoding threads"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:553
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:549
 msgid "Codec related"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:560
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:556
 msgid "Don't standardize volume"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:561
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:557
 msgid "Use replaygain on audio files"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:562
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:558
 msgid "Use normalize on WAVE files"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:565
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:561
 msgid "Album / Audiophile modus"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:566
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:562
 msgid "Track modus"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:573
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:569
 msgid "Normalize to standard volume"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:583
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:579
 msgid "Primary metadata provider:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:585
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:581
 msgid "Gnudb"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:586
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:582
 msgid "Musicbrainz"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:587
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:583
 msgid "Don't use a metadata provider"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:590
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:586
 msgid "Choose your metadata provider"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:596
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:592
 msgid "Always use first gnudb hit"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:597
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:593
 msgid "Gnudb server:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:598
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:594
 msgid "Username:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:599
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:595
 msgid "Hostname:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:614
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:610
 msgid "Gnudb options"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:620
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:616
 msgid "Preferred countries:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:622
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:618
 msgid "Preferred release date:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:624
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:620
 msgid "Preferred year (metadata):"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:627
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:629
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:623
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:625
 msgid "Original"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:628
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:624
 msgid "Latest available"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:630
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:626
 msgid "From release"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:640
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:636
 msgid "Musicbrainz options"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:660
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:656
 msgid "Base directory:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:661
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:657
 msgid "Standard:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:662
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:658
 msgid "Various artists:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:663
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:659
 msgid "Single file image:"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:665
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:661
 msgid "Show options for \"File naming scheme\""
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:670
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:667
 #: ../lib/rubyripper/rippingInfoAtStart.rb:101
 msgid "Track"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:670
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:667
 msgid "Various artist"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:705
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:669
+msgid "Replace spaces with underscores in file names"
+msgstr ""
+
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:670
+msgid "Downsize all capital letters in file names"
+msgstr ""
+
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:708
 msgid "File naming scheme"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:735
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:772
 msgid "Log file viewer: "
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:736
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:773
 msgid "File manager: "
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:744
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:781
 msgid "Programs of choice"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:752
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:789
 msgid "Verbose mode"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:753
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:790
 msgid "Debug mode"
 msgstr ""
 
-#: ../lib/rubyripper/gtk3/gtkPreferences.rb:756
+#: ../lib/rubyripper/gtk3/gtkPreferences.rb:793
 msgid "Debug options"
 msgstr ""
 

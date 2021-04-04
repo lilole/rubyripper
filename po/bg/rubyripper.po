@@ -442,14 +442,6 @@ msgstr ""
 "Брой на потоци за компресия\n"
 "(Изберете число равно на броя ядра на PC-то)"
 
-#, fuzzy
-msgid "Replace spaces with underscores %s"
-msgstr "Замяна на интервали с долни черти в имената"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names %s"
-msgstr "Малки букви за всички букви в имената"
-
 msgid "Normalize program"
 msgstr ""
 
@@ -581,6 +573,14 @@ msgstr "16) схема за компилации (различни изпълн�
 #, fuzzy
 msgid "Single file rip file scheme"
 msgstr "Имидж файл:"
+
+#, fuzzy
+msgid "Replace spaces with underscores %s"
+msgstr "Замяна на интервали с долни черти в имената"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names %s"
+msgstr "Малки букви за всички букви в имената"
 
 #, fuzzy
 msgid "Log file viewer"
@@ -1023,14 +1023,6 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr "Създаване на плейлиста m3u"
 
-#, fuzzy
-msgid "Replace spaces with underscores in file names"
-msgstr "Замяна на интервали с долни черти в имената"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names"
-msgstr "Малки букви за всички букви в имената"
-
 msgid "Number of extra encoding threads"
 msgstr ""
 "Брой на потоци за компресия\n"
@@ -1138,6 +1130,14 @@ msgstr "Песен %s"
 #, fuzzy
 msgid "Various artist"
 msgstr "Схема за компилация (V.A.):"
+
+#, fuzzy
+msgid "Replace spaces with underscores in file names"
+msgstr "Замяна на интервали с долни черти в имената"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names"
+msgstr "Малки букви за всички букви в имената"
 
 #, fuzzy
 msgid "File naming scheme"

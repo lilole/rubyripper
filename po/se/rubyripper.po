@@ -439,14 +439,6 @@ msgstr "6)  stöd för spellista [%s]"
 msgid "Maximum extra encoding threads"
 msgstr "Antalet extra omkodningstrådar"
 
-#, fuzzy
-msgid "Replace spaces with underscores %s"
-msgstr "Ersätt alla mellanslag i filnamnen med understreck"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names %s"
-msgstr "Omvandla alla versaler i filnamn"
-
 msgid "Normalize program"
 msgstr ""
 
@@ -575,6 +567,14 @@ msgstr "16) schema vid olika artister : %s"
 #, fuzzy
 msgid "Single file rip file scheme"
 msgstr "Avbild för enstaka fil:"
+
+#, fuzzy
+msgid "Replace spaces with underscores %s"
+msgstr "Ersätt alla mellanslag i filnamnen med understreck"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names %s"
+msgstr "Omvandla alla versaler i filnamn"
 
 #, fuzzy
 msgid "Log file viewer"
@@ -1026,14 +1026,6 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr "Skapa m3u spellista"
 
-#, fuzzy
-msgid "Replace spaces with underscores in file names"
-msgstr "Ersätt alla mellanslag i filnamnen med understreck"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names"
-msgstr "Omvandla alla versaler i filnamn"
-
 msgid "Number of extra encoding threads"
 msgstr "Antalet extra omkodningstrådar"
 
@@ -1136,6 +1128,14 @@ msgstr "Låt %s"
 #, fuzzy
 msgid "Various artist"
 msgstr "Olika artister:"
+
+#, fuzzy
+msgid "Replace spaces with underscores in file names"
+msgstr "Ersätt alla mellanslag i filnamnen med understreck"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names"
+msgstr "Omvandla alla versaler i filnamn"
 
 #, fuzzy
 msgid "File naming scheme"

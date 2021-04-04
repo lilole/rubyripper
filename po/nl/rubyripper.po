@@ -398,12 +398,6 @@ msgstr "Maak afspeellijst aan %s"
 msgid "Maximum extra encoding threads"
 msgstr "Aantal extra encodeer processen"
 
-msgid "Replace spaces with underscores %s"
-msgstr "Vervang spaties met underscores in bestandsnamen %s"
-
-msgid "Downsize all capital letters in file names %s"
-msgstr "Alleen kleine letters in bestandsnamen %s"
-
 msgid "Normalize program"
 msgstr "Programma om te normaliseren"
 
@@ -517,6 +511,12 @@ msgstr "Schema voor verscheidene artiesten"
 
 msgid "Single file rip file scheme"
 msgstr "Schema voor een image bestand"
+
+msgid "Replace spaces with underscores %s"
+msgstr "Vervang spaties met underscores in bestandsnamen %s"
+
+msgid "Downsize all capital letters in file names %s"
+msgstr "Alleen kleine letters in bestandsnamen %s"
 
 msgid "Log file viewer"
 msgstr "Log bestand openen met"
@@ -949,12 +949,6 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr "Maak m3u afspeellijst"
 
-msgid "Replace spaces with underscores in file names"
-msgstr "Vervang spaties met underscores in bestandsnamen"
-
-msgid "Downsize all capital letters in file names"
-msgstr "Alleen kleine letters in bestandsnamen"
-
 msgid "Number of extra encoding threads"
 msgstr "Aantal extra encoding processen"
 
@@ -1052,6 +1046,12 @@ msgstr "Track"
 
 msgid "Various artist"
 msgstr "Verscheidene artiesten"
+
+msgid "Replace spaces with underscores in file names"
+msgstr "Vervang spaties met underscores in bestandsnamen"
+
+msgid "Downsize all capital letters in file names"
+msgstr "Alleen kleine letters in bestandsnamen"
 
 msgid "File naming scheme"
 msgstr "Bestandsnaam schema"

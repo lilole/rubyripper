@@ -214,10 +214,12 @@ msgid "n"
 msgstr "n"
 
 #, fuzzy
-msgid "Please answer %s or %s. Try again.\n"
+msgid ""
+"Please answer %s or %s. Try again.\n"
 msgstr "svar venligst ja eller nej"
 
-msgid "Please enter an integer value. Try again.\n"
+msgid ""
+"Please enter an integer value. Try again.\n"
 msgstr ""
 
 #, fuzzy
@@ -402,12 +404,6 @@ msgstr "Understøttelse af afspilningsliste %s"
 msgid "Maximum extra encoding threads"
 msgstr "Maksimalt antal ekstra kodningstråde"
 
-msgid "Replace spaces with underscores %s"
-msgstr "Erstat mellemrum med understregninger %s"
-
-msgid "Downsize all capital letters in file names %s"
-msgstr "Erstat alle store bogstaver i filnavne med små %s"
-
 msgid "Normalize program"
 msgstr "Normaliser program"
 
@@ -522,6 +518,12 @@ msgstr "Filskema for forskellige kunstnere"
 msgid "Single file rip file scheme"
 msgstr "Et filrip med filskema"
 
+msgid "Replace spaces with underscores %s"
+msgstr "Erstat mellemrum med understregninger %s"
+
+msgid "Downsize all capital letters in file names %s"
+msgstr "Erstat alle store bogstaver i filnavne med små %s"
+
 msgid "Log file viewer"
 msgstr "Logfilviser"
 
@@ -597,16 +599,22 @@ msgstr ""
 "\n"
 
 #, fuzzy
-msgid "Silence detected for disc : %s sectors\n"
-msgstr "Stilhed registreret for disk : %s sektorer\n"
+msgid ""
+"Silence detected for disc : %s sectors\n"
+msgstr ""
+"Stilhed registreret for disk : %s sektorer\n"
 
 #, fuzzy
-msgid "Pregap detected for track %s : %s sectors\n"
-msgstr "Indledende mellemrum registreret for nummer %s: %s sektorer\n"
+msgid ""
+"Pregap detected for track %s : %s sectors\n"
+msgstr ""
+"Indledende mellemrum registreret for nummer %s: %s sektorer\n"
 
 #, fuzzy
-msgid "Track %s is marked as a DATA track\n"
-msgstr "Nummer %s er markeret som et DATA-spor\n"
+msgid ""
+"Track %s is marked as a DATA track\n"
+msgstr ""
+"Nummer %s er markeret som et DATA-spor\n"
 
 msgid "No disc found after %s trial(s)!"
 msgstr "Ingen disk fundet efter %s forsøg!"
@@ -958,12 +966,6 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr "Opret m2u-afspilningsliste"
 
-msgid "Replace spaces with underscores in file names"
-msgstr "Erstat mellemrum med understregninger i filnavne"
-
-msgid "Downsize all capital letters in file names"
-msgstr "Lav alle store bogstaver små i filnavne"
-
 msgid "Number of extra encoding threads"
 msgstr "Antal ekstra kodningstråde"
 
@@ -1060,6 +1062,12 @@ msgstr "Nummer"
 
 msgid "Various artist"
 msgstr "Forskellige kunstnere"
+
+msgid "Replace spaces with underscores in file names"
+msgstr "Erstat mellemrum med understregninger i filnavne"
+
+msgid "Downsize all capital letters in file names"
+msgstr "Lav alle store bogstaver små i filnavne"
 
 msgid "File naming scheme"
 msgstr "Filnavngivningsskema"
@@ -1175,7 +1183,8 @@ msgstr ""
 
 #, fuzzy
 msgid "Corrected all sector mismatches! (%s matches found for each chunk)"
-msgstr "Fejl rettet, %s match fundet for hvert stykke :)\n"
+msgstr ""
+"Fejl rettet, %s match fundet for hvert stykke :)\n"
 
 #, fuzzy
 msgid ""
@@ -1194,12 +1203,16 @@ msgstr ""
 "\n"
 
 #, fuzzy
-msgid "File name %s\n"
-msgstr "Filnavn %s\n"
+msgid ""
+"File name %s\n"
+msgstr ""
+"Filnavn %s\n"
 
 #, fuzzy
-msgid "Trial %s: %s seconds (%sx)\n"
-msgstr "Forsøg %s: %s sekunder (%sx)\n"
+msgid ""
+"Trial %s: %s seconds (%sx)\n"
+msgstr ""
+"Forsøg %s: %s sekunder (%sx)\n"
 
 msgid "Peak level %.1f %%"
 msgstr ""
@@ -1240,8 +1253,10 @@ msgstr ""
 "\n"
 
 #, fuzzy
-msgid "All chunks were tried to match at least %s times.\n"
-msgstr "Alle stykker blev forsøgt sammenlignet mindst %s gange.\n"
+msgid ""
+"All chunks were tried to match at least %s times.\n"
+msgstr ""
+"Alle stykker blev forsøgt sammenlignet mindst %s gange.\n"
 
 msgid "Chunks that differed after %s trials,"
 msgstr "Stykker som var forskellige efter %s forsøg,"
@@ -1258,8 +1273,10 @@ msgid "No errors occurred"
 msgstr "Der opstod ingen fejl"
 
 #, fuzzy
-msgid "None of the tracks gave any problems\n"
-msgstr "Ingen af numrene gav nogen problemer\n"
+msgid ""
+"None of the tracks gave any problems\n"
+msgstr ""
+"Ingen af numrene gav nogen problemer\n"
 
 msgid "There were errors which could not be corrected"
 msgstr "Der var fejl, der ikke kunne rettes"
@@ -1267,11 +1284,14 @@ msgstr "Der var fejl, der ikke kunne rettes"
 #, fuzzy
 msgid ""
 "Some track(s) could NOT be corrected within the maximum amount of trials\n"
-msgstr "Nogle numre kunne IKKE tilrettes indenfor det maksimale antal forsøg\n"
+msgstr ""
+"Nogle numre kunne IKKE tilrettes indenfor det maksimale antal forsøg\n"
 
 #, fuzzy
-msgid "Track %s could NOT be corrected completely\n"
-msgstr "Nummer %s kunne IKKE tilrettes fuldstændigt\n"
+msgid ""
+"Track %s could NOT be corrected completely\n"
+msgstr ""
+"Nummer %s kunne IKKE tilrettes fuldstændigt\n"
 
 msgid "There were errors which required correction"
 msgstr "Der var fejl som krævede korrektion"
@@ -1286,8 +1306,10 @@ msgstr ""
 "tilrettes indenfor det maksimale antal forsøg\n"
 
 #, fuzzy
-msgid "There were errors during encoding\n"
-msgstr "Der opstod fejl under kodning\n"
+msgid ""
+"There were errors during encoding\n"
+msgstr ""
+"Der opstod fejl under kodning\n"
 
 #, fuzzy
 msgid ""
@@ -1349,8 +1371,10 @@ msgid "No"
 msgstr "Nej"
 
 #, fuzzy
-msgid "Fill up missing offset samples with silence : %s\n"
-msgstr "Fyld manglende forskydningsprøver med stilhed : %s\n"
+msgid ""
+"Fill up missing offset samples with silence : %s\n"
+msgstr ""
+"Fyld manglende forskydningsprøver med stilhed : %s\n"
 
 msgid "Yes"
 msgstr "Ja"
@@ -1359,8 +1383,10 @@ msgid "Null samples used in CRC calculations"
 msgstr "Ingen prøver brugt i CRC-beregninger"
 
 #, fuzzy
-msgid "Used output encoder : %s\n"
-msgstr "Brugt udgangskoder : %s\n"
+msgid ""
+"Used output encoder : %s\n"
+msgstr ""
+"Brugt udgangskoder : %s\n"
 
 msgid "Internal WAVE routines"
 msgstr "Interne WAVE-rutiner"
@@ -1418,8 +1444,7 @@ msgid "File size is not correct! Trying another time"
 msgstr "Filstørrelse er ikke korrekt! Forsøger igen"
 
 msgid "Sector mismatches at the following times, requiring extra trials:"
-msgstr ""
-"Sektor var forskellig på de følgende tidspunkter, kræver ekstra forsøg:"
+msgstr "Sektor var forskellig på de følgende tidspunkter, kræver ekstra forsøg:"
 
 msgid "The drive is spinning for more than 30 minutes."
 msgstr "Drevet har rotereret i mere end 30 minutter."
@@ -1443,14 +1468,12 @@ msgstr "Du vil ikke kunne bruge oversættelser."
 msgid ""
 "You won't have accurate Gnudb string \\\n"
 "calculation unless %s is installed."
-msgstr ""
-"Du vil ikke have præcis Gnudb-strengberegning med mindre %s er installeret."
+msgstr "Du vil ikke have præcis Gnudb-strengberegning med mindre %s er installeret."
 
 msgid ""
 "You won't have accurate Gnnudb string \\\n"
 "calculation unless %s is installed."
-msgstr ""
-"Du vil ikke have præcis Gnudb-strengberegning med mindre %s er installeret."
+msgstr "Du vil ikke have præcis Gnudb-strengberegning med mindre %s er installeret."
 
 msgid "Your disc tray can not be opened after ripping"
 msgstr "Din skuffe kan ikke åbnes efter udtræk"

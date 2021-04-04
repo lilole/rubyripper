@@ -1,4 +1,8 @@
 ---------0.8.0 RELEASE------
+* changed 'NoSpaces' preference's behavior; it does nothing if not activated
+ (was changing underscores to spaces before)
+* moved 'NoSpaces' and 'NoCapitals' preferences from Codec to Other
+ preference page (they are related to file names).
 * implemented replaygain for wavpack codec
 * fixed replaygain in 'album' mode
 * Musicbrainz disc id is now written into tags

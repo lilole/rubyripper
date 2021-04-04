@@ -26,7 +26,8 @@ msgstr "Módosítani szeretnéd a beállításokat? (y/n) : "
 
 #, fuzzy
 msgid "Rubyripper version %s"
-msgstr "Ez a naplófájl a Rubyripper %s verziójával készült\n"
+msgstr ""
+"Ez a naplófájl a Rubyripper %s verziójával készült\n"
 
 #, fuzzy
 msgid "* RUBYRIPPER MAIN MENU *"
@@ -227,11 +228,13 @@ msgid "n"
 msgstr "n"
 
 #, fuzzy
-msgid "Please answer %s or %s. Try again.\n"
+msgid ""
+"Please answer %s or %s. Try again.\n"
 msgstr "y"
 
 #, fuzzy
-msgid "Please enter an integer value. Try again.\n"
+msgid ""
+"Please enter an integer value. Try again.\n"
 msgstr "y"
 
 msgid ""
@@ -283,8 +286,8 @@ msgstr "CD-ROM offset:"
 #, fuzzy
 msgid "Find your offset at http://www.accuraterip.com/driveoffsets.htm."
 msgstr ""
-"   **A megfelelő offset-et a http://www.accuraterip.com/driveoffsets.htm "
-"címen nézheted meg.\n"
+"   **A megfelelő offset-et a http://www.accuraterip.com/driveoffsets.htm címen"
+" nézheted meg.\n"
 "   **A meghajtód típusa a naplófájlban található."
 
 msgid "Your drive model is shown in the logfile."
@@ -430,14 +433,6 @@ msgstr "6)  számlista támogatás [%s]"
 msgid "Maximum extra encoding threads"
 msgstr ""
 
-#, fuzzy
-msgid "Replace spaces with underscores %s"
-msgstr "Szóközök kicserélése aláhúzásjelre a fájlnevekben"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names %s"
-msgstr "Nagybetűk cseréje kisbetűre a fájlnevekben"
-
 msgid "Normalize program"
 msgstr ""
 
@@ -568,6 +563,14 @@ msgid "Single file rip file scheme"
 msgstr "Egyetlen képfájl: "
 
 #, fuzzy
+msgid "Replace spaces with underscores %s"
+msgstr "Szóközök kicserélése aláhúzásjelre a fájlnevekben"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names %s"
+msgstr "Nagybetűk cseréje kisbetűre a fájlnevekben"
+
+#, fuzzy
 msgid "Log file viewer"
 msgstr "Naplófájl olvasó: "
 
@@ -641,13 +644,16 @@ msgid ""
 "\n"
 msgstr "n"
 
-msgid "Silence detected for disc : %s sectors\n"
+msgid ""
+"Silence detected for disc : %s sectors\n"
 msgstr ""
 
-msgid "Pregap detected for track %s : %s sectors\n"
+msgid ""
+"Pregap detected for track %s : %s sectors\n"
 msgstr ""
 
-msgid "Track %s is marked as a DATA track\n"
+msgid ""
+"Track %s is marked as a DATA track\n"
 msgstr ""
 
 #, fuzzy
@@ -994,14 +1000,6 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr "m3u számlista készítése"
 
-#, fuzzy
-msgid "Replace spaces with underscores in file names"
-msgstr "Szóközök kicserélése aláhúzásjelre a fájlnevekben"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names"
-msgstr "Nagybetűk cseréje kisbetűre a fájlnevekben"
-
 msgid "Number of extra encoding threads"
 msgstr ""
 
@@ -1103,6 +1101,14 @@ msgstr "%s. szám"
 #, fuzzy
 msgid "Various artist"
 msgstr "Több előadó:"
+
+#, fuzzy
+msgid "Replace spaces with underscores in file names"
+msgstr "Szóközök kicserélése aláhúzásjelre a fájlnevekben"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names"
+msgstr "Nagybetűk cseréje kisbetűre a fájlnevekben"
 
 #, fuzzy
 msgid "File naming scheme"
@@ -1231,10 +1237,12 @@ msgid ""
 msgstr "%s. szám"
 
 #, fuzzy
-msgid "File name %s\n"
+msgid ""
+"File name %s\n"
 msgstr "Elnevezési séma"
 
-msgid "Trial %s: %s seconds (%sx)\n"
+msgid ""
+"Trial %s: %s seconds (%sx)\n"
 msgstr ""
 
 msgid "Peak level %.1f %%"
@@ -1277,8 +1285,10 @@ msgstr ""
 "\n"
 
 #, fuzzy
-msgid "All chunks were tried to match at least %s times.\n"
-msgstr "Minden darab legalább %s alkalommal volt összevetve.\n"
+msgid ""
+"All chunks were tried to match at least %s times.\n"
+msgstr ""
+"Minden darab legalább %s alkalommal volt összevetve.\n"
 
 #, fuzzy
 msgid "Chunks that differed after %s trials,"
@@ -1290,14 +1300,17 @@ msgstr ""
 msgid ""
 "\n"
 "were tried to match %s times.\n"
-msgstr "Minden darab legalább %s alkalommal volt összevetve.\n"
+msgstr ""
+"Minden darab legalább %s alkalommal volt összevetve.\n"
 
 msgid "No errors occurred"
 msgstr ""
 
 #, fuzzy
-msgid "None of the tracks gave any problems\n"
-msgstr "Egyik szám másolásával sem volt probléma\n"
+msgid ""
+"None of the tracks gave any problems\n"
+msgstr ""
+"Egyik szám másolásával sem volt probléma\n"
 
 msgid "There were errors which could not be corrected"
 msgstr ""
@@ -1306,12 +1319,13 @@ msgstr ""
 msgid ""
 "Some track(s) could NOT be corrected within the maximum amount of trials\n"
 msgstr ""
-"Néhány számot nem lehetett kijavítani a megadott maximális próbálkozás "
-"alatt\n"
+"Néhány számot nem lehetett kijavítani a megadott maximális próbálkozás alatt\n"
 
 #, fuzzy
-msgid "Track %s could NOT be corrected completely\n"
-msgstr "A %s. számot nem lehetett teljesen kijavítani\n"
+msgid ""
+"Track %s could NOT be corrected completely\n"
+msgstr ""
+"A %s. számot nem lehetett teljesen kijavítani\n"
 
 msgid "There were errors which required correction"
 msgstr ""
@@ -1324,7 +1338,8 @@ msgstr ""
 "Néhány számot javítani kellett, de sikerült\n"
 "kijavítani a megadott maximális próbálkozás alatt\n"
 
-msgid "There were errors during encoding\n"
+msgid ""
+"There were errors during encoding\n"
 msgstr ""
 
 #, fuzzy
@@ -1368,7 +1383,8 @@ msgstr "n"
 
 #, fuzzy
 msgid "Matches required for all chunks"
-msgstr "Szükséges egyezés minden darabhoz: %s\n"
+msgstr ""
+"Szükséges egyezés minden darabhoz: %s\n"
 
 #, fuzzy
 msgid "Matches required for erroneous chunks"
@@ -1385,7 +1401,8 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-msgid "Fill up missing offset samples with silence : %s\n"
+msgid ""
+"Fill up missing offset samples with silence : %s\n"
 msgstr ""
 
 #, fuzzy
@@ -1395,7 +1412,8 @@ msgstr "igen"
 msgid "Null samples used in CRC calculations"
 msgstr ""
 
-msgid "Used output encoder : %s\n"
+msgid ""
+"Used output encoder : %s\n"
 msgstr ""
 
 msgid "Internal WAVE routines"
@@ -1450,7 +1468,8 @@ msgstr ""
 
 #, fuzzy
 msgid "File size is not correct! Trying another time"
-msgstr "A fájlméret helytelen! Újabb próbálkozás\n"
+msgstr ""
+"A fájlméret helytelen! Újabb próbálkozás\n"
 
 msgid "Sector mismatches at the following times, requiring extra trials:"
 msgstr ""
@@ -1467,7 +1486,8 @@ msgstr "Az eject program nem található!"
 
 #, fuzzy
 msgid "Rubyripper can't be used without cdparanoia!"
-msgstr "Használt másoló: cdparanoia %s\n"
+msgstr ""
+"Használt másoló: cdparanoia %s\n"
 
 #, fuzzy
 msgid "You won't be able to use the gtk3 interface."

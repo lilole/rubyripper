@@ -26,7 +26,8 @@ msgstr "Einstellungen ändern? (j/n) : "
 
 #, fuzzy
 msgid "Rubyripper version %s"
-msgstr "Das Protokoll wurde erstellt von Rubyripper, Version %s\n"
+msgstr ""
+"Das Protokoll wurde erstellt von Rubyripper, Version %s\n"
 
 #, fuzzy
 msgid "* RUBYRIPPER MAIN MENU *"
@@ -255,11 +256,13 @@ msgid "n"
 msgstr "n"
 
 #, fuzzy
-msgid "Please answer %s or %s. Try again.\n"
+msgid ""
+"Please answer %s or %s. Try again.\n"
 msgstr "j"
 
 #, fuzzy
-msgid "Please enter an integer value. Try again.\n"
+msgid ""
+"Please enter an integer value. Try again.\n"
 msgstr "j"
 
 msgid ""
@@ -465,14 +468,6 @@ msgstr "6)  Playlist Support [%s]"
 msgid "Maximum extra encoding threads"
 msgstr "Anzahl zusätzlicher Kodier-Threads"
 
-#, fuzzy
-msgid "Replace spaces with underscores %s"
-msgstr "Leerzeichen in Dateinamen durch Unterstriche ersetzen"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names %s"
-msgstr "Großbuchstaben in Dateinamen in Kleinbuchstaben umwandeln"
-
 msgid "Normalize program"
 msgstr ""
 
@@ -603,6 +598,14 @@ msgid "Single file rip file scheme"
 msgstr "Einzeldatei-Abbild:"
 
 #, fuzzy
+msgid "Replace spaces with underscores %s"
+msgstr "Leerzeichen in Dateinamen durch Unterstriche ersetzen"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names %s"
+msgstr "Großbuchstaben in Dateinamen in Kleinbuchstaben umwandeln"
+
+#, fuzzy
 msgid "Log file viewer"
 msgstr "Protokolldateibetrachter: "
 
@@ -680,19 +683,26 @@ msgstr ""
 msgid ""
 "No pregap, silence, pre-emphasis or data track detected\n"
 "\n"
-msgstr "Keine Pregaps, Stille oder Pre-Emphasis entdeckt\n"
+msgstr ""
+"Keine Pregaps, Stille oder Pre-Emphasis entdeckt\n"
 
 #, fuzzy
-msgid "Silence detected for disc : %s sectors\n"
-msgstr "Stille in Track %s gefunden : %s Sektoren\n"
+msgid ""
+"Silence detected for disc : %s sectors\n"
+msgstr ""
+"Stille in Track %s gefunden : %s Sektoren\n"
 
 #, fuzzy
-msgid "Pregap detected for track %s : %s sectors\n"
-msgstr "Pregap entdeckt für Track %s : %s Sektoren\n"
+msgid ""
+"Pregap detected for track %s : %s sectors\n"
+msgstr ""
+"Pregap entdeckt für Track %s : %s Sektoren\n"
 
 #, fuzzy
-msgid "Track %s is marked as a DATA track\n"
-msgstr "Track %s ist als DATA Track markiert\n"
+msgid ""
+"Track %s is marked as a DATA track\n"
+msgstr ""
+"Track %s ist als DATA Track markiert\n"
 
 #, fuzzy
 msgid "No disc found after %s trial(s)!"
@@ -1045,14 +1055,6 @@ msgstr ""
 msgid "Create m3u playlist"
 msgstr "m3u Playlist generieren"
 
-#, fuzzy
-msgid "Replace spaces with underscores in file names"
-msgstr "Leerzeichen in Dateinamen durch Unterstriche ersetzen"
-
-#, fuzzy
-msgid "Downsize all capital letters in file names"
-msgstr "Großbuchstaben in Dateinamen in Kleinbuchstaben umwandeln"
-
 msgid "Number of extra encoding threads"
 msgstr "Anzahl zusätzlicher Kodier-Threads"
 
@@ -1154,6 +1156,14 @@ msgstr "Track %s"
 #, fuzzy
 msgid "Various artist"
 msgstr "Verschiedene Künstler:"
+
+#, fuzzy
+msgid "Replace spaces with underscores in file names"
+msgstr "Leerzeichen in Dateinamen durch Unterstriche ersetzen"
+
+#, fuzzy
+msgid "Downsize all capital letters in file names"
+msgstr "Großbuchstaben in Dateinamen in Kleinbuchstaben umwandeln"
 
 #, fuzzy
 msgid "File naming scheme"
@@ -1282,10 +1292,12 @@ msgid ""
 msgstr "Track %s"
 
 #, fuzzy
-msgid "File name %s\n"
+msgid ""
+"File name %s\n"
 msgstr "Dateinamen-Schema"
 
-msgid "Trial %s: %s seconds (%sx)\n"
+msgid ""
+"Trial %s: %s seconds (%sx)\n"
 msgstr ""
 
 msgid "Peak level %.1f %%"
@@ -1328,8 +1340,10 @@ msgstr ""
 "\n"
 
 #, fuzzy
-msgid "All chunks were tried to match at least %s times.\n"
-msgstr "Es wurde versucht alle Teilstücke mindestens %s mal abzugleichen.\n"
+msgid ""
+"All chunks were tried to match at least %s times.\n"
+msgstr ""
+"Es wurde versucht alle Teilstücke mindestens %s mal abzugleichen.\n"
 
 #, fuzzy
 msgid "Chunks that differed after %s trials,"
@@ -1342,14 +1356,17 @@ msgstr ""
 msgid ""
 "\n"
 "were tried to match %s times.\n"
-msgstr "Es wurde versucht alle Teilstücke mindestens %s mal abzugleichen.\n"
+msgstr ""
+"Es wurde versucht alle Teilstücke mindestens %s mal abzugleichen.\n"
 
 msgid "No errors occurred"
 msgstr ""
 
 #, fuzzy
-msgid "None of the tracks gave any problems\n"
-msgstr "Bei keinem Track kamen Probleme auf\n"
+msgid ""
+"None of the tracks gave any problems\n"
+msgstr ""
+"Bei keinem Track kamen Probleme auf\n"
 
 msgid "There were errors which could not be corrected"
 msgstr ""
@@ -1362,8 +1379,10 @@ msgstr ""
 "von Versuchen korrigiert werden\n"
 
 #, fuzzy
-msgid "Track %s could NOT be corrected completely\n"
-msgstr "Track %s konnte NICHT vollständig korrigiert werden\n"
+msgid ""
+"Track %s could NOT be corrected completely\n"
+msgstr ""
+"Track %s konnte NICHT vollständig korrigiert werden\n"
 
 msgid "There were errors which required correction"
 msgstr ""
@@ -1376,7 +1395,8 @@ msgstr ""
 "Einige Tracks bedurften einer Korrektur, aber konnten erfolgreich\n"
 "innerhalb der maximalen Anzahl von Versuchen korrigiert werden\n"
 
-msgid "There were errors during encoding\n"
+msgid ""
+"There were errors during encoding\n"
 msgstr ""
 
 #, fuzzy
@@ -1420,11 +1440,13 @@ msgstr "n"
 
 #, fuzzy
 msgid "Matches required for all chunks"
-msgstr "Benötigte Übereinstimmungen für alle Teilstücke: %s\n"
+msgstr ""
+"Benötigte Übereinstimmungen für alle Teilstücke: %s\n"
 
 #, fuzzy
 msgid "Matches required for erroneous chunks"
-msgstr "Benötigte Übereinstimmungen für fehlerhafte Teilstücke: %s\n"
+msgstr ""
+"Benötigte Übereinstimmungen für fehlerhafte Teilstücke: %s\n"
 
 msgid "Read offset correction"
 msgstr ""
@@ -1435,7 +1457,8 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-msgid "Fill up missing offset samples with silence : %s\n"
+msgid ""
+"Fill up missing offset samples with silence : %s\n"
 msgstr ""
 
 #, fuzzy
@@ -1445,7 +1468,8 @@ msgstr "ja"
 msgid "Null samples used in CRC calculations"
 msgstr ""
 
-msgid "Used output encoder : %s\n"
+msgid ""
+"Used output encoder : %s\n"
 msgstr ""
 
 msgid "Internal WAVE routines"
@@ -1500,7 +1524,8 @@ msgstr ""
 
 #, fuzzy
 msgid "File size is not correct! Trying another time"
-msgstr "Dateigröße ist nicht korrekt! Neuer Versuch\n"
+msgstr ""
+"Dateigröße ist nicht korrekt! Neuer Versuch\n"
 
 msgid "Sector mismatches at the following times, requiring extra trials:"
 msgstr ""
@@ -1517,7 +1542,8 @@ msgstr "Kein Auswurf-Werkzeug (eject) gefunden!"
 
 #, fuzzy
 msgid "Rubyripper can't be used without cdparanoia!"
-msgstr "Benutzter Ripper: cdparanoia %s\n"
+msgstr ""
+"Benutzter Ripper: cdparanoia %s\n"
 
 #, fuzzy
 msgid "You won't be able to use the gtk3 interface."
