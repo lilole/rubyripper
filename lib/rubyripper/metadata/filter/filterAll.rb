@@ -27,10 +27,6 @@ module Metadata
     def filter(item)
       item.gsub!('`', "'") # remove backquotes
 
-      # replace any underscores with spaces, some freedb info got
-      # underscores instead of spaces
-      item.gsub!('_', ' ') unless @prefs.noSpaces
-
       # replace utf-8 single quotes with latin single quote
       # see also http://www.utf8-chartable.de/unicode-utf8-table.pl
       item.gsub!(/\u{02018}|\u{02019}/, "'")

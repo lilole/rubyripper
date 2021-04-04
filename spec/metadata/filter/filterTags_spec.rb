@@ -41,7 +41,7 @@ describe Metadata::FilterTags do
     end
     
     it "should be able to combine all logic for filterTags + filterAll" do
-      data.tracklist = {1=>" #{'abc"def'} AC/DC Don`t_wont_know ??_** >< | "}
+      data.tracklist = {1=>" #{'abc"def'} AC/DC Don`t wont know ?? ** >< | "}
       expect(filter.trackname(1)).to eq("\"#{'abc\\"def'} AC/DC Don't wont know ?? ** >< |\"")
     end
   end

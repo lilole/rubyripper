@@ -30,18 +30,6 @@ describe Metadata::FilterAll do
       expect(filter.artist).to eq("No ' allowed")
     end
     
-    it "should replace underscores with spaces if noSpaces setting = false" do
-      data.artist = 'Iron_Maiden'
-      expect(prefs).to receive(:noSpaces).and_return false
-      expect(filter.artist).to eq('Iron Maiden')
-    end
-    
-    it "should keep the underscores if noSpaces setting = true" do
-      data.artist = 'Iron_Maiden'
-      expect(prefs).to receive(:noSpaces).and_return true
-      expect(filter.artist).to eq('Iron_Maiden')
-    end
-    
     it "should replace UTF-8 single quote with ASCII single quote" do
       data.artist = "single quote \342\200\230 1"
       data.album = "single quote \342\200\231 2"
@@ -62,8 +50,7 @@ describe Metadata::FilterAll do
     end
     
     it "should be able to combine this logic" do
-      data.tracklist = {1=>"  Don`t_won\342\200\230t_know  "}
-      expect(prefs).to receive(:noSpaces).and_return false
+      data.tracklist = {1=>"  Don`t won\342\200\230t know  "}
       expect(filter.trackname(1)).to eq("Don't won't know")
     end
   end

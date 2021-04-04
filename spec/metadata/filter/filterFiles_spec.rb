@@ -44,7 +44,7 @@ describe Metadata::FilterFiles do
     end
     
     it "should be able to combine all logic for filterFiles + filterDirs + filterAll" do
-      expect(filter.filter(" AC/DC \"\\Don`t_won\342\200\230t_know ??_** >< | ")).to eq("ACDC Don't won't know")
+      expect(filter.filter(" AC/DC \"\\Don`t won\342\200\230t know ?? ** >< | ")).to eq("ACDC Don't won't know")
     end
   end
 end

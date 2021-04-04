@@ -76,7 +76,7 @@ describe Metadata::FilterDirs do
     end
     
     it "should be able to combine all logic for filterDirs + filterAll" do
-      data.tracklist = {1=>"  \"\\Don`t_won\342\200\230t_know ??_** >< | "}
+      data.tracklist = {1=>"  \"\\Don`t won\342\200\230t know ?? ** >< | "}
       expect(filter.trackname(1)).to eq("Don't won't know")
     end
   end
@@ -88,10 +88,29 @@ describe Metadata::FilterDirs do
       expect(filter.artist).to eq("Hello_world")
     end
     
+    it "should not replace spaces to underscores if not wished for" do
+      data.artist = 'Hello world'
+      allow(prefs).to receive(:noSpaces).and_return(false)
+      expect(filter.artist).to eq("Hello world")
+    end
+
+    it "should not replace underscores with spaces if noSpaces setting  == false" do
+      data.artist = 'Hello_world'
+      allow(prefs).to receive(:noSpaces).and_return(false)
+      expect(filter.artist).to eq("Hello_world")
+    end
+
     it "should downsize all letters if wished for" do
       data.artist = 'hELLo WoRLD'
       allow(prefs).to receive(:noCapitals).and_return(true)
       expect(filter.artist).to eq('hello world')
     end
+
+    it "should not downsize all letters if not wished for" do
+      data.artist = 'hELLo WoRLD'
+      allow(prefs).to receive(:noCapitals).and_return(false)
+      expect(filter.artist).to eq('hELLo WoRLD')
+    end
+
   end
 end
