@@ -537,19 +537,15 @@ It is recommended to enable this option.")
   end
 
   def buildFrameCodecRelated #Encoding related frame
-    @table80 = newTable(rows=4, columns=2)
+    @table80 = newTable(rows=2, columns=2)
 #creating objects
     @playlist = Gtk::CheckButton.new(_("Create m3u playlist"))
-    @noSpaces = Gtk::CheckButton.new(_("Replace spaces with underscores in file names"))
-    @noCapitals = Gtk::CheckButton.new(_("Downsize all capital letters in file names"))
     @maxThreads = Gtk::SpinButton.new(0.0, 10.0, 1.0)
     @maxThreadsLabel = Gtk::Label.new(_("Number of extra encoding threads"))
 #packing objects
     @table80.attach(@maxThreadsLabel, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
     @table80.attach(@maxThreads, 1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
     @table80.attach(@playlist, 0, 2, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-    @table80.attach(@noSpaces, 0, 2, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-    @table80.attach(@noCapitals, 0, 2, 3, 4, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
     @frame80 = newFrame(_('Codec related'), child=@table80)
   end
 
@@ -655,7 +651,7 @@ It is recommended to enable this option.")
   end
 
   def buildFrameFilenamingScheme # Naming scheme frame
-    @table100 = newTable(rows=6, columns=2)
+    @table100 = newTable(rows=8, columns=2)
 #creating objects 1st column
     @basedir_label = Gtk::Label.new(_('Base directory:')) ; @basedir_label.set_alignment(0.0, 0.5) #set_alignment(xalign=0.0, yalign=0.5)
     @naming_normal_label = Gtk::Label.new(_('Standard:')) ; @naming_normal_label.set_alignment(0.0, 0.5)
@@ -663,20 +659,27 @@ It is recommended to enable this option.")
     @naming_image_label = Gtk::Label.new(_('Single file image:')) ; @naming_image_label.set_alignment(0.0, 0.5)
     @example_label =Gtk::Label.new('') ; @example_label.set_alignment(0.0, 0.5) ; @example_label.wrap = true
     @expander100 = Gtk::Expander.new(_('Show options for "File naming scheme"'))
+    @example_label_shows = 'normal'
 #configure expander
     #@artist_label = Gtk::Label.new("%a = artist   %b = album   %f = codec   %g = genre\n%va = various artists   %n = track   %t = trackname   %y = year")
     @legend_label = Gtk::Label.new("%a=" + _("Artist") + " %g=" + _("Genre") + " %t=" + _("Track name") +
                                      " %f=" + _("Codec") + "\n%b=" + _("Album") + " %y=" + _("Year") +
                                     " %n=" + _("Track") + " %va=" + _("Various artist"))
     @expander100.add(@legend_label)
+    @noSpaces = Gtk::CheckButton.new(_("Replace spaces with underscores in file names"))
+    @noCapitals = Gtk::CheckButton.new(_("Downsize all capital letters in file names"))
+    @noSpaces.signal_connect("toggled") { updateExampleLabel() }
+    @noCapitals.signal_connect("toggled") { updateExampleLabel() }
 #packing 1st column
     @table100.attach(@basedir_label, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
     @table100.attach(@naming_normal_label, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
     @table100.attach(@naming_various_label, 0, 1, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
     @table100.attach(@naming_image_label, 0, 1, 3, 4, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-    @table100.attach(@example_label, 0, 2, 4, 5, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
+    @table100.attach(@noSpaces, 0, 2, 4, 5, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+    @table100.attach(@noCapitals, 0, 2, 5, 6, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+    @table100.attach(@example_label, 0, 2, 6, 7, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
                      Gtk::AttachOptions::SHRINK, 0, 0) #width = 2 columns, also maximise width
-    @table100.attach(@expander100, 0, 2 , 5, 6, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
+    @table100.attach(@expander100, 0, 2 , 7, 8, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
                      Gtk::AttachOptions::SHRINK, 0, 0)
 #creating objects 2nd column and connect signals to them
     @basedirEntry = Gtk::Entry.new
@@ -704,21 +707,55 @@ It is recommended to enable this option.")
                      Gtk::AttachOptions::SHRINK, 0, 0)
     @frame100 = newFrame(_('File naming scheme'), child=@table100)
   end
-  
+
   def showFileNormal
-    @example_label.text = _("Example file name: ") + Preferences.showFilenameNormal( @basedirEntry.text, @namingNormalEntry.text)
+    backupPrefsBeforeExampleLabelUpdate()
+    @example_label.text = _("Example file name: ") +
+      Preferences.showFilenameNormal( @basedirEntry.text, @namingNormalEntry.text)
+    @example_label_shows = 'normal'
+    restorePrefsAfterExampleLabelUpdate()
   end
   
   def showFileVarious
-    @example_label.text = _("Example file name: ") + Preferences.showFilenameVarious(
-    @basedirEntry.text, @namingVariousEntry.text)
+    backupPrefsBeforeExampleLabelUpdate()
+    @example_label.text = _("Example file name: ") +
+      Preferences.showFilenameVarious(@basedirEntry.text, @namingVariousEntry.text)
+    @example_label_shows = 'various'
+    restorePrefsAfterExampleLabelUpdate()
   end
   
   def showFileImage
-    @example_label.text = _("Example file name: ") + Preferences.showFilenameVarious(
-    @basedirEntry.text, @namingImageEntry.text)
+    backupPrefsBeforeExampleLabelUpdate()
+    @example_label.text = _("Example file name: ") +
+      Preferences.showFilenameVarious(@basedirEntry.text, @namingImageEntry.text)
+    @example_label_shows = 'image'
+    restorePrefsAfterExampleLabelUpdate()
   end
 
+  def updateExampleLabel
+    if @example_label_shows == 'various'
+      showFileVarious()
+    elsif @example_label_shows == 'image'
+      showFileImage()
+    else
+      showFileNormal()
+    end
+  end
+
+  # showFileXXX uses @prefs to calculate the format; 
+  # backup/restore some prefs values and apply the current Gtk values to have the correct display
+  def backupPrefsBeforeExampleLabelUpdate
+    @backupNoSpaces = @prefs.noSpaces
+    @backupNoCapitals = @prefs.noCapitals
+    @prefs.noSpaces = @noSpaces.active?
+    @prefs.noCapitals = @noCapitals.active?
+  end
+
+  def restorePrefsAfterExampleLabelUpdate
+    @prefs.noSpaces = @backupNoSpaces
+    @prefs.noCapitals = @backupNoCapitals
+  end
+  
   # Would you believe this actually prevents bug reports?
   def preventStupidness()
     puts "You need to make a subdirectory with at least the artist or album"

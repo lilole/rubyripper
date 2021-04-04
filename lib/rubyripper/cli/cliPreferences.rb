@@ -240,10 +240,8 @@ private
     @out.puts '17) ' + _("Commandline passed") + ": %s" % [@prefs.settingsOther]
     @out.puts '18) ' + _("Playlist support %s") %[showBool(@prefs.playlist)]
     @out.puts '19) ' + _("Maximum extra encoding threads") + ": %s" % [@prefs.maxThreads]
-    @out.puts '20) ' + _("Replace spaces with underscores %s") % [showBool(@prefs.noSpaces)]
-    @out.puts '21) ' + _("Downsize all capital letters in file names %s") %[showBool(@prefs.noCapitals)]
-    @out.puts '22) ' + _("Normalize program") + ": %s" % [@prefs.normalizer]
-    @out.puts '23) ' + _("Normalize modus") + ": %s" % [@prefs.gain]
+    @out.puts '20) ' + _("Normalize program") + ": %s" % [@prefs.normalizer]
+    @out.puts '21) ' + _("Normalize modus") + ": %s" % [@prefs.gain]
     @out.puts '99) ' + _("Back to settings main menu")
     @out.puts ""
     @int.get("Please type the number of the setting you wish to change", 99)
@@ -280,10 +278,8 @@ private
       when 18 then switchBool('playlist')
       when 19 then @prefs.maxThreads = \
         @int.get(_("Maximum extra encoding threads"), 2)
-      when 20 then switchBool('noSpaces')
-      when 21 then switchBool('noCapitals')
-      when 22 then setNormalizer()
-      when 23 then setNormalizeModus()
+      when 20 then setNormalizer()
+      when 21 then setNormalizeModus()
     else noValidChoiceMessage(choice)
     end
     loopSubMenuCodecs() unless choice == 99
@@ -371,10 +367,12 @@ private
     @out.puts ' 2) ' + _("Standard file scheme") + ": %s" % [@prefs.namingNormal]
     @out.puts ' 3) ' + _("Various artist file scheme") + ": %s" % [@prefs.namingVarious]
     @out.puts ' 4) ' + _("Single file rip file scheme") + ": %s" % [@prefs.namingImage]
-    @out.puts ' 5) ' + _("Log file viewer") + ": %s" % [@prefs.editor]
-    @out.puts ' 6) ' + _("File manager") + ": %s" % [@prefs.filemanager]
-    @out.puts ' 7) ' + _("Verbose mode %s") % [showBool(@prefs.verbose)]
-    @out.puts ' 8) ' + _("Debug mode %s") % [showBool(@prefs.debug)]
+    @out.puts ' 5) ' + _("Replace spaces with underscores %s") % [showBool(@prefs.noSpaces)]
+    @out.puts ' 6) ' + _("Downsize all capital letters in file names %s") % [showBool(@prefs.noCapitals)]
+    @out.puts ' 7) ' + _("Log file viewer") + ": %s" % [@prefs.editor]
+    @out.puts ' 8) ' + _("File manager") + ": %s" % [@prefs.filemanager]
+    @out.puts ' 9) ' + _("Verbose mode %s") % [showBool(@prefs.verbose)]
+    @out.puts '10) ' + _("Debug mode %s") % [showBool(@prefs.debug)]
     @out.puts '99) ' + _("Back to settings main menu")
     @out.puts ""
     @int.get("Please type the number of the setting you wish to change", 99)
@@ -389,12 +387,14 @@ private
       when 2 then setDir('normal', @prefs.namingNormal)
       when 3 then setDir('various', @prefs.namingVarious)
       when 4 then setDir('image', @prefs.namingImage)
-      when 5 then @prefs.editor = @string.get(_('Log file viewer'),
+      when 5 then switchBool('noSpaces')
+      when 6 then switchBool('noCapitals')
+      when 7 then @prefs.editor = @string.get(_('Log file viewer'),
         @prefs.editor)
-      when 6 then @prefs.filemanager = @string.get(_('File manager'),
+      when 8 then @prefs.filemanager = @string.get(_('File manager'),
         @prefs.filemanager)
-      when 7 then switchBool('verbose')
-      when 8 then switchBool('debug')
+      when 9 then switchBool('verbose')
+      when 19 then switchBool('debug')
     else noValidChoiceMessage(choice)
     end
     loopSubMenuOther() unless choice == 99

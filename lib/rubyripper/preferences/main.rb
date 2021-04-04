@@ -71,7 +71,9 @@ module Preferences
     '%i' =>'inputfile', '%o' => 'outputfile'}.each do |key, value|
         filename.gsub!(key,value)
     end
-    return filename
+    require 'rubyripper/metadata/filter/filterDirs'
+    fileNameFilter = Metadata::FilterDirs.new(nil)
+    return fileNameFilter.filter(filename)
   end
 
   # A separate help function to make it faster
@@ -83,6 +85,8 @@ module Preferences
     '%t' => 'Cowboy'}.each do |key, value|
         filename.gsub!(key,value)
     end
-    return filename
+    require 'rubyripper/metadata/filter/filterDirs'
+    fileNameFilter = Metadata::FilterDirs.new(nil)
+    return fileNameFilter.filter(filename)
   end
 end
