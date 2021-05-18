@@ -46,11 +46,13 @@ module Codecs
     # %s will be replaced by the output file
     def replaygain(track)
       puts "WARNING: No replaygain available for opus."
+      return ""
     end
   
     # %s will be replaced by a File.join(output directory, *.extension)
     def replaygainAlbum
       puts "WARNING: No replaygain available for opus."
+      return ""
     end
   end
 end
