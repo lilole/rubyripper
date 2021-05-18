@@ -38,9 +38,10 @@ module Preferences
 
     # load the preferences after setting the defaults
     def load(customFilename="")
-      Cleanup.new()
+      cleanup = Cleanup.new()
       SetDefaults.new()
       Load.new(customFilename, @out)
+      cleanup.migrateFreedbToGnudb()
     end
 
     # save the preferences

@@ -19,14 +19,25 @@ require 'rubyripper/system/fileAndDir'
 
 module Preferences
   class Cleanup
-    def initialize(fileAndDir=nil)
+    def initialize(fileAndDir=nil, prefs=nil)
       @file = fileAndDir ? fileAndDir : FileAndDir.instance
+      @data = prefs ? prefs.data : Main.instance.data
     end
 
     # clean up the old config files
     def cleanup
       getOldConfigs()
       removeOldFiles()
+    end
+
+    # migrate settings from freedb to gnudb
+    def migrateFreedbToGnudb
+      if @data.metadataProvider == 'freedb'
+        @data.metadataProvider = 'gnudb'
+      end
+      if @data.site.include? 'freedb'
+        @data.site.gsub!('freedb', 'gnudb')
+      end
     end
 
 private
