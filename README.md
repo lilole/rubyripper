@@ -76,6 +76,7 @@ hear this.
 Dependencies:
 * cdparanoia
 * ruby 1.9 and higher
+* ruby-rexml (gem)
 
 Suggested:
 * ruby-gettext (for translations)
