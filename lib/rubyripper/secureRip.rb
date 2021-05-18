@@ -332,7 +332,7 @@ is #{@disc.getFileSize(track)} bytes." if @prefs.debug
 
     # Sort the hash keys to prevent jumping forward and backwards in the file
     @errors.keys.sort.each do |key|
-      raise "Wrong position (key) for @errors: #{key.class}" unless key.class == Fixnum
+      raise "Wrong position (key) for @errors: #{key.class}" unless key.class == Integer
       raise "No array for @errors! (#{@errors[key].class})" unless @errors[key].class == Array
       @errors[key].sort!
       @errors[key].uniq.each do |result|
