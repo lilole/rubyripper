@@ -41,11 +41,11 @@ class Rubyripper
     require 'rubyripper/fileScheme'
     @fileScheme = FileScheme.new(@disc, @trackSelection)
     @fileScheme.prepare()
-    
+
     require 'rubyripper/checkConfigBeforeRipping'
     return CheckConfigBeforeRipping.new(@ui, @disc, @trackSelection, @fileScheme).result
   end
-  
+
   # check the existence of the output dir
   def dirStillAvailable
     @fileScheme.dir.values.each{|dir| return false if @file.exists?(dir) }
@@ -86,7 +86,7 @@ class Rubyripper
     require 'rubyripper/secureRip'
     @ripper = SecureRip.new(@trackSelection, @disc, @fileScheme, @log, @encoding)
   end
-  
+
   def waitForCuesheet
     @disc.finishExtendedTocScan(@log)
     @prefs.codecs.each{|codec| @file.write(@fileScheme.getCueFile(codec), @disc.getCuesheet(codec, fileScheme))}
@@ -102,16 +102,16 @@ class Rubyripper
   def autofixCommonMistakes
     freedbHostnameAndUsernameCanNotBeEmpty()
     flacIsNotAllowedToDeleteInputFile() if @prefs.flac
-    repairOtherPrefs() if @prefs.other
+    #repairOtherPrefs() if @prefs.other # TODO: See method comment
     rippingErrorSectorsMustAtLeastEqualRippingNormalSectors()
   end
-  
+
   # otherwise the freedb server returns an error
-  def freedbHostnameAndUsernameCanNotBeEmpty  
+  def freedbHostnameAndUsernameCanNotBeEmpty
     if @prefs.username.strip().empty?
       @prefs.username = 'anonymous'
     end
-    
+
     if @prefs.hostname.strip().empty?
       @prefs.hostname = 'my_secret.com'
     end
@@ -122,28 +122,30 @@ class Rubyripper
     @prefs.settingsFlac = @prefs.settingsFlac.gsub(' --delete-input-file', '')
   end
 
-  def repairOtherprefs
-    copyString = ""
-    lastChar = ""
-
-    #first remove all double quotes. then iterate over each char
-    @prefs.settingsOther.delete('"').split(//).each do |char|
-      if char == '%' # prepend double quote before %
-        copyString << '"' + char
-      elsif lastChar == '%' # append double quote after %char
-        copyString << char + '"'
-      else
-        copyString << char
-      end
-      lastChar = char
-    end
-
-    # above won't work for various artist
-    copyString.gsub!('"%v"a', '"%va"')
-
-    @prefs.settingsOther = copyString
-    puts @prefs.settingsOther if @prefs['debug']
-  end
+  # TODO: Delete this? It does not seem to be needed now, as each `%x` format
+  #       string value is automatically wrapped in quotes at parse time.
+  #def repairOtherPrefs
+  #  copyString = ""
+  #  lastChar = ""
+  #
+  #  #first remove all double quotes. then iterate over each char
+  #  @prefs.settingsOther.delete('"').split(//).each do |char|
+  #    if char == '%' # prepend double quote before %
+  #      copyString << '"' + char
+  #    elsif lastChar == '%' # append double quote after %char
+  #      copyString << char + '"'
+  #    else
+  #      copyString << char
+  #    end
+  #    lastChar = char
+  #  end
+  #
+  #  # above won't work for various artist
+  #  copyString.gsub!('"%v"a', '"%va"')
+  #
+  #  @prefs.settingsOther = copyString
+  #  puts @prefs.settingsOther if @prefs.debug
+  #end
 
   def rippingErrorSectorsMustAtLeastEqualRippingNormalSectors()
     if @prefs.reqMatchesErrors < @prefs.reqMatchesAll

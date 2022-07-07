@@ -72,8 +72,9 @@ module Preferences
       @data.opus = false
       @data.settingsOpus = '--bitrate 160'
       @data.wav = false
+      @data.settingsWav = ''
       @data.other = false
-      @data.settingsOther = 'flac %i %o.flac'
+      @data.settingsOther = '/my/wav/processor/tool %i %o.ext'
       @data.playlist = true
       @data.maxThreads = 2
       @data.noSpaces = false

@@ -43,7 +43,7 @@ class Encode
     @codecs = [] ; @prefs.codecs.each{|codec| @codecs << Codecs::Main.new(codec, disc, scheme)}
     setHelpVariables()
   end
-  
+
   def setHelpVariables
     @cancelled = false
     @progress = 0.0
@@ -54,7 +54,7 @@ class Encode
     # all encoding tasks are saved here, to determine when to delete a wav
     @tasks = Hash.new
     if @prefs.image
-      @tasks['image'] = getCopyOfPrefsCodecs 
+      @tasks['image'] = getCopyOfPrefsCodecs
     else
       @trackSelection.each{|track| @tasks[track] = getCopyOfPrefsCodecs}
     end
@@ -64,7 +64,7 @@ class Encode
     pref_codecs = [] ; @prefs.codecs.each{|codec| pref_codecs << codec }
     pref_codecs
   end
-  
+
   # is called when a track is ripped succesfully
   def addTrack(track=nil)
     startEncoding(track) unless waitingForNormalizeToFinish(track)
@@ -75,7 +75,7 @@ class Encode
     # mark the progress bar as being started
     @log.updateEncodingProgress() if track == @trackSelection[0] || @prefs.image
     return false if @cancelled != false
-    
+
     @codecs.each do |codec|
       if @prefs.maxThreads == 0 || @prefs.image
         encodeTrack(codec, track)
@@ -135,52 +135,22 @@ class Encode
   # call the specific codec function for the track and apply replaygain if desired
   def encodeTrack(codec, track=nil)
     @log.encodingErrors = true if @exec.launch(codec.command(track)).empty?
-  
-    if @prefs.normalizer == "replaygain" and @prefs.gain == "track"
+
+    if @prefs.normalizer == "replaygain" && @prefs.gain == "track"
       @exec.launch(codec.replaygain(track))
     end
-    
+
     @exec.launch(codec.setTagsAfterEncoding(track))
-    
+
     @lock.synchronize do
-      key = @prefs.image ? 'image' : track 
+      key = @prefs.image ? 'image' : track
       @tasks[key].delete(codec.name)
       @file.delete(@scheme.getTempFile(track)) if @tasks[key].empty?
       @log.updateEncodingProgress(track, @codecs.size)
     end
 
-    if @prefs.normalizer == "replaygain" and @prefs.gain == "album" 
+    if @prefs.normalizer == "replaygain" && @prefs.gain == "album"
       @exec.launch(codec.replaygainAlbum()) unless @tasks.values.flatten.include?(codec.name)
     end
   end
 end
-
-#    elsif codec == 'other' && @prefs.settingsOther != nil ; doOther(track)
-# 
-#   def doOther(track)
-#     filename = @out.getFile(track, 'other')
-#     command = @prefs.settingsOther.dup
-# 
-#     command.force_encoding("UTF-8") if command.respond_to?("force_encoding")
-#     command.gsub!('%n', sprintf("%02d", track)) if track != "image"
-#     command.gsub!('%f', 'other')
-# 
-#     if @md.various?
-#       command.gsub!('%a', @tags.getVarArtist(track))
-#       command.gsub!('%va', @tags.artist)
-#     else
-#       command.gsub!('%a', @tags.artist)
-#     end
-# 
-#     command.gsub!('%b', @tags.album)
-#     command.gsub!('%g', @tags.genre)
-#     command.gsub!('%y', @tags.year)
-#     command.gsub!('%t', @tags.getTrackname(track))
-#     command.gsub!('%i', @out.getTempFile(track, 1))
-#     command.gsub!('%o', @out.getFile(track, 'other'))
-#     checkCommand(command, track, 'other')
-#   end
-# 
-# TODO There used to be an issue with mp3 that the tags should be
-# TODO latin1 encoded, though the outputfile should be UTF8
-# TODO It is possible lame has itself fixed the error

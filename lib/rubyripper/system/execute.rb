@@ -55,20 +55,25 @@ attr_reader :status
             # normal end of input stream
           rescue Exception => exception
             puts "DEBUG: Command #{command} failed with exception: #{exception.message}" if @prefs.debug
+            output = nil
           end
         end
       rescue
         puts Errors.failedToExecute(program, command)
-        output = ''
+        output = nil
       end
       @filename = filename
     else
       puts Errors.binaryNotFound(program)
+      output = nil
     end
 
+    if    output.nil?   then output = [] # Sentinel for error
+    elsif output.empty? then output = ["OK"] # Command finished ok with no output
+    end
     return output
   end
-  
+
   # return created file with command
   def readFile
     return File.read(@filename) if File.exists?(@filename)

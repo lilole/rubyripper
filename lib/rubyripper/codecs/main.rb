@@ -44,38 +44,31 @@ module Codecs
       @md = metadata ? metadata : @disc.metadata
       @prefs = prefs ? prefs : Preferences::Main.instance()
       @file = file ? file : FileAndDir.instance()
-      
+
       # Set the charset environment variable to UTF-8. Oggenc needs this.
       # Perhaps others need it as well.
       ENV['CHARSET'] = "UTF-8"
     end
-     
+
     # to replaygain a single track
     def replaygain(track=nil)
       @codec.replaygain(track) % [output(track)]
     end
-  
+
     # to replaygain a complete album
     def replaygainAlbum()
       @codec.replaygainAlbum() % [File.join(dir(), '*.' + @codec.extension)]
     end
-  
+
     # return the command for the track and codec
     def command(track)
-      command = Array.new()
-      @codec.sequence.each do |part|
-        command << case part
-          when :binary then addBinary()
-          when :prefs then addPreference()
-          when :tags then addTags(track)
-          when :input then addInput(track)
-          when :output then addOutput(track)
-        end
+      if name == "other"
+        command_other(track)
+      else
+        command_configured(track)
       end
-      command.delete('')
-      command.join(' ')
     end
-    
+
     # some codecs set the tags after the encoding (for example nero AAC)
     def setTagsAfterEncoding(track)
       command = Array.new()
@@ -91,27 +84,68 @@ module Codecs
       command.delete('')
       command.join(' ')
     end
-    
+
     def name ; @codec.name ; end
-  
-    private
-  
+
+  private
+
+    def command_configured(track)
+      command = Array.new()
+      @codec.sequence.each do |part|
+        command << case part
+          when :binary then addBinary()
+          when :prefs then addPreference()
+          when :tags then addTags(track)
+          when :input then addInput(track)
+          when :output then addOutput(track)
+        end
+      end
+      command.delete('')
+      command.join(' ')
+    end
+
+    # TODO: There used to be an issue with mp3 that the tags should be
+    #       latin1 encoded, though the outputfile should be UTF8.
+    #       It is possible lame has itself fixed the error.
+    #
+    def command_other(track)
+      command = @prefs.settingsOther.dup
+      command.force_encoding("UTF-8") if command.respond_to?(:force_encoding)
+      command.gsub!('%n', "%02d" % track) if track != "image"
+      command.gsub!('%f', 'other')
+
+      if @md.various?
+        command.gsub!('%a',  @tags.getVarArtist(track))
+        command.gsub!('%va', @tags.artist)
+      else
+        command.gsub!('%a', @tags.artist)
+      end
+
+      command.gsub!('%b', @tags.album)
+      command.gsub!('%g', @tags.genre)
+      command.gsub!('%y', @tags.year)
+      command.gsub!('%t', @tags.trackname(track))
+      command.gsub!('%i', input(track))
+      command.gsub!('%o', output(track))
+      command
+    end
+
     # get the configuration and return the specific codec object
     def config(codec)
       require "rubyripper/codecs/#{codec}"
       Codecs.const_get(codec.capitalize).new
     end
-    
+
     def addBinary
       @codec.binary
     end
-    
+
     def addPreference
       prefs = @prefs.send("settings" + @codec.name.capitalize)
       prefs = @codec.default if prefs == nil || prefs.strip().empty?
       prefs.strip()
     end
-    
+
     def addTags(track)
       result = Array.new
       @codec.tags.each do |key, value|
@@ -143,7 +177,7 @@ module Codecs
         return "\"#{discId}\""
       end
     end
-    
+
     def addCuesheet(value)
       filename = @scheme.getCueFile(@codec.name)
       if @prefs.createCue && @file.exist?(filename)
@@ -152,7 +186,7 @@ module Codecs
         ''
       end
     end
-    
+
     def addInput(track)
       if @codec.respond_to?(:inputEncodingTag)
         add(@codec.inputEncodingTag, input(track))
@@ -160,7 +194,7 @@ module Codecs
         input(track)
       end
     end
-    
+
     def addOutput(track)
       if @codec.respond_to?(:outputEncodingTag)
         add(@codec.outputEncodingTag, output(track))
@@ -168,31 +202,31 @@ module Codecs
         output(track)
       end
     end
-    
+
     def addTagBinary
       @codec.tagBinary
     end
-    
+
     def addTagInput(track)
       output(track)
     end
-    
+
     # return the input file for encoding
     def input(track)
       "\"#{@scheme.getTempFile(track)}\""
     end
-  
+
     # return the output file for encoding
     def output(track)
       "\"#{@scheme.getFile(@codec.name, track)}\""
     end
-  
+
     # if tag ends with equal sign dont use a space separator
     def add(tag, value)
       separator = tag[-1] == '=' ? '' : ' '
       value.empty? ? '' : tag + separator + value
     end
-  
+
     def dir()
       "\"#{@scheme.getDir(@codec.name)}\""
     end
