@@ -46,7 +46,7 @@ class FileScheme
     @filterFiles = filterFiles ? filterFiles : Metadata::FilterFiles.new(@md)
     @file = file ? file : FileAndDir.instance
   end
-  
+
   # cleanup the filescheme and calculate output directories
   def prepare
     setVariables()
@@ -55,7 +55,7 @@ class FileScheme
     setDirectoryForEachCodec()
     detectOtherCodecExtension()
   end
-  
+
   # (re)attempt creation of the dirs, when succesfull create the filenames
   def createFileAndDirs()
     createOutputDir()
@@ -63,7 +63,7 @@ class FileScheme
     setFileNames()
     createPlaylists()
   end
-  
+
   # clean temporary Dir (when finished)
   def cleanTempDir
     @file.removeDir(getTempDir())
@@ -110,7 +110,7 @@ class FileScheme
   def getTempDir
     File.join(File.dirname(@dir.values[0]), "temp_#{File.basename(@prefs.cdrom)}/")
   end
-  
+
   # auto rename choice in directory already exist dialog
   def postfixDir
     postfix = 1
@@ -128,14 +128,14 @@ class FileScheme
   end
 
   private
-  
-  def setVariables      
+
+  def setVariables
     @dir = Hash.new    # store the dirs for each codec in @dir
     @files = Hash.new   # store the files each tracknumber + codec in @file.
     @image = Hash.new  # store the image file in @image
     @otherExtension = String.new
   end
-  
+
   # choose which filescheme is relevant for the rip
   def setFileScheme
     if @prefs.image
@@ -147,7 +147,7 @@ class FileScheme
     end
     @fileScheme = File.expand_path(File.join(@prefs.basedir, @fileScheme))
   end
-  
+
   # do a few clever checks on the filescheme
   def correctFilescheme()
     if !@md.various? && @fileScheme.include?('%va')
@@ -182,23 +182,31 @@ class FileScheme
   def setDirectoryForEachCodec
     artist = @md.artist.gsub('/', '')
     album = @md.album.gsub('/', '')
-    
+
     @prefs.codecs.each do |codec|
       dir = File.dirname(@fileScheme)
       {'%a' => artist, '%b' => album, '%f' => codec, '%g' => @md.genre, '%y' => @md.year, '%va' => artist}.each do |key, value|
         value.nil? ? dir.gsub!(key, '') : dir.gsub!(key, value)
       end
 
-      dir = File.join(dir, "CD #{sprintf("%02d", @md.discNumber)}") if @md.discNumber  
+      dir = File.join(dir, "CD #{sprintf("%02d", @md.discNumber)}") if @md.discNumber
       @dir[codec] = @filterDirs.filter(dir)
     end
   end
 
   # find the extension after the output (%o)
   def detectOtherCodecExtension
-    if @prefs.other
-      @otherExtension = @file.extension(@prefs.settingsOther)
-      @prefs.settingsOther.gsub!(@otherExtension, '') # remove any references to the ext in the settings
+    if @prefs.other && @otherExtension.empty?
+      match = /\B%o(\.\S+)/.match(@prefs.settingsOther)
+      if ! match
+        puts "Missing '.ext' after '%o' in settings."
+        return
+      end
+      @otherExtension = match[1].downcase
+      # Now clean the ext we just found
+      # TODO: Is this needed? Seems to break filenames now.
+      #del_range = (match.begin(1)...match.end(1))
+      #@prefs.settingsOther[del_range] = ""
     end
   end
 
@@ -246,10 +254,10 @@ class FileScheme
         file.gsub!(key, value)
       end
     end
-  
+
     return @filterFiles.filter(file) + fileExtension(codec)
   end
-  
+
   def fileExtension(codec)
     case codec
       when 'flac' then '.flac'
@@ -270,7 +278,7 @@ class FileScheme
     @md.setVarArtist(0, _("Unknown Artist")) if @md.various?
     @prefs.codecs.each{|codec| @files[codec][0] = giveFileName(codec, 0)} unless @prefs.image
   end
- 
+
   # create Playlist for each codec
   def createPlaylists
     @prefs.codecs.each do |codec|
