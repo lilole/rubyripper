@@ -204,9 +204,9 @@ class FileScheme
       end
       @otherExtension = match[1].downcase
       # Now clean the ext we just found
-      # TODO: Is this needed? Seems to break filenames now.
-      #del_range = (match.begin(1)...match.end(1))
-      #@prefs.settingsOther[del_range] = ""
+      # TODO: Is this needed? Seems to break filenames sometimes.
+      del_range = (match.begin(1)...match.end(1))
+      @prefs.settingsOther[del_range] = ""
     end
   end
 
