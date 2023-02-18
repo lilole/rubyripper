@@ -1,93 +1,77 @@
-#!/usr/bin/env ruby
-#    Rubyripper - A secure ripper for Linux/BSD/OSX
-#    Copyright (C) 2007 - 2013  Bouke Woudstra (boukewoudstra@gmail.com)
-#
-#    This file is part of Rubyripper. Rubyripper is free software: you can
-#    redistribute it and/or modify it under the terms of the GNU General
-#    Public License as published by the Free Software Foundation, either
-#    version 3 of the License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>
+# Copyright 2022-2023 Dan Higgins (https://github.com/lilole)
+# Copyright 2007-2013 Bouke Woudstra (boukewoudstra@gmail.com)
+# If you use this file then you must apply the LICENSE file at the root of this project.
 
-require 'singleton'
-require 'rubyripper/preferences/data'
-require 'rubyripper/preferences/cleanup'
-require 'rubyripper/preferences/setDefaults'
-require 'rubyripper/preferences/load'
-require 'rubyripper/preferences/save'
+require "singleton"
 
+module RripRedux
 module Preferences
-
   class Main
-    include Singleton unless $run_specs
-    
-    attr_reader :data
+    include Singleton
+
+    attr_reader :data, :out
     attr_accessor :filename
 
     def initialize(out=nil)
       @data = Data.new
-      @filename = getDefaultFilename()
-      @out = out ? out : $stdout
+      @filename = get_default_filename
+      @out = out || $stdout
     end
 
-    # load the preferences after setting the defaults
-    def load(customFilename="")
-      cleanup = Cleanup.new()
-      SetDefaults.new()
-      Load.new(customFilename, @out)
-      cleanup.migrateFreedbToGnudb()
+    # Load the preferences after setting the defaults
+    def load(custom_filename="")
+      SetDefaults.new
+      Load.new(custom_filename, out)
+      Cleanup.new.migrate_freedb_to_gnudb
     end
 
-    # save the preferences
-    def save()
-      Save.new() unless @data.testdisc
+    # Save the preferences
+    def save
+      Save.new unless data.testdisc
     end
 
    private
 
-    # if the method is not found try to look it up in the data object
+    # If the method is not found try to look it up in the data object
     def method_missing(name, *args)
-      @data.send(name, *args)
+      data.send(name, *args)
     end
 
-    # return the default filename
-    def getDefaultFilename
-      dir = ENV['XDG_CONFIG_HOME'] || File.join(ENV['HOME'], '.config')
-      File.join(dir, 'rubyripper/settings')
+    # Return the default filename
+    def get_default_filename
+      dir = ENV["XDG_CONFIG_HOME"] || File.join(ENV["HOME"], ".config")
+      File.join(dir, "rrip_redux/settings")
     end
-  end
+  end # Main
 
-  # A separate help function to make it faster
-  def self.showFilenameNormal(basedir, layout)
+  def self.show_filename_normal(basedir, layout)
     filename = File.expand_path(File.join(basedir, layout))
     filename = "%s.ext" % [filename]
-    {'%a' => 'Judas Priest', '%b' => 'Sin After Sin', '%f' => 'codec',
-    '%g' => 'Rock', '%y' => '1977', '%n' =>'01', '%t' => 'Sinner',
-    '%i' =>'inputfile', '%o' => 'outputfile'}.each do |key, value|
-        filename.gsub!(key,value)
-    end
-    require 'rubyripper/metadata/filter/filterDirs'
-    fileNameFilter = Metadata::FilterDirs.new(nil)
-    return fileNameFilter.filter(filename)
+
+    @substs_normal ||= {
+      "%a" => "Judas Priest", "%b" => "Sin After Sin", "%f" => "codec",
+      "%g" => "Rock", "%y" => "1977", "%n" => "01", "%t" => "Sinner",
+      "%i" => "inputfile", "%o" => "outputfile"
+    }
+
+    @substs_normal.each { |key, value| filename.gsub!(key, value) }
+
+    Metadata::FilterDirs.new(nil).filter(filename)
   end
 
-  # A separate help function to make it faster
-  def self.showFilenameVarious(basedir, layout)
+  def self.show_filename_various(basedir, layout)
     filename = File.expand_path(File.join(basedir, layout))
     filename = "%s.ext" % [filename]
-    {'%va' => 'Various Artists', '%b' => 'TMF Rockzone', '%f' => 'codec',
-    '%g' => "Rock", '%y' => '1999', '%n' => '01', '%a' => 'Kid Rock',
-    '%t' => 'Cowboy'}.each do |key, value|
-        filename.gsub!(key,value)
-    end
-    require 'rubyripper/metadata/filter/filterDirs'
-    fileNameFilter = Metadata::FilterDirs.new(nil)
-    return fileNameFilter.filter(filename)
+
+    @substs_various ||= {
+      "%va" => "Various Artists", "%b" => "TMF Rockzone", "%f" => "codec",
+      "%g" => "Rock", "%y" => "1999", "%n" => "01", "%a" => "Kid Rock",
+      "%t" => "Cowboy"
+    }
+
+    @substs_various.each { |key, value| filename.gsub!(key, value) }
+
+    Metadata::FilterDirs.new(nil).filter(filename)
   end
+end
 end

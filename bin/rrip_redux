@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+#
+# Copyright 2022-2023 Dan Higgins (https://github.com/lilole)
+# Copyright 2007-2013 Bouke Woudstra (boukewoudstra@gmail.com)
+# If you use this file then you must apply the LICENSE file at the root of this project.
+
+%w[zeitwerk gtk3].then do |libs|
+  errs = []
+  libs.each do |lib|
+    begin
+      require lib
+    rescue LoadError => e
+      errs << [e, lib]
+    end
+  end
+  errs.each do |e, lib|
+    puts "\nThe #{lib.inspect} library or one of its dependencies could not be loaded:"
+    puts "#{e.class}: #{e.message}"
+  end
+  exit(1) if errs.any?
+end
+
+$EXE_DIR = File.dirname(File.realpath($0))
+
+Zeitwerk::Loader.new.tap do |loader|
+  loader.push_dir($EXE_DIR + "/../lib")
+  loader.setup
+end
+
+RripRedux::PreInit.run
+
+if __FILE__ == $0
+  Gtk.init
+  app = RripRedux::GraphicalUserInterface.new
+  app.start
+end
