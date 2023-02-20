@@ -71,10 +71,10 @@ module Gtk3
       @disc = RripRedux::Disc::Disc.new
       Thread.new do
         disc.scan
-        ui_update_msg = 'scan_disc_finished'
-        if disc.status == 'ok'
+        ui_update_msg = "scan_disc_finished"
+        if disc.status == "ok"
           @md = disc.metadata
-          ui_update_msg = 'scan_disc_metadata_mutiple_records' if md.status == 'multipleRecords'
+          ui_update_msg = "scan_disc_metadata_mutiple_records" if md.status == "multipleRecords"
         else
           @error = disc.error
         end
@@ -112,14 +112,14 @@ module Gtk3
     def set_disc_values
       @disc_info_table = Gtk::Table.new(4, 4, false)
 
-      @artist_label = Gtk::Label.new(_('Artist:'))
-      @album_label  = Gtk::Label.new(_('Album:'))
-      @genre_label  = Gtk::Label.new(_('Genre:'))
-      @year_label   = Gtk::Label.new(_('Year:'))
-      @var_checkbox = Gtk::CheckButton.new(_('Mark disc as various artist'))
+      @artist_label = Gtk::Label.new(_("Artist:"))
+      @album_label  = Gtk::Label.new(_("Album:"))
+      @genre_label  = Gtk::Label.new(_("Genre:"))
+      @year_label   = Gtk::Label.new(_("Year:"))
+      @var_checkbox = Gtk::CheckButton.new(_("Mark disc as various artist"))
 
-      @freeze_checkbox   = Gtk::CheckButton.new(_('Freeze disc info'))
-      @disc_number_label = Gtk::Label.new(_('Disc:'))
+      @freeze_checkbox   = Gtk::CheckButton.new(_("Freeze disc info"))
+      @disc_number_label = Gtk::Label.new(_("Disc:"))
       @disc_number_spin  = Gtk::SpinButton.new(1.0, 99.0, 1.0)
 
       @artist_entry = Gtk::Entry.new
@@ -187,8 +187,8 @@ module Gtk3
     end
 
     def set_track_values
-      @all_tracks_button = Gtk::CheckButton.new(_('All'))
-      @var_artist_label = Gtk::Label.new(_('Artist'))
+      @all_tracks_button = Gtk::CheckButton.new(_("All"))
+      @var_artist_label = Gtk::Label.new(_("Artist"))
       @trackname_label = Gtk::Label.new(_("Track names \(%s track(s)\)") % [disc.audiotracks])
       @length_label = Gtk::Label.new(_("Length \(%s\)") % [disc.playtime])
 

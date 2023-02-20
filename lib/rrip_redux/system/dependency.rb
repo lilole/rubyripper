@@ -233,12 +233,14 @@ module System
     #
     def get_browser
       case
-      when installed?("chromium")                                     then "chromium"
-      when installed?("konqueror") && ENV["DESKTOP_SESSION"] == "kde" then "konqueror"
-      when installed?("firefox")                                      then "firefox"
-      when installed?("epiphany")                                     then "epiphany"
-      when installed?("opera")                                        then "opera"
+      # Try to sort these from least to most common
       when ENV.key?("BROWSER")                                        then ENV["BROWSER"]
+      when installed?("konqueror") && ENV["DESKTOP_SESSION"] == "kde" then "konqueror"
+      when installed?("epiphany")                                     then "epiphany"
+      when installed?("brave")                                        then "brave"
+      when installed?("opera")                                        then "opera"
+      when installed?("firefox")                                      then "firefox"
+      when installed?("chromium")                                     then "chromium"
       else "echo"
       end
     end

@@ -48,7 +48,7 @@ module Gtk3
       display.add(vbox1)
       button1.signal_connect("released") do
         metadata.choose(combobox.active)
-        main_instance.update('scan_disc_finished')
+        main_instance.update("scan_disc_finished")
       end
     end
   end
