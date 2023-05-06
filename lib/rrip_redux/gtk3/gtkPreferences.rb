@@ -14,10 +14,43 @@ module Gtk3
     DEFAULT_ROW_SPACINGS = 4
     DEFAULT_BORDER_WIDTH = 7
 
-    attr_reader :all_chunks, :all_chunks_spin, :append_pregaps, :cdrdao, :cdrdao_hbox, :cdrdao_image, :cdrom_entry, :cdrom_label, :cdrom_offset_label, :cdrom_offset_spin, :codec_labels, :create_cuesheet, :deps, :display, :eject, :err_chunks, :err_chunks_spin, :frame40, :frame50, :frame60, :frame_toc1, :frame_toc2, :frame_toc3, :frame_toc4, :image, :mark_hidden_track_label1, :mark_hidden_track_label2, :max_label, :max_spin, :min_length_hidden_track_spin, :no_log, :offset_button, :pad_missing_samples, :page1, :page1_label, :prefs, :prepend_pregaps, :rip_entry, :rip_hidden_audio, :rip_label, :table40, :table50, :table60, :table_toc1, :table_toc2, :table_toc3, :table_toc4, :time1, :time2, :time3, :vbox_toc, :page_toc, :page_toc_label, :correct_pre_emphasis, :do_not_correct_pre_emphasis,
-      :codec_rows, :select_codecs_table, :frame70,
-      :add_codec_combo_box, :add_codec_label, :add_codec_button,
-      :table80, :playlist, :max_threads, :max_threads_label, :frame80
+    attr_reader :add_codec_button, :add_codec_combo_box, :add_codec_label,
+      :all_chunks, :all_chunks_spin, :append_pregaps,
+      :basedir_entry, :basedir_label,
+      :cdrdao, :cdrdao_hbox, :cdrdao_image,
+      :cdrom_entry, :cdrom_label, :cdrom_offset_label, :cdrom_offset_spin,
+      :choose_latest_release, :choose_original_release, :choose_original_year, :choose_release_year,
+      :codec_labels, :codec_rows,
+      :correct_pre_emphasis, :create_cuesheet, :debug, :deps, :display, :do_not_correct_pre_emphasis,
+      :editor_entry, :editor_label,
+      :eject, :entry_preferred_country,
+      :err_chunks, :err_chunks_spin,
+      :example_label, :example_label_shows,
+      :expander100,
+      :filemanager_entry, :filemanager_label,
+      :first_hit,
+      :frame40, :frame50, :frame60, :frame70, :frame80, :frame85, :frame90, :frame91, :frame92, :frame100, :frame110, :frame120,
+      :frame_toc1, :frame_toc2, :frame_toc3, :frame_toc4,
+      :freedb_hostname_entry, :freedb_hostname_label, :freedb_server_entry, :freedb_server_label,
+      :freedb_username_entry, :freedb_username_label,
+      :image,
+      :label_preferred_country, :label_preferred_release, :label_preferred_year,
+      :legend_label,
+      :mark_hidden_track_label1, :mark_hidden_track_label2,
+      :max_label, :max_spin, :max_threads, :max_threads_label,
+      :metadata_choice, :metadata_label,
+      :min_length_hidden_track_spin, :modus,
+      :naming_image_entry, :naming_image_label, :naming_normal_entry, :naming_normal_label,
+      :naming_various_entry, :naming_various_label,
+      :no_capitals, :no_log, :no_spaces, :normalize, :offset_button, :pad_missing_samples,
+      :page1, :page1_label, :page2, :page2_label, :page3, :page3_label, :page4, :page4_label, :page_toc, :page_toc_label,
+      :playlist, :prefs, :prepend_pregaps,
+      :rip_entry, :rip_hidden_audio, :rip_label,
+      :select_codecs_table,
+      :table40, :table50, :table60, :table80, :table85, :table90, :table91, :table92, :table100, :table110, :table120,
+      :table_toc1, :table_toc2, :table_toc3, :table_toc4,
+      :time1, :time2, :time3,
+      :vbox_toc, :verbose
 
     def initialize(prefs=nil, deps=nil)
       @prefs        = prefs || RripRedux::Preferences::Main.instance
@@ -94,7 +127,7 @@ module Gtk3
       max_spin.value             = prefs.max_tries.to_f
       rip_entry.text             = prefs.rippersettings
       eject.active               = prefs.eject
-      no_log.active              = prefs.noLog
+      no_log.active              = prefs.no_log
 
       # Toc settings
       create_cue.active                  = prefs.create_cue
@@ -139,18 +172,18 @@ module Gtk3
 
     def load_normalizer
       case prefs.normalizer
-        when "none"       then 0
-        when "replaygain" then 1
-        when "normalize"  then 2
+      when "none"       then 0
+      when "replaygain" then 1
+      when "normalize"  then 2
       end
     end
 
     def load_metadata_provider
       case prefs.metadata_provider
-        when "freedb"      then 0
-        when "gnudb"       then 0
-        when "musicbrainz" then 1
-        when "none"        then 2
+      when "freedb"      then 0
+      when "gnudb"       then 0
+      when "musicbrainz" then 1
+      when "none"        then 2
       end
     end
 
@@ -212,17 +245,17 @@ module Gtk3
 
     def save_normalizer
       case normalize.active
-        when 0 then "none"
-        when 1 then "replaygain"
-        when 2 then "normalize"
+      when 0 then "none"
+      when 1 then "replaygain"
+      when 2 then "normalize"
       end
     end
 
     def save_metadata_provider
       case metadata_choice.active
-        when 0 then "gnudb"
-        when 1 then "musicbrainz"
-        when 2 then "none"
+      when 0 then "gnudb"
+      when 1 then "musicbrainz"
+      when 2 then "none"
       end
     end
 
@@ -252,13 +285,13 @@ module Gtk3
 
     # Secure ripping tab, frame 1
     def build_frame_cdrom_device
-      @table40 = newTable(rows=3, columns=3)
+      @table40 = new_table(rows: 3, columns: 3)
 
       # Creating objects
-      @cdrom_label = Gtk::Label.new(_("Cdrom device:")); cdrom_label.set_alignment(0.0, 0.5) # Align to the left
+      @cdrom_label        = Gtk::Label.new(_("Cdrom device:")); cdrom_label.set_alignment(0.0, 0.5) # Align to the left
       @cdrom_offset_label = Gtk::Label.new(_("Cdrom offset:")); cdrom_offset_label.set_alignment(0.0, 0.5)
-      @cdrom_entry = Gtk::Entry.new; cdrom_entry.width_request = 120
-      @cdrom_offset_spin = Gtk::SpinButton.new(-1500.0, 1500.0, 1.0); cdrom_offset_spin.value = 0.0
+      @cdrom_entry        = Gtk::Entry.new; cdrom_entry.width_request = 120
+      @cdrom_offset_spin  = Gtk::SpinButton.new(-1500.0, 1500.0, 1.0); cdrom_offset_spin.value = 0.0
 
       @offset_button = Gtk::LinkButton.new(_("List with offsets"))
       offset_button.uri = "http://www.accuraterip.com/driveoffsets.htm"
@@ -276,24 +309,23 @@ module Gtk3
 
       fill   = Gtk::AttachOptions::FILL
       shrink = Gtk::AttachOptions::SHRINK
-      table40.attach(cdrom_label,        0, 1, 0, 1, fill,   shrink, 0, 0)
-      table40.attach(cdrom_offset_label, 0, 1, 1, 2, fill,   shrink, 0, 0)
-      table40.attach(cdrom_entry,        1, 2, 0, 1, shrink, shrink, 0, 0)
-      table40.attach(cdrom_offset_spin,  1, 2, 1, 2, fill,   shrink, 0, 0)
-      table40.attach(offset_button,      2, 3, 1, 2, fill,   shrink, 0, 0)
+      table40.attach(cdrom_label,         0, 1, 0, 1, fill,   shrink, 0, 0)
+      table40.attach(cdrom_offset_label,  0, 1, 1, 2, fill,   shrink, 0, 0)
+      table40.attach(cdrom_entry,         1, 2, 0, 1, shrink, shrink, 0, 0)
+      table40.attach(cdrom_offset_spin,   1, 2, 1, 2, fill,   shrink, 0, 0)
+      table40.attach(offset_button,       2, 3, 1, 2, fill,   shrink, 0, 0)
+      table40.attach(pad_missing_samples, 0, 2, 2, 3, fill,   shrink, 0, 0)
 
-      # Connect signal
-      table40.attach(pad_missing_samples, 0, 2, 2, 3, fill, shrink, 0, 0)
+      # Connect signals
       offset_button.signal_connect("clicked") do
-        Thread.new { `#{prefs.browser} #{offset_button.uri}` }
+        Thread.new { `#{prefs.browser} #{offset_button.uri} 2>&1` }
       end
-      cdrom_offset_spin.signal_connect("value-changed") { enable_padding_option? }
+      cdrom_offset_spin.signal_connect("value-changed") { enable_padding_option }
+
       @frame40 = new_frame(_("Cdrom device"), table40)
     end
 
-    # Enable the padding option if the offset is > 580 || < -580.
-    #
-    def enable_padding_option?
+    def enable_padding_option
       value = cdrom_offset_spin.value.to_i
       pad_missing_samples.sensitive = (value > 580 || value < -580)
     end
@@ -307,7 +339,7 @@ module Gtk3
       @all_chunks      = Gtk::Label.new(_("Match all chunks:")); all_chunks.set_alignment(0.0, 0.5)
       @err_chunks      = Gtk::Label.new(_("Match erroneous chunks:")); err_chunks.set_alignment(0.0, 0.5)
       @max_label       = Gtk::Label.new(_("Maximum trials (0 = unlimited):")); max_label.set_alignment(0.0, 0.5)
-      @all_chunks_spin = Gtk::SpinButton.new(2.0,  100.0, 1.0)
+      @all_chunks_spin = Gtk::SpinButton.new(2.0, 100.0, 1.0)
       @err_chunks_spin = Gtk::SpinButton.new(2.0, 100.0, 1.0)
       @max_spin        = Gtk::SpinButton.new(0.0, 100.0, 1.0)
       @time1           = Gtk::Label.new(_("times"))
@@ -317,13 +349,13 @@ module Gtk3
       # Pack objects
       fill   = Gtk::AttachOptions::FILL
       shrink = Gtk::AttachOptions::SHRINK
-      table50.attach(all_chunks,      0, 1, 0, 1, fill, shrink, 0, 0) # C 1
+      table50.attach(all_chunks,      0, 1, 0, 1, fill, shrink, 0, 0) # Col 1
       table50.attach(err_chunks,      0, 1, 1, 2, fill, shrink, 0, 0)
       table50.attach(max_label,       0, 1, 2, 3, fill, shrink, 0, 0)
-      table50.attach(all_chunks_spin, 1, 2, 0, 1, fill, shrink, 0, 0) # C 2
+      table50.attach(all_chunks_spin, 1, 2, 0, 1, fill, shrink, 0, 0) # Col 2
       table50.attach(err_chunks_spin, 1, 2, 1, 2, fill, shrink, 0, 0)
       table50.attach(max_spin,        1, 2, 2, 3, fill, shrink, 0, 0)
-      table50.attach(time1,           2, 3, 0, 1, fill, shrink, 0, 0) # C 3
+      table50.attach(time1,           2, 3, 0, 1, fill, shrink, 0, 0) # Col 3
       table50.attach(time2,           2, 3, 1, 2, fill, shrink, 0, 0)
       table50.attach(time3,           2, 3, 2, 3, fill, shrink, 0, 0)
 
@@ -335,7 +367,8 @@ module Gtk3
         end
         err_chunks_spin.set_range(all_chunks_spin.value, 100.0)
       end
-      @frame50 = newFrame(_("Ripping options"), table50)
+
+      @frame50 = new_frame(_("Ripping options"), table50)
     end
 
     def build_frame_ripping_related
@@ -354,14 +387,14 @@ module Gtk3
       table60.attach(rip_entry, 1, 2, 0, 1, shrink,        shrink, 0, 0)
       table60.attach(eject,     0, 2, 1, 2, fill,          shrink, 0, 0)
       table60.attach(no_log,    0, 2, 2, 3, fill | shrink, shrink, 0, 0)
+
       @frame60 = new_frame(_("Ripping related"), table60)
 
       # Pack all frames into a single page
-      @page1 = Gtk::Box.new(:vertical) # One VBox to rule them all
-      [frame40, frame50, frame60].each do |frame|
-        page1.pack_start(frame, expand: false, fill: false)
-      end
+      @page1       = Gtk::Box.new(:vertical) # One VBox to rule them all
       @page1_label = Gtk::Label.new(_("Secure Ripping"))
+      [frame40, frame50, frame60].each { |frame| page1.pack_start(frame, expand: false, fill: false) }
+
       display.append_page(page1, page1_label)
     end
 
@@ -388,9 +421,11 @@ module Gtk3
       table_toc1.attach(mark_hidden_track_label1,     0, 1, 1, 2, fill, shrink, 0, 0)
       table_toc1.attach(min_length_hidden_track_spin, 1, 2, 1, 2, fill, shrink, 0, 0)
       table_toc1.attach(mark_hidden_track_label2,     2, 3, 1, 2, fill, shrink, 0, 0)
+
       rip_hidden_audio.signal_connect("clicked") do
         min_length_hidden_track_spin.sensitive = rip_hidden_audio.active?
       end
+
       @frame_toc1 = new_frame(_("Audio sectors before track 1"), table_toc1)
     end
 
@@ -428,7 +463,9 @@ module Gtk3
       # Pack objects
       table_toc3.attach(append_pregaps,  0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
       table_toc3.attach(prepend_pregaps, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+
       @frame_toc3 = new_frame(_("Handling pregaps other than track 1"), table_toc3)
+
       vbox_toc.pack_start(frame_toc3, expand: false, fill: false)
     end
 
@@ -446,16 +483,17 @@ module Gtk3
       shrink = Gtk::AttachOptions::SHRINK
       table_toc4.attach(correct_pre_emphasis,        0, 1, 0, 1, fill, shrink, 0, 0)
       table_toc4.attach(do_not_correct_pre_emphasis, 0, 1, 1, 2, fill, shrink, 0, 0)
-      frame_toc4 = new_frame(_("Handling tracks with pre-emphasis"), table_toc4)
+
+      @frame_toc4 = new_frame(_("Handling tracks with pre-emphasis"), table_toc4)
+
       vbox_toc.pack_start(frame_toc4, expand: false, fill: false)
 
       # Pack all frames into a single page
-      set_signals_toc()
+      set_signals_toc
       @page_toc = Gtk::Box.new(:vertical) # One VBox to rule them all
-      [frame_toc1, cdrdao_hbox, frame_toc2].each do |frame|
-        page_toc.pack_start(frame, expand: false, fill: false)
-      end
       @page_toc_label = Gtk::Label.new(_("TOC analysis"))
+      [frame_toc1, cdrdao_hbox, frame_toc2].each { |frame| page_toc.pack_start(frame, expand: false, fill: false) }
+
       display.append_page(page_toc, page_toc_label)
     end
 
@@ -611,263 +649,301 @@ module Gtk3
       @frame80 = new_frame(_("Codec related"), table80)
     end
 
-zzz
-    def buildFrameNormalizeToStandardVolume #Normalize audio
-      @table85 = newTable(rows=2, columns=1)
-  #creating objects
-      @normalize = Gtk::ComboBoxText.new()
-      @normalize.append_text(_("Don't standardize volume"))
-      @normalize.append_text(_("Use replaygain on audio files"))
-      @normalize.append_text(_("Use normalize on WAVE files"))
-      @normalize.active=0
-      @modus = Gtk::ComboBoxText.new()
-      @modus.append_text(_("Album / Audiophile modus"))
-      @modus.append_text(_("Track modus"))
-      @modus.active = 0
-      @modus.sensitive = false
-      @normalize.signal_connect("changed") {if @normalize.active == 0 ; @modus.sensitive = false else @modus.sensitive = true end}
-  #packing objects
-      @table85.attach(@normalize, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      @table85.attach(@modus, 1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      @frame85 = newFrame(_("Normalize to standard volume"), child=@table85)
-  #pack all frames into a single page
-      @page2 = Gtk::Box.new(:vertical) #One VBox to rule them all
-      [@frame70, @frame80, @frame85].each{|frame| @page2.pack_start(frame, :expand => false, :fill => false)}
+    def build_frame_normalize_to_standard_volume
+      @table85 = new_table(rows: 2, columns: 1)
+
+      # Creating objects
+      @normalize = Gtk::ComboBoxText.new
+      normalize.append_text(_("Don't standardize volume"))
+      normalize.append_text(_("Use replaygain on audio files"))
+      normalize.append_text(_("Use normalize on WAVE files"))
+      normalize.active = 0
+
+      @modus = Gtk::ComboBoxText.new
+      modus.append_text(_("Album / Audiophile modus"))
+      modus.append_text(_("Track modus"))
+      modus.active = 0
+      modus.sensitive = false
+
+      normalize.signal_connect("changed") { modus.sensitive = (normalize.active != 0) }
+
+      # Packing objects
+      table85.attach(normalize, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+      table85.attach(modus,     1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+      @frame85 = new_frame(_("Normalize to standard volume"), table85)
+
+      # Pack all frames into a single page
+      @page2 = Gtk::Box.new(:vertical) # One VBox to rule them all
+      [frame70, frame80, frame85].each { |frame| page2.pack_start(frame, expand: false, fill: false) }
       @page2_label = Gtk::Label.new(_("Codecs"))
-      @display.append_page(@page2, @page2_label)
+      display.append_page(page2, page2_label)
     end
 
-    def buildFrameChooseMetadataProvider
-      @table90 = newTable(rows=1, columns=2)
-      @metadataLabel = Gtk::Label.new(_("Primary metadata provider:"))
-      @metadataChoice = Gtk::ComboBoxText.new()
-      @metadataChoice.append_text(_("Gnudb"))
-      @metadataChoice.append_text(_("Musicbrainz"))
-      @metadataChoice.append_text(_("Don't use a metadata provider"))
-      @table90.attach(@metadataLabel,0,1,0,1,Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK,0,0)
-      @table90.attach(@metadataChoice,1,2,0,1,Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK,0,0)
-      @frame90 = newFrame(_("Choose your metadata provider"), child=@table90)
+    def build_frame_choose_metadata_provider
+      @table90 = new_table(rows: 1, columns: 2)
+      @metadata_label = Gtk::Label.new(_("Primary metadata provider:"))
+      @metadata_choice = Gtk::ComboBoxText.new()
+
+      metadata_choice.append_text(_("Gnudb"))
+      metadata_choice.append_text(_("Musicbrainz"))
+      metadata_choice.append_text(_("Don't use a metadata provider"))
+
+      table90.attach(metadata_label,  0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table90.attach(metadata_choice, 1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+
+      @frame90 = new_frame(_("Choose your metadata provider"), table90)
     end
 
-    def buildFrameFreedbOptions
-      @table91 = newTable(rows=4, columns=2)
-  #creating objects
-      @firstHit= Gtk::CheckButton.new(_("Always use first gnudb hit"))
-      @freedb_server_label= Gtk::Label.new(_("Gnudb server:")) ; @freedb_server_label.set_alignment(0.0, 0.5)
-      @freedb_username_label= Gtk::Label.new(_("Username:")) ; @freedb_username_label.set_alignment(0.0, 0.5)
-      @freedb_hostname_label= Gtk::Label.new(_("Hostname:")) ; @freedb_hostname_label.set_alignment(0.0, 0.5)
-      @freedbServerEntry = Gtk::Entry.new
-      @freedbUsernameEntry = Gtk::Entry.new
-      @freedbHostnameEntry = Gtk::Entry.new
-  #packing objects
-      @table91.attach(@firstHit, 0, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0) #both columns, 2nd row
-      @table91.attach(@freedb_server_label, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0) #1st column, 3rd row
-      @table91.attach(@freedb_username_label, 0, 1, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0) #1st column, 4th row
-      @table91.attach(@freedb_hostname_label, 0, 1, 3, 4, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0) #1st column, 5th row
-      @table91.attach(@freedbServerEntry, 1, 2 , 1, 2, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND,
-                      Gtk::AttachOptions::SHRINK, 0, 0) #2nd column, 3rd row
-      @table91.attach(@freedbUsernameEntry, 1, 2, 2, 3, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND,
-                      Gtk::AttachOptions::SHRINK, 0, 0) #2nd column, 4th row
-      @table91.attach(@freedbHostnameEntry, 1, 2, 3, 4, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND,
-                      Gtk::AttachOptions::SHRINK, 0, 0) #2nd column, 5th row
-      @frame91 = newFrame(_("Gnudb options"), child=@table91)
-  #pack frame
+    def build_frame_freedb_options
+      @table91 = new_table(rows: 4, columns: 2)
+
+      # Creating objects
+      @first_hit             = Gtk::CheckButton.new(_("Always use first gnudb hit"))
+      @freedb_server_label   = Gtk::Label.new(_("Gnudb server:")); freedb_server_label.set_alignment(0.0, 0.5)
+      @freedb_username_label = Gtk::Label.new(_("Username:"));     freedb_username_label.set_alignment(0.0, 0.5)
+      @freedb_hostname_label = Gtk::Label.new(_("Hostname:"));     freedb_hostname_label.set_alignment(0.0, 0.5)
+      @freedb_server_entry   = Gtk::Entry.new
+      @freedb_username_entry = Gtk::Entry.new
+      @freedb_hostname_entry = Gtk::Entry.new
+
+      # Packing objects
+      fill   = Gtk::AttachOptions::FILL
+      shrink = Gtk::AttachOptions::SHRINK
+      expand = Gtk::AttachOptions::EXPAND
+      table91.attach(first_hit,             0, 2, 0, 1, fill,        shrink, 0, 0) # Both cols, 2nd row
+      table91.attach(freedb_server_label,   0, 1, 1, 2, fill,        shrink, 0, 0) # 1st col, 3rd row
+      table91.attach(freedb_username_label, 0, 1, 2, 3, fill,        shrink, 0, 0) # 1st col, 4th row
+      table91.attach(freedb_hostname_label, 0, 1, 3, 4, fill,        shrink, 0, 0) # 1st col, 5th row
+      table91.attach(freedb_server_entry,   1, 2, 1, 2, fill|expand, shrink, 0, 0) # 2nd col, 3rd row
+      table91.attach(freedb_username_entry, 1, 2, 2, 3, fill|expand, shrink, 0, 0) # 2nd col, 4th row
+      table91.attach(freedb_hostname_entry, 1, 2, 3, 4, fill|expand, shrink, 0, 0) # 2nd col, 5th row
+
+      @frame91 = new_frame(_("Gnudb options"), table91)
     end
 
-    def buildFrameMusicbrainzOptions
-      @table92 = newTable(rows=3, columns=3)
-      @labelPreferredCountry = Gtk::Label.new(_("Preferred countries:"))
-      @labelPreferredCountry.set_alignment(0.0, 0.5)
-      @labelPreferredRelease = Gtk::Label.new(_("Preferred release date:"))
-      @labelPreferredRelease.set_alignment(0.0, 0.5)
-      @labelPreferredYear = Gtk::Label.new(_("Preferred year (metadata):"))
-      @labelPreferredYear.set_alignment(0.0, 0.5)
-      @entryPreferredCountry = Gtk::Entry.new()
-      @chooseOriginalRelease = Gtk::RadioButton.new(:label => _("Original"))
-      @chooseLatestRelease = Gtk::RadioButton.new(:member => @chooseOriginalRelease, :label => _("Latest available"))
-      @chooseOriginalYear = Gtk::RadioButton.new(:label => _("Original"))
-      @chooseReleaseYear = Gtk::RadioButton.new(:member => @chooseOriginalYear, :label => _("From release"))
-  #packing objects
-      @table92.attach(@labelPreferredCountry, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table92.attach(@entryPreferredCountry, 1, 3, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table92.attach(@labelPreferredRelease, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table92.attach(@chooseOriginalRelease, 1, 2, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table92.attach(@chooseLatestRelease, 2, 3, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table92.attach(@labelPreferredYear, 0, 1, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table92.attach(@chooseOriginalYear, 1, 2, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table92.attach(@chooseReleaseYear, 2, 3, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @frame92 = newFrame(_("Musicbrainz options"), @table92)
+    def build_frame_musicbrainz_options
+      @table92 = new_table(rows: 3, columns: 3)
+
+      @label_preferred_country = Gtk::Label.new(_("Preferred countries:")); label_preferred_country.set_alignment(0.0, 0.5)
+      @entry_preferred_country = Gtk::Entry.new
+
+      @label_preferred_release = Gtk::Label.new(_("Preferred release date:")); label_preferred_release.set_alignment(0.0, 0.5)
+      @choose_original_release = Gtk::RadioButton.new(label: _("Original"))
+      @choose_latest_release   = Gtk::RadioButton.new(member: choose_original_release, label: _("Latest available"))
+
+      @label_preferred_year = Gtk::Label.new(_("Preferred year (metadata):")); label_preferred_year.set_alignment(0.0, 0.5)
+      @choose_original_year = Gtk::RadioButton.new(label: _("Original"))
+      @choose_release_year  = Gtk::RadioButton.new(member: choose_original_year, label: _("From release"))
+
+      table92.attach(label_preferred_country, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table92.attach(entry_preferred_country, 1, 3, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table92.attach(label_preferred_release, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table92.attach(choose_original_release, 1, 2, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table92.attach(choose_latest_release,   2, 3, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table92.attach(label_preferred_year,    0, 1, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table92.attach(choose_original_year,    1, 2, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table92.attach(choose_release_year,     2, 3, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+
+      @frame92 = new_frame(_("Musicbrainz options"), table92)
     end
 
-    # grey out the two frames if no metadata provider is chosen
-    def updateMetadataProviderView
-      @frame91.children.each{|child| child.sensitive = @metadataChoice.active != 2}
-      @frame92.children.each{|child| child.sensitive = @metadataChoice.active != 2}
+    def update_metadata_provider_view
+      frame91.children.each { |child| child.sensitive = (metadata_choice.active != 2) }
+      frame92.children.each { |child| child.sensitive = (metadata_choice.active != 2) }
     end
 
-    def packMetadataFrames
-      @metadataChoice.signal_connect("changed"){updateMetadataProviderView()}
-      @page3 = Gtk::Box.new(:vertical) #One VBox to rule them all
-      [@frame90, @frame91, @frame92].each{|frame| @page3.pack_start(frame, :expand => false, :fill => false)}
+    def pack_metadata_frames
+      metadata_choice.signal_connect("changed") { update_metadata_provider_view }
+
+      @page3 = Gtk::Box.new(:vertical) # One VBox to rule them all
+      [frame90, frame91, frame92].each { |frame| page3.pack_start(frame, expand: false, fill: false) }
       @page3_label = Gtk::Label.new(_("Metadata"))
-      @display.append_page(@page3, @page3_label)
+
+      display.append_page(page3, page3_label)
     end
 
-    def buildFrameFilenamingScheme # Naming scheme frame
-      @table100 = newTable(rows=8, columns=2)
-  #creating objects 1st column
-      @basedir_label = Gtk::Label.new(_("Base directory:")) ; @basedir_label.set_alignment(0.0, 0.5) #set_alignment(xalign=0.0, yalign=0.5)
-      @naming_normal_label = Gtk::Label.new(_("Standard:")) ; @naming_normal_label.set_alignment(0.0, 0.5)
-      @naming_various_label = Gtk::Label.new(_("Various artists:")) ; @naming_various_label.set_alignment(0.0, 0.5)
-      @naming_image_label = Gtk::Label.new(_("Single file image:")) ; @naming_image_label.set_alignment(0.0, 0.5)
-      @example_label =Gtk::Label.new("") ; @example_label.set_alignment(0.0, 0.5) ; @example_label.wrap = true
-      @expander100 = Gtk::Expander.new(_("Show options for "File naming scheme""))
+    def build_frame_filenaming_scheme
+      @table100 = new_table(rows: 8, columns: 2)
+
+      # Creating objects 1st column
+      @basedir_label        = Gtk::Label.new(_("Base directory:")); basedir_label.set_alignment(0.0, 0.5)
+      @naming_normal_label  = Gtk::Label.new(_("Standard:")); naming_normal_label.set_alignment(0.0, 0.5)
+      @naming_various_label = Gtk::Label.new(_("Various artists:")); naming_various_label.set_alignment(0.0, 0.5)
+      @naming_image_label   = Gtk::Label.new(_("Single file image:")); naming_image_label.set_alignment(0.0, 0.5)
+      @example_label        = Gtk::Label.new(""); example_label.set_alignment(0.0, 0.5); example_label.wrap = true
+      @expander100          = Gtk::Expander.new(_("Show options for \"File naming scheme\""))
+      @example_label_shows  = "normal"
+
+      # Configure expander
+      #@artist_label = Gtk::Label.new(
+      #  "%a=artist %b=album %f=codec %g=genre\n%va=various artists %n=track %t=trackname %y=year"
+      #)
+      @legend_label = Gtk::Label.new(
+        "%%a=%s %%g=%s %%t=%s %%f=%s\n%%b=%s %%y=%s %%n=%s %%va=%s" % [
+          _("Artist"), _("Genre"), _("Track name"), _("Codec"),
+          _("Album"), _("Year"), _("Track"), _("Various artist")
+        ]
+      )
+      expander100.add(@legend_label)
+
+      @no_spaces   = Gtk::CheckButton.new(_("Replace spaces with underscores in file names"))
+      @no_capitals = Gtk::CheckButton.new(_("Downsize all capital letters in file names"))
+      no_spaces.signal_connect("toggled") { update_example_label }
+      no_capitals.signal_connect("toggled") { update_example_label }
+
+      # Packing 1st column
+      fill   = Gtk::AttachOptions::FILL
+      shrink = Gtk::AttachOptions::SHRINK
+      expand = Gtk::AttachOptions::EXPAND
+      table100.attach(basedir_label,        0, 1, 0, 1, fill,        shrink, 0, 0)
+      table100.attach(naming_normal_label,  0, 1, 1, 2, fill,        shrink, 0, 0)
+      table100.attach(naming_various_label, 0, 1, 2, 3, fill,        shrink, 0, 0)
+      table100.attach(naming_image_label,   0, 1, 3, 4, fill,        shrink, 0, 0)
+      table100.attach(no_spaces,            0, 2, 4, 5, fill,        fill,   0, 0)
+      table100.attach(no_capitals,          0, 2, 5, 6, fill,        fill,   0, 0)
+      table100.attach(example_label,        0, 2, 6, 7, expand|fill, shrink, 0, 0) # Width = 2 cols, also maximise width
+      table100.attach(expander100,          0, 2, 7, 8, expand|fill, shrink, 0, 0)
+
+      # Creating objects 2nd column and connect signals to them
+      @basedir_entry        = Gtk::Entry.new
+      @naming_normal_entry  = Gtk::Entry.new
+      @naming_various_entry = Gtk::Entry.new
+      @naming_image_entry   = Gtk::Entry.new
+
+      handler1 = -> { show_file_normal; false }
+      handler2 = -> { show_file_various; false }
+      handler3 = -> { show_file_image; false }
+      handler4 = ->(entry) do
+        if File.dirname(entry.text) !~ /%a|%b/
+          entry.text = "%a (%y) %b/" + entry.text
+          prevent_stupidness
+        end
+        false
+      end
+
+      basedir_entry.signal_connect("key_release_event",           &handler1)
+      basedir_entry.signal_connect("button_release_event",        &handler1)
+      naming_normal_entry.signal_connect("key_release_event",     &handler1)
+      naming_normal_entry.signal_connect("button_release_event",  &handler1)
+      naming_various_entry.signal_connect("key_release_event",    &handler2)
+      naming_various_entry.signal_connect("button_release_event", &handler2)
+      naming_image_entry.signal_connect("key_release_event",      &handler3)
+      naming_image_entry.signal_connect("button_release_event",   &handler3)
+      naming_normal_entry.signal_connect("focus-out-event")  { handler4.call(naming_normal_entry) }
+      naming_various_entry.signal_connect("focus-out-event") { handler4.call(naming_various_entry) }
+      naming_image_entry.signal_connect("focus-out-event")   { handler4.call(naming_image_entry) }
+
+      # Packing 2nd column
+      table100.attach(basedir_entry,        1, 2, 0, 1, expand|fill, shrink, 0, 0)
+      table100.attach(naming_normal_entry,  1, 2, 1, 2, expand|fill, shrink, 0, 0)
+      table100.attach(naming_various_entry, 1, 2, 2, 3, expand|fill, shrink, 0, 0)
+      table100.attach(naming_image_entry,   1, 2, 3, 4, expand|fill, shrink, 0, 0)
+
+      @frame100 = new_frame(_("File naming scheme"), table100)
+    end
+
+    def show_file_normal
+      backup_prefs_before_example_label_update
+      example_label.text = _("Example file name: ") +
+        Preferences.show_filename_normal(basedir_entry.text, naming_normal_entry.text)
       @example_label_shows = "normal"
-  #configure expander
-      #@artist_label = Gtk::Label.new("%a = artist   %b = album   %f = codec   %g = genre\n%va = various artists   %n = track   %t = trackname   %y = year")
-      @legend_label = Gtk::Label.new("%a=" + _("Artist") + " %g=" + _("Genre") + " %t=" + _("Track name") +
-                                       " %f=" + _("Codec") + "\n%b=" + _("Album") + " %y=" + _("Year") +
-                                      " %n=" + _("Track") + " %va=" + _("Various artist"))
-      @expander100.add(@legend_label)
-      @noSpaces = Gtk::CheckButton.new(_("Replace spaces with underscores in file names"))
-      @noCapitals = Gtk::CheckButton.new(_("Downsize all capital letters in file names"))
-      @noSpaces.signal_connect("toggled") { updateExampleLabel() }
-      @noCapitals.signal_connect("toggled") { updateExampleLabel() }
-  #packing 1st column
-      @table100.attach(@basedir_label, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table100.attach(@naming_normal_label, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table100.attach(@naming_various_label, 0, 1, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table100.attach(@naming_image_label, 0, 1, 3, 4, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table100.attach(@noSpaces, 0, 2, 4, 5, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      @table100.attach(@noCapitals, 0, 2, 5, 6, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      @table100.attach(@example_label, 0, 2, 6, 7, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
-                       Gtk::AttachOptions::SHRINK, 0, 0) #width = 2 columns, also maximise width
-      @table100.attach(@expander100, 0, 2 , 7, 8, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
-                       Gtk::AttachOptions::SHRINK, 0, 0)
-  #creating objects 2nd column and connect signals to them
-      @basedirEntry = Gtk::Entry.new
-      @namingNormalEntry = Gtk::Entry.new
-      @namingVariousEntry = Gtk::Entry.new
-      @namingImageEntry = Gtk::Entry.new
-      @basedirEntry.signal_connect("key_release_event"){showFileNormal() ; false}
-      @basedirEntry.signal_connect("button_release_event"){showFileNormal() ; false}
-      @namingNormalEntry.signal_connect("key_release_event"){showFileNormal() ; false}
-      @namingNormalEntry.signal_connect("button_release_event"){showFileNormal() ; false}
-      @namingNormalEntry.signal_connect("focus-out-event"){if not File.dirname(@namingNormalEntry.text) =~ /%a|%b/ ; @namingNormalEntry.text = "%a (%y) %b/" + @namingNormalEntry.text; preventStupidness() end; false}
-      @namingVariousEntry.signal_connect("key_release_event"){showFileVarious() ; false}
-      @namingVariousEntry.signal_connect("button_release_event"){showFileVarious() ; false}
-      @namingVariousEntry.signal_connect("focus-out-event"){if not File.dirname(@namingVariousEntry.text) =~ /%a|%b/ ; @namingVariousEntry.text = "%a (%y) %b/" + @namingVariousEntry.text; preventStupidness() end; false}
-      @namingImageEntry.signal_connect("key_release_event"){showFileImage() ; false}
-      @namingImageEntry.signal_connect("button_release_event"){showFileImage() ; false}
-      @namingImageEntry.signal_connect("focus-out-event"){if not File.dirname(@namingImageEntry.text) =~ /%a|%b/ ; @namingImageEntry.text = "%a (%y) %b/" + @namingImageEntry.text; preventStupidness() end; false}
-  #packing 2nd column
-      @table100.attach(@basedirEntry, 1, 2, 0, 1, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table100.attach(@namingNormalEntry, 1, 2, 1, 2, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
-                       Gtk::AttachOptions::SHRINK, 0, 0)
-      @table100.attach(@namingVariousEntry, 1, 2, 2, 3, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
-                       Gtk::AttachOptions::SHRINK, 0, 0)
-      @table100.attach(@namingImageEntry, 1, 2, 3, 4, Gtk::AttachOptions::EXPAND|Gtk::AttachOptions::FILL,
-                       Gtk::AttachOptions::SHRINK, 0, 0)
-      @frame100 = newFrame(_("File naming scheme"), child=@table100)
+      restore_prefs_after_example_label_update
     end
 
-    def showFileNormal
-      backupPrefsBeforeExampleLabelUpdate()
-      @example_label.text = _("Example file name: ") +
-        Preferences.showFilenameNormal( @basedirEntry.text, @namingNormalEntry.text)
-      @example_label_shows = "normal"
-      restorePrefsAfterExampleLabelUpdate()
-    end
-
-    def showFileVarious
-      backupPrefsBeforeExampleLabelUpdate()
-      @example_label.text = _("Example file name: ") +
-        Preferences.showFilenameVarious(@basedirEntry.text, @namingVariousEntry.text)
+    def show_file_various
+      backup_prefs_before_example_label_update
+      example_label.text = _("Example file name: ") +
+        Preferences.show_filename_various(basedir_entry.text, naming_various_entry.text)
       @example_label_shows = "various"
-      restorePrefsAfterExampleLabelUpdate()
+      restore_prefs_after_example_label_update
     end
 
-    def showFileImage
-      backupPrefsBeforeExampleLabelUpdate()
-      @example_label.text = _("Example file name: ") +
-        Preferences.showFilenameVarious(@basedirEntry.text, @namingImageEntry.text)
+    def show_file_image
+      backup_prefs_before_example_label_update
+      example_label.text = _("Example file name: ") +
+        Preferences.show_filename_various(basedir_entry.text, naming_image_entry.text)
       @example_label_shows = "image"
-      restorePrefsAfterExampleLabelUpdate()
+      restore_prefs_after_example_label_update
     end
 
-    def updateExampleLabel
-      if @example_label_shows == "various"
-        showFileVarious()
-      elsif @example_label_shows == "image"
-        showFileImage()
+    def update_example_label
+      if example_label_shows == "various"
+        show_file_various
+      elsif example_label_shows == "image"
+        show_file_image
       else
-        showFileNormal()
+        show_file_normal
       end
     end
 
-    # showFileXXX uses @prefs to calculate the format;
-    # backup/restore some prefs values and apply the current Gtk values to have the correct display
-    def backupPrefsBeforeExampleLabelUpdate
-      @backupNoSpaces = @prefs.noSpaces
-      @backupNoCapitals = @prefs.noCapitals
-      @prefs.noSpaces = @noSpaces.active?
-      @prefs.noCapitals = @noCapitals.active?
+    def backup_prefs_before_example_label_update
+      # When `show_file_xxx` runs, some prefs are overwritten to calculate the format, so backup those prefs
+      # values and apply the current Gtk values to have the correct display.
+      @backup_no_spaces   = prefs.no_spaces
+      @backup_no_capitals = prefs.no_capitals
+      prefs.no_spaces   = no_spaces.active?
+      prefs.no_capitals = no_capitals.active?
     end
 
-    def restorePrefsAfterExampleLabelUpdate
-      @prefs.noSpaces = @backupNoSpaces
-      @prefs.noCapitals = @backupNoCapitals
+    def restore_prefs_after_example_label_update
+      # When `show_file_xxx` runs, some prefs are overwritten to calculate the format, so restore those prefs values.
+      prefs.no_spaces   = @backup_no_spaces
+      prefs.no_capitals = @backup_no_capitals
     end
 
-    # Would you believe this actually prevents bug reports?
-    def preventStupidness()
+    def prevent_stupidness
+      # Would you believe this actually prevents bug reports?
       puts "You need to make a subdirectory with at least the artist or album"
       puts "name in it. Otherwise your directory will be overwritten each time!"
       puts "To protect you from making these unwise choices this is corrected :P"
     end
 
-  #Small table needed for setting programs
-  #log file viewer 	| entry
-  #file manager 	| entry
-    def buildFrameProgramsOfChoice
-      @table110 = newTable(rows=2, columns=2)
-  #creating objects
-      @editor_label = Gtk::Label.new(_("Log file viewer: ")) ; @editor_label.set_alignment(0.0, 0.5)
-      @filemanager_label = Gtk::Label.new(_("File manager: ")) ; @filemanager_label.set_alignment(0.0,0.5)
-      @editorEntry = Gtk::Entry.new
-      @filemanagerEntry = Gtk::Entry.new
-  #packing objects
-      @table110.attach(@editor_label, 0,1,0,1,Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table110.attach(@filemanager_label, 0,1,1,2,Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table110.attach(@editorEntry, 1,2,0,1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @table110.attach(@filemanagerEntry, 1,2,1,2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @frame110 = newFrame(_("Programs of choice"), child=@table110)
+    def build_frame_programs_of_choice
+      @table110 = new_table(rows: 2, columns: 2)
+
+      # Creating objects
+      @editor_label      = Gtk::Label.new(_("Log file viewer: ")); editor_label.set_alignment(0.0, 0.5)
+      @filemanager_label = Gtk::Label.new(_("File manager: ")); filemanager_label.set_alignment(0.0, 0.5)
+      @editor_entry      = Gtk::Entry.new
+      @filemanager_entry = Gtk::Entry.new
+
+      # Packing objects
+      fill   = Gtk::AttachOptions::FILL
+      shrink = Gtk::AttachOptions::SHRINK
+      table110.attach(editor_label,      0, 1, 0, 1, fill, shrink, 0, 0)
+      table110.attach(filemanager_label, 0, 1, 1, 2, fill, shrink, 0, 0)
+      table110.attach(editor_entry,      1, 2, 0, 1, fill, shrink, 0, 0)
+      table110.attach(filemanager_entry, 1, 2, 1, 2, fill, shrink, 0, 0)
+
+      @frame110 = new_frame(_("Programs of choice"), table110)
     end
 
-  #Small table for debugging
-  #Verbose mode	| debug mode
-    def buildFrameDebugOptions # Debug options frame
-      @table120 = newTable(rows=1, columns=2)
-  #creating objects and packing them
-      @verbose = Gtk::CheckButton.new(_("Verbose mode"))
-      @debug = Gtk::CheckButton.new(_("Debug mode"))
-      @table120.attach(@verbose, 0,1,0,1,Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::SHRINK)
-      @table120.attach(@debug, 1,2,0,1,Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::SHRINK)
-      @frame120 = newFrame(_("Debug options"), child=@table120)
+    def build_frame_debug_options
+      @table120 = new_table(rows: 1, columns: 2)
+      @verbose  = Gtk::CheckButton.new(_("Verbose mode"))
+      @debug    = Gtk::CheckButton.new(_("Debug mode"))
+
+      table120.attach(verbose, 0, 1, 0, 1, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::SHRINK)
+      table120.attach(debug,   1, 2, 0, 1, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::SHRINK)
+
+      @frame120 = new_frame(_("Debug options"), table120)
     end
 
-    def pack_other_frames #pack all frames into a single page
-      @page4 = Gtk::Box.new(:vertical)
-      [@frame100, @frame110, @frame120].each{|frame| @page4.pack_start(frame, :expand => false, :fill => false)}
+    def pack_other_frames
+      @page4       = Gtk::Box.new(:vertical)
       @page4_label = Gtk::Label.new(_("Other"))
-      @display.signal_connect("switch_page") do |a, b, page|
+
+      [frame100, frame110, frame120].each { |frame| page4.pack_start(frame, expand: false, fill: false) }
+
+      display.signal_connect("switch_page") do |a, b, page|
         if page == 1
-          cdrdaoInstalled()
+          cdrdao_installed
         elsif page == 4
-          showFileNormal()
+          show_file_normal
         end
       end
-      @display.append_page(@page4, @page4_label)
+
+      display.append_page(page4, page4_label)
     end
   end
 end
