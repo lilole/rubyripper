@@ -14,7 +14,10 @@ module Gtk3
     DEFAULT_ROW_SPACINGS = 4
     DEFAULT_BORDER_WIDTH = 7
 
-    attr_reader :cdrom_entry, :cdrom_label, :cdrom_offset_label, :cdrom_offset_spin, :codec_labels, :deps, :display, :frame40, :offset_button, :pad_missing_samples, :prefs, :table40, :frame50, :table50, :all_chunks, :err_chunks, :max_label, :all_chunks_spin, :err_chunks_spin, :max_spin, :time1, :time2, :time3, :frame60, :table60, :rip_label, :eject, :no_log, :rip_entry, :page1, :page1_label, :table_toc1, :rip_hidden_audio, :mark_hidden_track_label1, :mark_hidden_track_label2, :min_length_hidden_track_spin, :frame_toc1, :table_toc2, :create_cue, :image, :vbox_toc, :frame_toc2, :cdrdao_hbox, :cdrdao, :cdrdao_image, :table_toc3, :append_pregaps, :prepend_pregaps, :frame_toc3
+    attr_reader :all_chunks, :all_chunks_spin, :append_pregaps, :cdrdao, :cdrdao_hbox, :cdrdao_image, :cdrom_entry, :cdrom_label, :cdrom_offset_label, :cdrom_offset_spin, :codec_labels, :create_cuesheet, :deps, :display, :eject, :err_chunks, :err_chunks_spin, :frame40, :frame50, :frame60, :frame_toc1, :frame_toc2, :frame_toc3, :frame_toc4, :image, :mark_hidden_track_label1, :mark_hidden_track_label2, :max_label, :max_spin, :min_length_hidden_track_spin, :no_log, :offset_button, :pad_missing_samples, :page1, :page1_label, :prefs, :prepend_pregaps, :rip_entry, :rip_hidden_audio, :rip_label, :table40, :table50, :table60, :table_toc1, :table_toc2, :table_toc3, :table_toc4, :time1, :time2, :time3, :vbox_toc, :page_toc, :page_toc_label, :correct_pre_emphasis, :do_not_correct_pre_emphasis,
+      :codec_rows, :select_codecs_table, :frame70,
+      :add_codec_combo_box, :add_codec_label, :add_codec_button,
+      :table80, :playlist, :max_threads, :max_threads_label, :frame80
 
     def initialize(prefs=nil, deps=nil)
       @prefs        = prefs || RripRedux::Preferences::Main.instance
@@ -175,8 +178,8 @@ module Gtk3
 
       # Codec settings
       codec_rows.each do |label, objects|
-        prefs.send(get_codec_for_label(label) + "=", true)
-        prefs.send("settings" + get_codec_for_label(label).capitalize + "=", objects[1].text)
+        prefs.send(:"#{get_codec_for_label(label)}=", true)
+        prefs.send(:"settings_#{get_codec_for_label(label)}=", objects[1].text)
       end
       prefs.playlist    = playlist.active?
       prefs.no_spaces   = no_spaces.active?
@@ -225,7 +228,9 @@ module Gtk3
 
     # Helper to create a table.
     #
-    def new_table(rows, columns, homogeneous=false)
+    def new_table(rows0=nil, columns0=nil, homogeneous=false, rows: nil, columns: nil)
+      rows ||= rows0
+      columns ||= columns0
       Gtk::Table.new(rows, columns, homogeneous).tap do |t|
         t.column_spacings = DEFAULT_COLUMN_SPACINGS
         t.row_spacings    = DEFAULT_ROW_SPACINGS
@@ -235,7 +240,9 @@ module Gtk3
 
     # Helper to create a frame.
     #
-    def new_frame(label, child)
+    def new_frame(label0=nil, child0=nil, label: nil, child: nil)
+      label ||= label0
+      child ||= child0
       Gtk::Frame.new(label).tap do |f|
         f.set_shadow_type(Gtk::ShadowType::ETCHED_IN)
         f.border_width = DEFAULT_BORDER_WIDTH
@@ -294,7 +301,7 @@ module Gtk3
     # Secure ripping tab, frame 2.
     #
     def build_frame_ripping_options
-      @table50 = new_table(3, 3)
+      @table50 = new_table(rows: 3, columns: 3)
 
       # Create objects
       @all_chunks      = Gtk::Label.new(_("Match all chunks:")); all_chunks.set_alignment(0.0, 0.5)
@@ -332,7 +339,7 @@ module Gtk3
     end
 
     def build_frame_ripping_related
-      @table60 = new_table(2, 3)
+      @table60 = new_table(rows: 2, columns: 3)
 
       # Create objects
       @rip_label = Gtk::Label.new(_("Pass cdparanoia options:")); rip_label.set_alignment(0.0, 0.5)
@@ -360,7 +367,7 @@ module Gtk3
 
     def build_frame_audio_sectors_before_track_one
       # Create objects
-      @table_toc1                   = new_table(3, 3)
+      @table_toc1                   = new_table(rows: 3, columns: 3)
       @rip_hidden_audio             = Gtk::CheckButton.new(_("Rip hidden audio sectors"))
       @mark_hidden_track_label1     = Gtk::Label.new(_("Mark as a hidden track when longer than"))
       @mark_hidden_track_label2     = Gtk::Label.new(_("second(s)"))
@@ -389,9 +396,9 @@ module Gtk3
 
     def build_frame_advanced_toc_analysis
       # Create objects
-      @table_toc2 = new_table(3, 2)
-      @create_cue = Gtk::CheckButton.new(_("Create cuesheet"))
-      @image      = Gtk::CheckButton.new(_("Rip CD to single file"))
+      @table_toc2      = new_table(rows: 3, columns: 2)
+      @create_cuesheet = Gtk::CheckButton.new(_("Create cuesheet"))
+      @image           = Gtk::CheckButton.new(_("Rip CD to single file"))
 
       # Pack objects
       fill   = Gtk::AttachOptions::FILL
@@ -414,7 +421,7 @@ module Gtk3
 
     def build_frame_handling_pregaps_other_than_track_one
       # Create objects
-      @table_toc3      = new_table(3, 3)
+      @table_toc3      = new_table(rows: 3, columns: 3)
       @append_pregaps  = Gtk::RadioButton.new(label: _("Append pregap to the previous track"))
       @prepend_pregaps = Gtk::RadioButton.new(member: append_pregaps, label: _("Prepend pregap to the track"))
 
@@ -425,168 +432,186 @@ module Gtk3
       vbox_toc.pack_start(frame_toc3, expand: false, fill: false)
     end
 
-    def buildFrameHandlingTracksWithPreEmphasis
-      @tableToc4 = newTable(rows=3, columns=3)
-  #create objects
-      @correctPreEmphasis = Gtk::RadioButton.new(:label => _("Correct pre-emphasis tracks with sox"))
-      @doNotCorrectPreEmphasis = Gtk::RadioButton.new(:member => @correctPreEmphasis,
-                                                      :label =>_("Save the pre-emphasis tag in the cuesheet."))
-  #pack objects
-      @tableToc4.attach(@correctPreEmphasis, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @tableToc4.attach(@doNotCorrectPreEmphasis, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @frameToc4 = newFrame(_("Handling tracks with pre-emphasis"), child=@tableToc4)
-      @vboxToc.pack_start(@frameToc4, :expand => false, :fill => false)
-  #pack all frames into a single page
-      setSignalsToc()
-      @pageToc = Gtk::Box.new(:vertical) #One VBox to rule them all
-      [@frameToc1, @cdrdaoHbox, @frameToc2].each{|frame| @pageToc.pack_start(frame, :expand => false, :fill => false)}
-      @pageTocLabel = Gtk::Label.new(_("TOC analysis"))
-      @display.append_page(@pageToc, @pageTocLabel)
+    def build_frame_handling_tracks_with_pre_emphasis
+      @table_toc4 = new_table(rows: 3, columns: 3)
+
+      # Create objects
+      @correct_pre_emphasis = Gtk::RadioButton.new(label: _("Correct pre-emphasis tracks with sox"))
+      @do_not_correct_pre_emphasis = Gtk::RadioButton.new(
+        member: correct_pre_emphasis,
+        label: _("Save the pre-emphasis tag in the cuesheet.")
+      )
+      # Pack objects
+      fill   = Gtk::AttachOptions::FILL
+      shrink = Gtk::AttachOptions::SHRINK
+      table_toc4.attach(correct_pre_emphasis,        0, 1, 0, 1, fill, shrink, 0, 0)
+      table_toc4.attach(do_not_correct_pre_emphasis, 0, 1, 1, 2, fill, shrink, 0, 0)
+      frame_toc4 = new_frame(_("Handling tracks with pre-emphasis"), table_toc4)
+      vbox_toc.pack_start(frame_toc4, expand: false, fill: false)
+
+      # Pack all frames into a single page
+      set_signals_toc()
+      @page_toc = Gtk::Box.new(:vertical) # One VBox to rule them all
+      [frame_toc1, cdrdao_hbox, frame_toc2].each do |frame|
+        page_toc.pack_start(frame, expand: false, fill: false)
+      end
+      @page_toc_label = Gtk::Label.new(_("TOC analysis"))
+      display.append_page(page_toc, page_toc_label)
     end
 
-    #check if cdrdao is installed
-    def cdrdaoInstalled
-      if @deps.installed?("cdrdao")
-        @cdrdaoImage.stock = Gtk::Stock::APPLY
-        @frameToc2.each{|child| child.sensitive = true}
+    def cdrdao_installed
+      if deps.installed?("cdrdao")
+        cdrdao_image.stock = Gtk::Stock::APPLY
+        frame_toc2.each { |child| child.sensitive = true }
       else
-        @cdrdaoImage.stock = Gtk::Stock::CANCEL
-        @createCue.active = false
-        @frameToc2.each{|child| child.sensitive = false}
+        cdrdao_image.stock = Gtk::Stock::CANCEL
+        create_cue.active = false
+        frame_toc2.each { |child| child.sensitive = false }
       end
     end
 
-    # signal for createCue
-    def createCue
-      @image.sensitive = @createCue.active?
-      @image.active = false if !@createCue.active?
-      @tableToc3.each{|child| child.sensitive = @createCue.active?}
-      @tableToc4.each{|child| child.sensitive = @createCue.active?}
+    def create_cue
+      active = !! create_cuesheet.active?
+      image.sensitive = active
+      image.active    = active
+      table_toc3.each { |child| child.sensitive = active }
+      table_toc4.each { |child| child.sensitive = active }
     end
 
-    # signal for create single file
-    def createSingle
-      @tableToc3.each{|child| child.sensitive = !@image.active?}
-      @correctPreEmphasis.active = true
-      @doNotCorrectPreEmphasis.sensitive = !@image.active?
+    def create_single
+      table_toc3.each { |child| child.sensitive = ! image.active? }
+      correct_pre_emphasis.active = true
+      do_not_correct_pre_emphasis.sensitive = ! image.active?
     end
 
-    #set signals for the toc
-    def setSignalsToc
-      cdrdaoInstalled()
-      createSingle()
-      createCue()
-      @createCue.signal_connect("clicked"){createCue()}
-      @createCue.signal_connect("clicked"){`killall cdrdao 2>&1` if !@createCue.active?}
-      @image.signal_connect("clicked"){createSingle()}
+    def set_signals_toc
+      cdrdao_installed
+      create_single
+      create_cue
+
+      create_cuesheet.signal_connect("clicked") do
+        create_cue
+        `killall cdrdao 2>&1` if ! create_cue.active?
+      end
+
+      image.signal_connect("clicked") { create_single }
     end
 
-    def buildFrameSelectAudioCodecs # Select audio codecs frame
-      @codecRows = Hash.new
-      @prefs.codecs.each{|codec| createCodecRow(codec)}
-      @selectCodecsTable = newTable(@codecRows.size + 1, columns = 3)
-      createCodecsTable()
-      @frame70 = newFrame(_("Active audio codecs"), child=@selectCodecsTable)
+    def build_frame_select_audio_codecs
+      @codec_rows = Hash.new
+      prefs.codecs.each { |codec| create_codec_row(codec) }
+      @select_codecs_table = new_table(rows: codec_rows.size + 1, columns: 3)
+      create_codecs_table
+      @frame70 = new_frame(_("Active audio codecs"), select_codecs_table)
     end
 
-    def createCodecRow(codec)
-      @codecRows[codec] = [Gtk::Label.new(getLabelForCodec(codec))]
-      @codecRows[codec][0].set_alignment(0, 0.5)
+    def create_codec_row(codec)
+      codec_rows[codec] = [Gtk::Label.new(get_label_for_codec(codec))]
+      codec_rows[codec][0].set_alignment(0, 0.5)
       if codec == "wav"
-        @codecRows[codec] << Gtk::Label.new(_("No settings available"))
-        @codecRows[codec][1].set_alignment(0, 0.5)
+        codec_rows[codec] << Gtk::Label.new(_("No settings available"))
+        codec_rows[codec][1].set_alignment(0, 0.5)
       else
-        @codecRows[codec] << Gtk::Entry.new()
-        @codecRows[codec][1].text = @prefs.send("settings" + codec.capitalize)
+        codec_rows[codec] << Gtk::Entry.new()
+        codec_rows[codec][1].text = prefs.send(:"settings_#{codec}")
       end
-      @codecRows[codec] << Gtk::Button.new(:stock_id => Gtk::Stock::REMOVE)
-      addTooltipForOtherCodec(@codecRows[codec][1]) if codec == "other"
+      codec_rows[codec] << Gtk::Button.new(stock_id: Gtk::Stock::REMOVE)
 
-      # connect the remove button signal
-      @codecRows[codec][2].signal_connect("button_release_event") do |a, b|
-        @codecRows[codec].each{|object| @selectCodecsTable.remove(object)}
-        @codecRows.delete(codec)
-        @prefs.send(codec + "=", false)
-        updateCodecsView()
+      add_tooltip_for_other_codec(codec_rows[codec][1]) if codec == "other"
+
+      # Connect the remove button signal
+      codec_rows[codec][2].signal_connect("button_release_event") do |a, b|
+        codec_rows[codec].each { |object| select_codecs_table.remove(object) }
+        codec_rows.delete(codec)
+        prefs.send(:"#{codec}=", false)
+        update_codecs_view
       end
     end
 
-    def getLabelForCodec(codec)
-      @codec_labels.key?(codec) ? @codec_labels[codec] : codec.capitalize
+    def get_label_for_codec(codec)
+      codec_labels.key?(codec) ? codec_labels[codec] : codec.capitalize
     end
 
-    def getCodecForLabel(label)
-      @codec_labels.value?(label) ? @codec_labels.key(label) : label.downcase
+    def get_codec_for_label(label)
+      codec_labels.value?(label) ? codec_labels.key(label) : label.downcase
     end
 
-    def updateCodecsView
-      @selectCodecsTable.each{|child| @selectCodecsTable.remove(child)}
-      @selectCodecsTable.resize(@codecRows.size + 1, columns = 3)
-      createCodecsTable()
-      @selectCodecsTable.show_all()
+    def update_codecs_view
+      select_codecs_table.each { |child| select_codecs_table.remove(child) }
+      select_codecs_table.resize(rows: codec_rows.size + 1, columns: 3)
+      create_codecs_table
+      select_codecs_table.show_all
     end
 
-    def createCodecsTable
+    def create_codecs_table
+      fill   = Gtk::AttachOptions::FILL
+      shrink = Gtk::AttachOptions::SHRINK
+      expand = Gtk::AttachOptions::EXPAND
       top = 0
-      @codecRows.each do |codec, row|
-        @selectCodecsTable.attach(row[0], 0, 1, top, top+1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-        @selectCodecsTable.attach(row[1], 1, 2, top, top+1, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND,
-                                  Gtk::AttachOptions::SHRINK, 0, 0)
-        @selectCodecsTable.attach(row[2], 2, 3, top, top+1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      codec_rows.each do |codec, row|
+        select_codecs_table.attach(row[0], 0, 1, top, top + 1, fill,        shrink, 0, 0)
+        select_codecs_table.attach(row[1], 1, 2, top, top + 1, fill|expand, shrink, 0, 0)
+        select_codecs_table.attach(row[2], 2, 3, top, top + 1, fill,        shrink, 0, 0)
         top += 1
       end
 
-      createAddCodecRow()
+      create_add_codec_row
     end
 
-    def addTooltipForOtherCodec(entry)
-      entry.tooltip_text = _("%a=artist %g=genre %t=track name %f=codec %b=album
-  %y=year %n=track %va=various artist %o=output file %i=input file")
+    def add_tooltip_for_other_codec(entry)
+      entry.tooltip_text = _(
+        "%a=artist %g=genre %t=track name %f=codec %b=album\n" \
+        "  %y=year %n=track %va=various artist %o=output file %i=input file"
+      )
     end
 
-    def createAddCodecRow
-      @addCodecComboBox = Gtk::ComboBoxText.new()
-      @prefs.allCodecs.each do |codec|
-        @addCodecComboBox.append_text(getLabelForCodec(codec)) unless @codecRows.key?(codec)
+    def create_add_codec_row
+      @add_codec_combo_box = Gtk::ComboBoxText.new
+      prefs.all_codecs.each do |codec|
+        add_codec_combo_box.append_text(get_label_for_codec(codec)) if ! codec_rows.key?(codec)
       end
 
-      if @addCodecLabel.nil?
-        @addCodecLabel = Gtk::Label.new(_("Codec"))
-        @addCodecLabel.set_alignment(0, 0.5)
-        @addCodecButton = Gtk::Button.new(:stock_id => Gtk::Stock::ADD)
+      if add_codec_label.nil?
+        @add_codec_label = Gtk::Label.new(_("Codec"))
+        add_codec_label.set_alignment(0, 0.5)
+        @add_codec_button = Gtk::Button.new(stock_id: Gtk::Stock::ADD)
 
-        # create the signal for the button
-        @addCodecButton.signal_connect("button_release_event") do |a, b|
-
-          label = @addCodecComboBox.active_text
-          if not label.nil?
-            createCodecRow(getCodecForLabel(label))
-            updateCodecsView()
+        # Create the signal for the button
+        add_codec_button.signal_connect("button_release_event") do |a, b|
+          label = add_codec_combo_box.active_text
+          if label && ! label.strip.empty?
+            create_codec_row(get_codec_for_label(label.strip))
+            update_codecs_view
           end
         end
       end
 
-      # put the row into the table
-      top = @codecRows.size
-      @selectCodecsTable.attach(@addCodecLabel, 0, 1, top, top+1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      @selectCodecsTable.attach(@addCodecComboBox, 1, 2, top, top+1, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND,
-                                Gtk::AttachOptions::SHRINK, 0, 0)
-      @selectCodecsTable.attach(@addCodecButton, 2, 3, top, top+1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      # Put the row into the table
+      fill   = Gtk::AttachOptions::FILL
+      shrink = Gtk::AttachOptions::SHRINK
+      expand = Gtk::AttachOptions::EXPAND
+      top = codec_rows.size
+      select_codecs_table.attach(add_codec_label,     0, 1, top, top + 1, fill,        shrink, 0, 0)
+      select_codecs_table.attach(add_codec_combo_box, 1, 2, top, top + 1, fill|expand, shrink, 0, 0)
+      select_codecs_table.attach(add_codec_button,    2, 3, top, top + 1, fill,        shrink, 0, 0)
     end
 
-    def buildFrameCodecRelated #Encoding related frame
-      @table80 = newTable(rows=2, columns=2)
-  #creating objects
-      @playlist = Gtk::CheckButton.new(_("Create m3u playlist"))
-      @maxThreads = Gtk::SpinButton.new(0.0, 10.0, 1.0)
-      @maxThreadsLabel = Gtk::Label.new(_("Number of extra encoding threads"))
-  #packing objects
-      @table80.attach(@maxThreadsLabel, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      @table80.attach(@maxThreads, 1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      @table80.attach(@playlist, 0, 2, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      @frame80 = newFrame(_("Codec related"), child=@table80)
+    def build_frame_codec_related
+      @table80 = new_table(rows: 2, columns: 2)
+
+      # Creating objects
+      @playlist          = Gtk::CheckButton.new(_("Create m3u playlist"))
+      @max_threads       = Gtk::SpinButton.new(0.0, 10.0, 1.0)
+      @max_threads_label = Gtk::Label.new(_("Number of extra encoding threads"))
+
+      # Packing objects
+      table80.attach(max_threads_label, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+      table80.attach(max_threads,       1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+      table80.attach(playlist,          0, 2, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+      @frame80 = new_frame(_("Codec related"), table80)
     end
 
+zzz
     def buildFrameNormalizeToStandardVolume #Normalize audio
       @table85 = newTable(rows=2, columns=1)
   #creating objects
