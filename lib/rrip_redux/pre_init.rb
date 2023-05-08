@@ -20,8 +20,8 @@ module RripRedux
     end
 
     def self.assert_ruby_version
-      major_version = RUBY_VERSION.delete(".")[0..1].to_i
-      if major_version < 27
+      vers = [RUBY_VERSION, "2.7.0"].map { |v| Gem::Version.new(v) }
+      if vers[0] < vers[1]
         puts "Ruby versions older than 2.7 are not supported."
         puts "Please upgrade Ruby to a recent version."
         exit(1)

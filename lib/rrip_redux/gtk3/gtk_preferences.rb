@@ -9,6 +9,7 @@ module Gtk3
   #
   class GtkPreferences
     include GetText; GetText.bindtextdomain("rrip_redux")
+    include GtkConstants
 
     DEFAULT_COLUMN_SPACINGS = 5
     DEFAULT_ROW_SPACINGS = 4
@@ -277,7 +278,7 @@ module Gtk3
       label ||= label0
       child ||= child0
       Gtk::Frame.new(label).tap do |f|
-        f.set_shadow_type(Gtk::ShadowType::ETCHED_IN)
+        f.set_shadow_type(gETCHED_IN)
         f.border_width = DEFAULT_BORDER_WIDTH
         f.add(child)
       end
@@ -307,14 +308,12 @@ module Gtk3
         "It is recommended to enable this option.")
       pad_missing_samples.sensitive = false
 
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      table40.attach(cdrom_label,         0, 1, 0, 1, fill,   shrink, 0, 0)
-      table40.attach(cdrom_offset_label,  0, 1, 1, 2, fill,   shrink, 0, 0)
-      table40.attach(cdrom_entry,         1, 2, 0, 1, shrink, shrink, 0, 0)
-      table40.attach(cdrom_offset_spin,   1, 2, 1, 2, fill,   shrink, 0, 0)
-      table40.attach(offset_button,       2, 3, 1, 2, fill,   shrink, 0, 0)
-      table40.attach(pad_missing_samples, 0, 2, 2, 3, fill,   shrink, 0, 0)
+      table40.attach(cdrom_label,         0, 1, 0, 1, gFILL,   gSHRINK, 0, 0)
+      table40.attach(cdrom_offset_label,  0, 1, 1, 2, gFILL,   gSHRINK, 0, 0)
+      table40.attach(cdrom_entry,         1, 2, 0, 1, gSHRINK, gSHRINK, 0, 0)
+      table40.attach(cdrom_offset_spin,   1, 2, 1, 2, gFILL,   gSHRINK, 0, 0)
+      table40.attach(offset_button,       2, 3, 1, 2, gFILL,   gSHRINK, 0, 0)
+      table40.attach(pad_missing_samples, 0, 2, 2, 3, gFILL,   gSHRINK, 0, 0)
 
       # Connect signals
       offset_button.signal_connect("clicked") do
@@ -347,17 +346,15 @@ module Gtk3
       @time3           = Gtk::Label.new(_("times"))
 
       # Pack objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      table50.attach(all_chunks,      0, 1, 0, 1, fill, shrink, 0, 0) # Col 1
-      table50.attach(err_chunks,      0, 1, 1, 2, fill, shrink, 0, 0)
-      table50.attach(max_label,       0, 1, 2, 3, fill, shrink, 0, 0)
-      table50.attach(all_chunks_spin, 1, 2, 0, 1, fill, shrink, 0, 0) # Col 2
-      table50.attach(err_chunks_spin, 1, 2, 1, 2, fill, shrink, 0, 0)
-      table50.attach(max_spin,        1, 2, 2, 3, fill, shrink, 0, 0)
-      table50.attach(time1,           2, 3, 0, 1, fill, shrink, 0, 0) # Col 3
-      table50.attach(time2,           2, 3, 1, 2, fill, shrink, 0, 0)
-      table50.attach(time3,           2, 3, 2, 3, fill, shrink, 0, 0)
+      table50.attach(all_chunks,      0, 1, 0, 1, gFILL, gSHRINK, 0, 0) # Col 1
+      table50.attach(err_chunks,      0, 1, 1, 2, gFILL, gSHRINK, 0, 0)
+      table50.attach(max_label,       0, 1, 2, 3, gFILL, gSHRINK, 0, 0)
+      table50.attach(all_chunks_spin, 1, 2, 0, 1, gFILL, gSHRINK, 0, 0) # Col 2
+      table50.attach(err_chunks_spin, 1, 2, 1, 2, gFILL, gSHRINK, 0, 0)
+      table50.attach(max_spin,        1, 2, 2, 3, gFILL, gSHRINK, 0, 0)
+      table50.attach(time1,           2, 3, 0, 1, gFILL, gSHRINK, 0, 0) # Col 3
+      table50.attach(time2,           2, 3, 1, 2, gFILL, gSHRINK, 0, 0)
+      table50.attach(time3,           2, 3, 2, 3, gFILL, gSHRINK, 0, 0)
 
       # Connect a signal to all_chunks to make sure err_chunks always get at least the same amount of rips as all_chunks
       all_chunks_spin.signal_connect("value_changed") do
@@ -381,12 +378,10 @@ module Gtk3
       @rip_entry = Gtk::Entry.new; rip_entry.width_request = 120
 
       # Pack objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      table60.attach(rip_label, 0, 1, 0, 1, fill,          shrink, 0, 0)
-      table60.attach(rip_entry, 1, 2, 0, 1, shrink,        shrink, 0, 0)
-      table60.attach(eject,     0, 2, 1, 2, fill,          shrink, 0, 0)
-      table60.attach(no_log,    0, 2, 2, 3, fill | shrink, shrink, 0, 0)
+      table60.attach(rip_label, 0, 1, 0, 1, gFILL,         gSHRINK, 0, 0)
+      table60.attach(rip_entry, 1, 2, 0, 1, gSHRINK,       gSHRINK, 0, 0)
+      table60.attach(eject,     0, 2, 1, 2, gFILL,         gSHRINK, 0, 0)
+      table60.attach(no_log,    0, 2, 2, 3, gFILL|gSHRINK, gSHRINK, 0, 0)
 
       @frame60 = new_frame(_("Ripping related"), table60)
 
@@ -415,12 +410,10 @@ module Gtk3
       mark_hidden_track_label2.tooltip_text = text
 
       # Pack objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      table_toc1.attach(rip_hidden_audio,             0, 1, 0, 1, fill, shrink, 0, 0)
-      table_toc1.attach(mark_hidden_track_label1,     0, 1, 1, 2, fill, shrink, 0, 0)
-      table_toc1.attach(min_length_hidden_track_spin, 1, 2, 1, 2, fill, shrink, 0, 0)
-      table_toc1.attach(mark_hidden_track_label2,     2, 3, 1, 2, fill, shrink, 0, 0)
+      table_toc1.attach(rip_hidden_audio,             0, 1, 0, 1, gFILL, gSHRINK, 0, 0)
+      table_toc1.attach(mark_hidden_track_label1,     0, 1, 1, 2, gFILL, gSHRINK, 0, 0)
+      table_toc1.attach(min_length_hidden_track_spin, 1, 2, 1, 2, gFILL, gSHRINK, 0, 0)
+      table_toc1.attach(mark_hidden_track_label2,     2, 3, 1, 2, gFILL, gSHRINK, 0, 0)
 
       rip_hidden_audio.signal_connect("clicked") do
         min_length_hidden_track_spin.sensitive = rip_hidden_audio.active?
@@ -436,10 +429,8 @@ module Gtk3
       @image           = Gtk::CheckButton.new(_("Rip CD to single file"))
 
       # Pack objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      table_toc2.attach(create_cue, 0, 2, 1, 2, fill,          shrink, 0, 0)
-      table_toc2.attach(image,      0, 2, 2, 3, fill | shrink, shrink, 0, 0)
+      table_toc2.attach(create_cue, 0, 2, 1, 2, gFILL,         gSHRINK, 0, 0)
+      table_toc2.attach(image,      0, 2, 2, 3, gFILL|gSHRINK, gSHRINK, 0, 0)
 
       @vbox_toc = Gtk::Box.new(:vertical)
       vbox_toc.pack_start(table_toc2, expand: false, fill: false)
@@ -449,7 +440,7 @@ module Gtk3
       # Hbox for cdrdao
       @cdrdao_hbox  = Gtk::Box.new(:horizontal, 5)
       @cdrdao       = Gtk::Label.new(_("Cdrdao installed?"))
-      @cdrdao_image = Gtk::Image.new(stock: Gtk::Stock::CANCEL, size: Gtk::IconSize::BUTTON)
+      @cdrdao_image = Gtk::Image.new(stock: gCANCEL, size: gBUTTON)
       cdrdao_hbox.pack_start(cdrdao, expand: false, fill: false, padding: 5)
       cdrdao_hbox.pack_start(cdrdao_image, expand: false, fill: false)
     end
@@ -461,8 +452,8 @@ module Gtk3
       @prepend_pregaps = Gtk::RadioButton.new(member: append_pregaps, label: _("Prepend pregap to the track"))
 
       # Pack objects
-      table_toc3.attach(append_pregaps,  0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table_toc3.attach(prepend_pregaps, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table_toc3.attach(append_pregaps,  0, 1, 0, 1, gFILL, gSHRINK, 0, 0)
+      table_toc3.attach(prepend_pregaps, 0, 1, 1, 2, gFILL, gSHRINK, 0, 0)
 
       @frame_toc3 = new_frame(_("Handling pregaps other than track 1"), table_toc3)
 
@@ -479,10 +470,8 @@ module Gtk3
         label: _("Save the pre-emphasis tag in the cuesheet.")
       )
       # Pack objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      table_toc4.attach(correct_pre_emphasis,        0, 1, 0, 1, fill, shrink, 0, 0)
-      table_toc4.attach(do_not_correct_pre_emphasis, 0, 1, 1, 2, fill, shrink, 0, 0)
+      table_toc4.attach(correct_pre_emphasis,        0, 1, 0, 1, gFILL, gSHRINK, 0, 0)
+      table_toc4.attach(do_not_correct_pre_emphasis, 0, 1, 1, 2, gFILL, gSHRINK, 0, 0)
 
       @frame_toc4 = new_frame(_("Handling tracks with pre-emphasis"), table_toc4)
 
@@ -499,10 +488,10 @@ module Gtk3
 
     def cdrdao_installed
       if deps.installed?("cdrdao")
-        cdrdao_image.stock = Gtk::Stock::APPLY
+        cdrdao_image.stock = gAPPLY
         frame_toc2.each { |child| child.sensitive = true }
       else
-        cdrdao_image.stock = Gtk::Stock::CANCEL
+        cdrdao_image.stock = gCANCEL
         create_cue.active = false
         frame_toc2.each { |child| child.sensitive = false }
       end
@@ -553,7 +542,7 @@ module Gtk3
         codec_rows[codec] << Gtk::Entry.new()
         codec_rows[codec][1].text = prefs.send(:"settings_#{codec}")
       end
-      codec_rows[codec] << Gtk::Button.new(stock_id: Gtk::Stock::REMOVE)
+      codec_rows[codec] << Gtk::Button.new(stock_id: gREMOVE)
 
       add_tooltip_for_other_codec(codec_rows[codec][1]) if codec == "other"
 
@@ -582,14 +571,11 @@ module Gtk3
     end
 
     def create_codecs_table
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      expand = Gtk::AttachOptions::EXPAND
       top = 0
       codec_rows.each do |codec, row|
-        select_codecs_table.attach(row[0], 0, 1, top, top + 1, fill,        shrink, 0, 0)
-        select_codecs_table.attach(row[1], 1, 2, top, top + 1, fill|expand, shrink, 0, 0)
-        select_codecs_table.attach(row[2], 2, 3, top, top + 1, fill,        shrink, 0, 0)
+        select_codecs_table.attach(row[0], 0, 1, top, top + 1, gFILL,         gSHRINK, 0, 0)
+        select_codecs_table.attach(row[1], 1, 2, top, top + 1, gFILL|gEXPAND, gSHRINK, 0, 0)
+        select_codecs_table.attach(row[2], 2, 3, top, top + 1, gFILL,         gSHRINK, 0, 0)
         top += 1
       end
 
@@ -612,7 +598,7 @@ module Gtk3
       if add_codec_label.nil?
         @add_codec_label = Gtk::Label.new(_("Codec"))
         add_codec_label.set_alignment(0, 0.5)
-        @add_codec_button = Gtk::Button.new(stock_id: Gtk::Stock::ADD)
+        @add_codec_button = Gtk::Button.new(stock_id: gADD)
 
         # Create the signal for the button
         add_codec_button.signal_connect("button_release_event") do |a, b|
@@ -625,13 +611,10 @@ module Gtk3
       end
 
       # Put the row into the table
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      expand = Gtk::AttachOptions::EXPAND
       top = codec_rows.size
-      select_codecs_table.attach(add_codec_label,     0, 1, top, top + 1, fill,        shrink, 0, 0)
-      select_codecs_table.attach(add_codec_combo_box, 1, 2, top, top + 1, fill|expand, shrink, 0, 0)
-      select_codecs_table.attach(add_codec_button,    2, 3, top, top + 1, fill,        shrink, 0, 0)
+      select_codecs_table.attach(add_codec_label,     0, 1, top, top + 1, gFILL,         gSHRINK, 0, 0)
+      select_codecs_table.attach(add_codec_combo_box, 1, 2, top, top + 1, gFILL|gEXPAND, gSHRINK, 0, 0)
+      select_codecs_table.attach(add_codec_button,    2, 3, top, top + 1, gFILL,         gSHRINK, 0, 0)
     end
 
     def build_frame_codec_related
@@ -643,9 +626,9 @@ module Gtk3
       @max_threads_label = Gtk::Label.new(_("Number of extra encoding threads"))
 
       # Packing objects
-      table80.attach(max_threads_label, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      table80.attach(max_threads,       1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      table80.attach(playlist,          0, 2, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+      table80.attach(max_threads_label, 0, 1, 0, 1, gFILL, gFILL, 0, 0)
+      table80.attach(max_threads,       1, 2, 0, 1, gFILL, gFILL, 0, 0)
+      table80.attach(playlist,          0, 2, 1, 2, gFILL, gFILL, 0, 0)
       @frame80 = new_frame(_("Codec related"), table80)
     end
 
@@ -668,8 +651,8 @@ module Gtk3
       normalize.signal_connect("changed") { modus.sensitive = (normalize.active != 0) }
 
       # Packing objects
-      table85.attach(normalize, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
-      table85.attach(modus,     1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::FILL, 0, 0)
+      table85.attach(normalize, 0, 1, 0, 1, gFILL, gFILL, 0, 0)
+      table85.attach(modus,     1, 2, 0, 1, gFILL, gFILL, 0, 0)
       @frame85 = new_frame(_("Normalize to standard volume"), table85)
 
       # Pack all frames into a single page
@@ -688,8 +671,8 @@ module Gtk3
       metadata_choice.append_text(_("Musicbrainz"))
       metadata_choice.append_text(_("Don't use a metadata provider"))
 
-      table90.attach(metadata_label,  0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table90.attach(metadata_choice, 1, 2, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table90.attach(metadata_label,  0, 1, 0, 1, gFILL, gSHRINK, 0, 0)
+      table90.attach(metadata_choice, 1, 2, 0, 1, gFILL, gSHRINK, 0, 0)
 
       @frame90 = new_frame(_("Choose your metadata provider"), table90)
     end
@@ -707,16 +690,13 @@ module Gtk3
       @freedb_hostname_entry = Gtk::Entry.new
 
       # Packing objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      expand = Gtk::AttachOptions::EXPAND
-      table91.attach(first_hit,             0, 2, 0, 1, fill,        shrink, 0, 0) # Both cols, 2nd row
-      table91.attach(freedb_server_label,   0, 1, 1, 2, fill,        shrink, 0, 0) # 1st col, 3rd row
-      table91.attach(freedb_username_label, 0, 1, 2, 3, fill,        shrink, 0, 0) # 1st col, 4th row
-      table91.attach(freedb_hostname_label, 0, 1, 3, 4, fill,        shrink, 0, 0) # 1st col, 5th row
-      table91.attach(freedb_server_entry,   1, 2, 1, 2, fill|expand, shrink, 0, 0) # 2nd col, 3rd row
-      table91.attach(freedb_username_entry, 1, 2, 2, 3, fill|expand, shrink, 0, 0) # 2nd col, 4th row
-      table91.attach(freedb_hostname_entry, 1, 2, 3, 4, fill|expand, shrink, 0, 0) # 2nd col, 5th row
+      table91.attach(first_hit,             0, 2, 0, 1, gFILL,         gSHRINK, 0, 0) # Both cols, 2nd row
+      table91.attach(freedb_server_label,   0, 1, 1, 2, gFILL,         gSHRINK, 0, 0) # 1st col, 3rd row
+      table91.attach(freedb_username_label, 0, 1, 2, 3, gFILL,         gSHRINK, 0, 0) # 1st col, 4th row
+      table91.attach(freedb_hostname_label, 0, 1, 3, 4, gFILL,         gSHRINK, 0, 0) # 1st col, 5th row
+      table91.attach(freedb_server_entry,   1, 2, 1, 2, gFILL|gEXPAND, gSHRINK, 0, 0) # 2nd col, 3rd row
+      table91.attach(freedb_username_entry, 1, 2, 2, 3, gFILL|gEXPAND, gSHRINK, 0, 0) # 2nd col, 4th row
+      table91.attach(freedb_hostname_entry, 1, 2, 3, 4, gFILL|gEXPAND, gSHRINK, 0, 0) # 2nd col, 5th row
 
       @frame91 = new_frame(_("Gnudb options"), table91)
     end
@@ -735,14 +715,14 @@ module Gtk3
       @choose_original_year = Gtk::RadioButton.new(label: _("Original"))
       @choose_release_year  = Gtk::RadioButton.new(member: choose_original_year, label: _("From release"))
 
-      table92.attach(label_preferred_country, 0, 1, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table92.attach(entry_preferred_country, 1, 3, 0, 1, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table92.attach(label_preferred_release, 0, 1, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table92.attach(choose_original_release, 1, 2, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table92.attach(choose_latest_release,   2, 3, 1, 2, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table92.attach(label_preferred_year,    0, 1, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table92.attach(choose_original_year,    1, 2, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
-      table92.attach(choose_release_year,     2, 3, 2, 3, Gtk::AttachOptions::FILL, Gtk::AttachOptions::SHRINK, 0, 0)
+      table92.attach(label_preferred_country, 0, 1, 0, 1, gFILL, gSHRINK, 0, 0)
+      table92.attach(entry_preferred_country, 1, 3, 0, 1, gFILL, gSHRINK, 0, 0)
+      table92.attach(label_preferred_release, 0, 1, 1, 2, gFILL, gSHRINK, 0, 0)
+      table92.attach(choose_original_release, 1, 2, 1, 2, gFILL, gSHRINK, 0, 0)
+      table92.attach(choose_latest_release,   2, 3, 1, 2, gFILL, gSHRINK, 0, 0)
+      table92.attach(label_preferred_year,    0, 1, 2, 3, gFILL, gSHRINK, 0, 0)
+      table92.attach(choose_original_year,    1, 2, 2, 3, gFILL, gSHRINK, 0, 0)
+      table92.attach(choose_release_year,     2, 3, 2, 3, gFILL, gSHRINK, 0, 0)
 
       @frame92 = new_frame(_("Musicbrainz options"), table92)
     end
@@ -792,17 +772,14 @@ module Gtk3
       no_capitals.signal_connect("toggled") { update_example_label }
 
       # Packing 1st column
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      expand = Gtk::AttachOptions::EXPAND
-      table100.attach(basedir_label,        0, 1, 0, 1, fill,        shrink, 0, 0)
-      table100.attach(naming_normal_label,  0, 1, 1, 2, fill,        shrink, 0, 0)
-      table100.attach(naming_various_label, 0, 1, 2, 3, fill,        shrink, 0, 0)
-      table100.attach(naming_image_label,   0, 1, 3, 4, fill,        shrink, 0, 0)
-      table100.attach(no_spaces,            0, 2, 4, 5, fill,        fill,   0, 0)
-      table100.attach(no_capitals,          0, 2, 5, 6, fill,        fill,   0, 0)
-      table100.attach(example_label,        0, 2, 6, 7, expand|fill, shrink, 0, 0) # Width = 2 cols, also maximise width
-      table100.attach(expander100,          0, 2, 7, 8, expand|fill, shrink, 0, 0)
+      table100.attach(basedir_label,        0, 1, 0, 1, gFILL,         gSHRINK, 0, 0)
+      table100.attach(naming_normal_label,  0, 1, 1, 2, gFILL,         gSHRINK, 0, 0)
+      table100.attach(naming_various_label, 0, 1, 2, 3, gFILL,         gSHRINK, 0, 0)
+      table100.attach(naming_image_label,   0, 1, 3, 4, gFILL,         gSHRINK, 0, 0)
+      table100.attach(no_spaces,            0, 2, 4, 5, gFILL,         gFILL,   0, 0)
+      table100.attach(no_capitals,          0, 2, 5, 6, gFILL,         gFILL,   0, 0)
+      table100.attach(example_label,        0, 2, 6, 7, gEXPAND|gFILL, gSHRINK, 0, 0) # Width = 2 cols, also maximise width
+      table100.attach(expander100,          0, 2, 7, 8, gEXPAND|gFILL, gSHRINK, 0, 0)
 
       # Creating objects 2nd column and connect signals to them
       @basedir_entry        = Gtk::Entry.new
@@ -908,12 +885,10 @@ module Gtk3
       @filemanager_entry = Gtk::Entry.new
 
       # Packing objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      table110.attach(editor_label,      0, 1, 0, 1, fill, shrink, 0, 0)
-      table110.attach(filemanager_label, 0, 1, 1, 2, fill, shrink, 0, 0)
-      table110.attach(editor_entry,      1, 2, 0, 1, fill, shrink, 0, 0)
-      table110.attach(filemanager_entry, 1, 2, 1, 2, fill, shrink, 0, 0)
+      table110.attach(editor_label,      0, 1, 0, 1, gFILL, gSHRINK, 0, 0)
+      table110.attach(filemanager_label, 0, 1, 1, 2, gFILL, gSHRINK, 0, 0)
+      table110.attach(editor_entry,      1, 2, 0, 1, gFILL, gSHRINK, 0, 0)
+      table110.attach(filemanager_entry, 1, 2, 1, 2, gFILL, gSHRINK, 0, 0)
 
       @frame110 = new_frame(_("Programs of choice"), table110)
     end
@@ -923,8 +898,8 @@ module Gtk3
       @verbose  = Gtk::CheckButton.new(_("Verbose mode"))
       @debug    = Gtk::CheckButton.new(_("Debug mode"))
 
-      table120.attach(verbose, 0, 1, 0, 1, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::SHRINK)
-      table120.attach(debug,   1, 2, 0, 1, Gtk::AttachOptions::FILL|Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::SHRINK)
+      table120.attach(verbose, 0, 1, 0, 1, gFILL|gEXPAND, gSHRINK)
+      table120.attach(debug,   1, 2, 0, 1, gFILL|gEXPAND, gSHRINK)
 
       @frame120 = new_frame(_("Debug options"), table120)
     end

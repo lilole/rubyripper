@@ -10,31 +10,40 @@ module Gtk3
   #
   class GtkDirExists
     include GetText; GetText.bindtextdomain("rrip_redux")
+    include GtkConstants
 
-    attr_reader :buttonbox, :buttons, :display, :hboxes, :image, :infobox, :label, :labels, :separator, :vbox
+    attr_reader :buttonbox, :display, :image, :infobox, :label, :separator, :vbox
 
     def initialize(gui, rrip_redux, dirname)
       @label = Gtk::Label.new(_("The directory %s already exists.\n\nWhat do you want to do?") % [dirname])
       label.wrap = true
-      @image = Gtk::Image.new(stock: Gtk::Stock::DIALOG_QUESTION, size: Gtk::IconSize::DIALOG)
+      @image = Gtk::Image.new(stock: gDIALOG_QUESTION, size: gDIALOG)
 
       @infobox = Gtk::Box.new(:horizontal)
       infobox.add(image)
       infobox.add(label)
       @separator = Gtk::Separator.new(:horizontal)
 
-      @buttons = [Gtk::Button.new, Gtk::Button.new, Gtk::Button.new]
-      @labels = [
+      buttons = [
+        Gtk::Button.new,
+        Gtk::Button.new,
+        Gtk::Button.new
+      ]
+      labels = [
         Gtk::Label.new(_("Cancel rip")),
         Gtk::Label.new(_("Delete existing\ndirectory")),
         Gtk::Label.new(_("Auto rename\ndirectory"))
       ]
-      @images = [
-        Gtk::Image.new(:stock => Gtk::Stock::CANCEL, :size => Gtk::IconSize::LARGE_TOOLBAR),
-        Gtk::Image.new(:stock => Gtk::Stock::CLEAR, :size => Gtk::IconSize::LARGE_TOOLBAR),
-        Gtk::Image.new(:stock => Gtk::Stock::OK, :size => Gtk::IconSize::LARGE_TOOLBAR)
+      images = [
+        Gtk::Image.new(:stock => gCANCEL, :size => gLARGE_TOOLBAR),
+        Gtk::Image.new(:stock => gCLEAR,  :size => gLARGE_TOOLBAR),
+        Gtk::Image.new(:stock => gOK,     :size => gLARGE_TOOLBAR)
       ]
-      @hboxes = [Gtk::Box.new(:horizontal), Gtk::Box.new(:horizontal), Gtk::Box.new(:horizontal)]
+      hboxes = [
+        Gtk::Box.new(:horizontal),
+        Gtk::Box.new(:horizontal),
+        Gtk::Box.new(:horizontal)
+      ]
       @buttonbox = Gtk::Box.new(:horizontal)
 
       3.times do |index|
@@ -56,7 +65,7 @@ module Gtk3
       end
 
       @display = Gtk::Frame.new(_("Directory already exists..."))
-      display.set_shadow_type(Gtk::ShadowType::ETCHED_IN)
+      display.set_shadow_type(gETCHED_IN)
       display.border_width = 5
       display.add(vbox)
     end

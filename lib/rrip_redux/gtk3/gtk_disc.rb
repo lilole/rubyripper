@@ -9,6 +9,7 @@ module Gtk3
   #
   class GtkDisc
     include GetText; GetText.bindtextdomain("rrip_redux")
+    include GtkConstants
 
     attr_reader :album_entry, :album_label, :all_tracks_button, :artist_entry, :artist_label, :check_track_array,
       :disc, :disc_info_table, :disc_number_label, :disc_number_spin, :display, :error, :firsttime, :frame10, :frame20,
@@ -17,9 +18,6 @@ module Gtk3
       :var_artist_entry_array, :var_artist_label, :var_checkbox, :year_entry, :year_label
 
     def initialize(gui)
-      @disc_info_table = nil
-      @track_info_table = nil
-      @display = nil
       @ui = gui
     end
 
@@ -160,21 +158,18 @@ module Gtk3
     end
 
     def pack_disc_objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      expand = Gtk::AttachOptions::EXPAND
-      disc_info_table.attach(artist_label,      0, 1, 0, 1, fill, shrink, 0, 0) # Column 1
-      disc_info_table.attach(album_label,       0, 1, 1, 2, fill, shrink, 0, 0)
-      disc_info_table.attach(artist_entry,      1, 2, 0, 1, fill | expand, shrink, 0, 0) # Column 2
-      disc_info_table.attach(album_entry,       1, 2, 1, 2, fill | expand, shrink, 0, 0)
-      disc_info_table.attach(genre_label,       2, 3, 0, 1, fill, shrink, 0, 0) # Column 3
-      disc_info_table.attach(year_label,        2, 3, 1, 2, fill, shrink, 0, 0)
-      disc_info_table.attach(genre_entry,       3, 4, 0, 1, shrink, shrink, 0, 0) # Column 4
-      disc_info_table.attach(year_entry,        3, 4, 1, 2, shrink, shrink, 0, 0)
-      disc_info_table.attach(var_checkbox,      0, 4, 3, 4, fill, shrink, 0, 0)
-      disc_info_table.attach(freeze_checkbox,   0, 2, 2, 3, fill, shrink, 0, 0)
-      disc_info_table.attach(disc_number_label, 2, 3, 2, 3, fill, shrink, 0, 0)
-      disc_info_table.attach(disc_number_spin,  3, 4, 2, 3, fill, shrink, 0, 0)
+      disc_info_table.attach(artist_label,      0, 1, 0, 1, gFILL,         gSHRINK, 0, 0) # Column 1
+      disc_info_table.attach(album_label,       0, 1, 1, 2, gFILL,         gSHRINK, 0, 0)
+      disc_info_table.attach(artist_entry,      1, 2, 0, 1, gFILL|gEXPAND, gSHRINK, 0, 0) # Column 2
+      disc_info_table.attach(album_entry,       1, 2, 1, 2, gFILL|gEXPAND, gSHRINK, 0, 0)
+      disc_info_table.attach(genre_label,       2, 3, 0, 1, gFILL,         gSHRINK, 0, 0) # Column 3
+      disc_info_table.attach(year_label,        2, 3, 1, 2, gFILL,         gSHRINK, 0, 0)
+      disc_info_table.attach(genre_entry,       3, 4, 0, 1, gSHRINK,       gSHRINK, 0, 0) # Column 4
+      disc_info_table.attach(year_entry,        3, 4, 1, 2, gSHRINK,       gSHRINK, 0, 0)
+      disc_info_table.attach(var_checkbox,      0, 4, 3, 4, gFILL,         gSHRINK, 0, 0)
+      disc_info_table.attach(freeze_checkbox,   0, 2, 2, 3, gFILL,         gSHRINK, 0, 0)
+      disc_info_table.attach(disc_number_label, 2, 3, 2, 3, gFILL,         gSHRINK, 0, 0)
+      disc_info_table.attach(disc_number_spin,  3, 4, 2, 3, gFILL,         gSHRINK, 0, 0)
     end
 
     def set_track_info_table
@@ -217,41 +212,36 @@ module Gtk3
     def set_track_signals
       all_tracks_button.signal_connect("toggled") do
         # Signal to toggle on/off all tracks
-        on = !! all_tracks_button.active?
-        check_track_array.each { |box| box.active = on }
+        state = !! all_tracks_button.active?
+        check_track_array.each { |box| box.active = state }
       end
     end
 
     # Pack with or without support for various artists.
     #
     def pack_track_objects
-      fill   = Gtk::AttachOptions::FILL
-      shrink = Gtk::AttachOptions::SHRINK
-      expand = Gtk::AttachOptions::EXPAND
-      track_info_table.attach(all_tracks_button, 0, 1, 0, 1, fill, shrink, 0, 0) # R 1 C 1
-      track_info_table.attach(length_label,      3, 4, 0, 1, fill, shrink, 0, 0) # R 1 C 4
+      track_info_table.attach(all_tracks_button, 0, 1, 0, 1, gFILL, gSHRINK, 0, 0) # R 1 C 1
+      track_info_table.attach(length_label,      3, 4, 0, 1, gFILL, gSHRINK, 0, 0) # R 1 C 4
 
       if md.various?
-        track_info_table.attach(var_artist_label, 1, 2, 0, 1, fill, shrink, 0, 0) # R 1 C 2
-        track_info_table.attach(trackname_label,  2, 3, 0, 1, fill, shrink, 0, 0) # R 1 C 3
+        track_info_table.attach(var_artist_label, 1, 2, 0, 1, gFILL, gSHRINK, 0, 0) # R 1 C 2
+        track_info_table.attach(trackname_label,  2, 3, 0, 1, gFILL, gSHRINK, 0, 0) # R 1 C 3
       else
-        track_info_table.attach(trackname_label, 1, 3, 0, 1, fill | expand, shrink, 0, 0)
+        track_info_table.attach(trackname_label, 1, 3, 0, 1, gFILL|gEXPAND, gSHRINK, 0, 0)
       end
 
       disc.audiotracks.times do |index|
-        track_info_table.attach(check_track_array[index],  0, 1, 1 + index, 2 + index, fill, shrink, 0, 0) # R 2 C 1
-        track_info_table.attach(length_label_array[index], 3, 4, 1 + index, 2 + index, fill, shrink, 0, 0) # R 2 C 4
+        track_info_table.attach(check_track_array[index],  0, 1, 1 + index, 2 + index, gFILL, gSHRINK, 0, 0) # R 2 C 1
+        track_info_table.attach(length_label_array[index], 3, 4, 1 + index, 2 + index, gFILL, gSHRINK, 0, 0) # R 2 C 4
 
         if md.various?
-          track_info_table.attach(var_artist_entry_array[index], 1, 2, index + 1, index + 2, fill, shrink, 0, 0)
-          track_info_table.attach(track_entry_array[index],      2, 3, index + 1, index + 2, fill, shrink, 0, 0)
+          track_info_table.attach(var_artist_entry_array[index], 1, 2, index + 1, index + 2, gFILL, gSHRINK, 0, 0)
+          track_info_table.attach(track_entry_array[index],      2, 3, index + 1, index + 2, gFILL, gSHRINK, 0, 0)
         else
-          track_info_table.attach(track_entry_array[index], 1, 3, 1 + index, 2 + index, fill | expand, shrink, 0, 0) # R 2 C 2+3
+          track_info_table.attach(track_entry_array[index], 1, 3, 1 + index, 2 + index, gFILL|gEXPAND, gSHRINK, 0, 0) # R 2 C 2+3
         end
       end
     end
-
-    :display, :frame10, :frame20, :label10, :label20, :scrolled_window
 
     def set_display_values
       @label10 = Gtk::Label.new
@@ -267,15 +257,15 @@ module Gtk3
 
     def config_display_values
       label10.set_markup(_("<b>Disc info</b>"))
-      frame10.set_shadow_type(Gtk::ShadowType::ETCHED_IN)
+      frame10.set_shadow_type(gETCHED_IN)
       frame10.label_widget = label10
       frame10.border_width = 5
 
-      scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC)
+      scrolled_window.set_policy(gAUTOMATIC, gAUTOMATIC)
       scrolled_window.set_border_width(5)
 
       label20.set_markup(_("<b>Track selection</b>"))
-      frame20.set_shadow_type(Gtk::ShadowType::ETCHED_IN)
+      frame20.set_shadow_type(gETCHED_IN)
       frame20.label_widget = label20
       frame20.border_width = 5
     end

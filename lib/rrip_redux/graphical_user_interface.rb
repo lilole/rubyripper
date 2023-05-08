@@ -7,6 +7,7 @@ module RripRedux
   #
   class GraphicalUserInterface
     include GetText; GetText.bindtextdomain("rrip_redux")
+    include RripRedux::Gtk3::GtkConstants
 
     QueueEntry = Struct.new(:modus, :value)
 
@@ -15,9 +16,9 @@ module RripRedux
       :rrip_redux, :rrip_redux_thread, :short_message, :update_queue, :vboxes, :vbuttonbox1
 
     def initialize(prefs=nil, short=nil, deps=nil)
-      @prefs         = prefs || Preferences::Main.instance
-      @short_message = short || Gtk3::ShortMessage.new
-      @deps          = deps  || System::Dependency.instance
+      @prefs         = prefs || RripRedux::Preferences::Main.instance
+      @short_message = short || RripRedux::Gtk3::GtkShortMessage.new
+      @deps          = deps  || RripRedux::System::Dependency.instance
       @update_queue  = Queue.new
     end
 
@@ -51,9 +52,9 @@ module RripRedux
     # Set the name, icon and size.
     #
     def prepare_main_window
-      gtk_window = Gtk::Window.new("RRip_redux")
+      @gtk_window = Gtk::Window.new("RRip Redux")
       set_icon_for_window
-      gtk_window.set_default_size(570, 470) # Width, height
+      gtk_window.set_default_size(1280, 720) # Width, height
     end
 
     # Find the icon.
@@ -121,10 +122,10 @@ module RripRedux
     def show_multiple_records_selection
       meta_data_type = gtk_disc.disc.metadata.class.to_s
       if meta_data_type == "MusicBrainz"
-        @multiple_music_brainz_hits = Gtk3::MultipleMusicBrainzHits.new(gtk_disc.disc.metadata, self)
+        @multiple_music_brainz_hits = RripRedux::Gtk3::GtkMultipleMusicBrainzHits.new(gtk_disc.disc.metadata, self)
         change_display(multiple_music_brainz_hits)
       elsif meta_data_type == "Freedb"
-        @multiple_freedb_hits = Gtk3::MultipleFreedbHits.new(gtk_disc.disc.metadata, self)
+        @multiple_freedb_hits = RripRedux::Gtk3::GtkMultipleFreedbHits.new(gtk_disc.disc.metadata, self)
         change_display(multiple_freedb_hits)
       else
         puts "ERROR: Unknown metadata type, check code!"
@@ -149,7 +150,7 @@ module RripRedux
         elsif entry.modus == "scroll_to_end"
           rip_status.scroll_to_end
         elsif entry.modus == "dir_exists"
-          @dir_exists = Gtk3::GtkDirExists.new(self, rrip_redux, entry.value)
+          @dir_exists = RripRedux::Gtk3::GtkDirExists.new(self, rrip_redux, entry.value)
           change_display(dir_exists)
         elsif entry.modus == "finished"
           show_summary(entry.value)
@@ -178,14 +179,14 @@ module RripRedux
     #
     def update_abort_button_to_exit
       buttontext[4].set_markup("_" + _("Exit"), { use_underline: true })
-      buttonicons[4].stock = Gtk::Stock::QUIT
+      buttonicons[4].stock = gQUIT
     end
 
     # The exit button transforms into abort when the rip is started.
     #
     def update_exit_button_to_abort
       buttontext[4].set_markup("_" + _("Abort"), { use_underline: true })
-      buttonicons[4].stock = Gtk::Stock::CANCEL
+      buttonicons[4].stock = gCANCEL
     end
 
     # The central function that manages the display on the right side.
@@ -194,7 +195,7 @@ module RripRedux
       update_abort_button_to_exit if current_instance == "RipStatus"
 
       main_hbox.remove(main_hbox.children[-1]) if current_instance
-      @currentInstance = object.class.to_s # Save the name of the class as a string
+      @current_instance = object.class.to_s # Save the name of the class as a string
       main_hbox.pack_start(object.display, expand: true, fill: true)
 
       update_exit_button_to_abort if current_instance == "RipStatus"
@@ -206,7 +207,7 @@ module RripRedux
     def create_buttons_leftside
       @vbuttonbox1 = Gtk::Box.new(:vertical, 5) # Child of main_hbox
       vbuttonbox = Gtk::ButtonBox.new(:vertical)
-      vbuttonbox.layout_style = Gtk::ButtonBoxStyle::START
+      vbuttonbox.layout_style = gSTART
       vbuttonbox.spacing = 5
 
       @buttons = [Gtk::Button.new, Gtk::Button.new, Gtk::Button.new, Gtk::Button.new, Gtk::Button.new]
@@ -220,11 +221,11 @@ module RripRedux
         Gtk::Label.new("_" + _("Exit"),        { use_underline: true })
       ]
       @buttonicons = [
-        Gtk::Image.new(stock: Gtk::Stock::PREFERENCES, size: Gtk::IconSize::LARGE_TOOLBAR),
-        Gtk::Image.new(stock: Gtk::Stock::REFRESH,     size: Gtk::IconSize::LARGE_TOOLBAR),
-        Gtk::Image.new(stock: Gtk::Stock::GOTO_BOTTOM, size: Gtk::IconSize::LARGE_TOOLBAR),
-        Gtk::Image.new(stock: Gtk::Stock::CDROM,       size: Gtk::IconSize::LARGE_TOOLBAR),
-        Gtk::Image.new(stock: Gtk::Stock::QUIT,        size: Gtk::IconSize::LARGE_TOOLBAR)
+        Gtk::Image.new(stock: gPREFERENCES, size: gLARGE_TOOLBAR),
+        Gtk::Image.new(stock: gREFRESH,     size: gLARGE_TOOLBAR),
+        Gtk::Image.new(stock: gGOTO_BOTTOM, size: gLARGE_TOOLBAR),
+        Gtk::Image.new(stock: gCDROM,       size: gLARGE_TOOLBAR),
+        Gtk::Image.new(stock: gQUIT,        size: gLARGE_TOOLBAR)
       ]
       @vboxes = [
         Gtk::Box.new(:vertical, 5),
@@ -262,7 +263,7 @@ module RripRedux
         quit
       else
         Thread.new do
-          rrip_redux.cancelRip() # Let rubyripper stop ripping and encoding
+          rrip_redux.cancel_rip # Let rubyripper stop ripping and encoding
           @rrip_redux = nil # Kill the instance
           rrip_redux_thread.exit # Kill the thread
           buttons_sensitive!(true)
@@ -278,7 +279,7 @@ module RripRedux
     def save_preferences
       if current_instance == "GtkPreferences"
         buttontext[0].set_markup("_" + _("Preferences"), { use_underline: true })
-        buttonicons[0].stock = Gtk::Stock::PREFERENCES
+        buttonicons[0].stock = gPREFERENCES
         gtk_prefs.save
       end
     end
@@ -293,7 +294,7 @@ module RripRedux
     #
     def startup_preferences
       if ! gtk_prefs
-        @gtk_prefs = Gtk3::GtkPreferences.new
+        @gtk_prefs = RripRedux::Gtk3::GtkPreferences.new
         gtk_prefs.start
       end
       gtk_prefs.display.page = 0
@@ -314,7 +315,7 @@ module RripRedux
       buttons_sensitive!(false)
       if current_instance != "GtkPreferences"
         buttontext[0].set_markup("_" + _("Disc info"), { use_underline: true })
-        buttonicons[0].stock = Gtk::Stock::INFO
+        buttonicons[0].stock = gINFO
         startup_preferences
         buttons_sensitive!(true, 0, 1, 2, 4)
         buttons[3].sensitive = true if gtk_disc && gtk_disc.error.nil?
@@ -349,12 +350,12 @@ module RripRedux
 
     def show_closed_tray
       buttontext[2].set_markup("_" + _("Close tray"), { use_underline: true })
-      buttonicons[2].stock = Gtk::Stock::GOTO_TOP
+      buttonicons[2].stock = gGOTO_TOP
     end
 
     def show_open_tray
       buttontext[2].set_markup("_" + _("Open tray"), { use_underline: true })
-      buttonicons[2].stock = Gtk::Stock::GOTO_BOTTOM
+      buttonicons[2].stock = gGOTO_BOTTOM
     end
 
     def ask_for_disc
@@ -387,7 +388,7 @@ module RripRedux
 
     def update_interface_and_start_rip
       buttons_sensitive!(false, 0, 1, 2, 3)
-      @rip_status = Gtk3::RipStatus.new(self)
+      @rip_status = RripRedux::Gtk3::RipStatus.new(self)
       change_display(rip_status)
 
       @rrip_redux_thread = Thread.new do
@@ -412,7 +413,7 @@ module RripRedux
       buttons[2].sensitive = true
       buttons[3].sensitive = true if ! prefs.eject
 
-      @gtk_summary = Gtk3::GtkSummary.new(rrip_redux.file_scheme, rrip_redux.summary, success)
+      @gtk_summary = RripRedux::Gtk3::GtkSummary.new(rrip_redux.file_scheme, rrip_redux.summary, success)
       change_display(gtk_summary)
 
       show_closed_tray if !! prefs.eject
